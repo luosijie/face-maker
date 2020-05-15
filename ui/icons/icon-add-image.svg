@@ -4,9 +4,7 @@
     <title>icon-add-image</title>
     <desc>Created with Sketch.</desc>
     <g id="icon-add-image" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle" stroke="#DDDDDD" stroke-width="2" x="1" y="1" width="67" height="67" rx="9"></rect>
-        <text id="+" font-family="PingFangSC-Medium, PingFang SC" font-size="36" font-weight="400" fill="#D8D8D8">
-            <tspan x="24.11" y="45">+</tspan>
-        </text>
+        <path d="M9,2 C5.13400675,2 2,5.13400675 2,9 L2,60 C2,63.8659932 5.13400675,67 9,67 L60,67 C63.8659932,67 67,63.8659932 67,60 L67,9 C67,5.13400675 63.8659932,2 60,2 L9,2 Z M9,0 L60,0 C64.9705627,-9.13077564e-16 69,4.02943725 69,9 L69,60 C69,64.9705627 64.9705627,69 60,69 L9,69 C4.02943725,69 6.08718376e-16,64.9705627 0,60 L0,9 C-6.08718376e-16,4.02943725 4.02943725,9.13077564e-16 9,0 Z" id="Rectangle" fill="#DDDDDD" fill-rule="nonzero"></path>
+        <polygon id="+" fill="#D8D8D8" fill-rule="nonzero" points="33.434 26.604 36.602 26.604 36.602 34.092 44.09 34.092 44.09 37.26 36.602 37.26 36.602 44.784 33.434 44.784 33.434 37.26 25.91 37.26 25.91 34.092 33.434 34.092"></polygon>
     </g>
 </svg>

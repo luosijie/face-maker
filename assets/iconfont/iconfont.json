@@ -1,0 +1,65 @@
+{
+  "id": "1820283",
+  "name": "face-maker",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "14729637",
+      "name": "icon-cancel",
+      "font_class": "icon-cancel",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "14729638",
+      "name": "icon-style-shadow",
+      "font_class": "icon-style-shadow",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "14729640",
+      "name": "icon-confirm",
+      "font_class": "icon-confirm",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "14729641",
+      "name": "icon-style-transverse",
+      "font_class": "icon-style-transverse",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "14729642",
+      "name": "icon-style-verticality",
+      "font_class": "icon-style-verticality",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "14729643",
+      "name": "icon-style-stroke",
+      "font_class": "icon-style-stroke",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "14729644",
+      "name": "icon-style-bold",
+      "font_class": "icon-style-bold",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "14729648",
+      "name": "icon-add-image",
+      "font_class": "icon-add-image",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    }
+  ]
+}
