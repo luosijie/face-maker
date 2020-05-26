@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="menus">
-      <div class="tool add-text">
+      <div class="tool add-text" @click="navigateTo('/edit')">
         <i class="iconfont icon-text"></i>
         <span class="label">文字</span>
       </div>
@@ -41,7 +41,10 @@ export default Vue.extend({
     onClickJump() {
       window.location.href = '/test/list/123'
     },
-
+    navigateTo(url) {
+      window.open(url)
+      // this.$router.go(url)
+    },
     onClickOpen() {
       window.open('/test/detail/123')
     },

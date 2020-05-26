@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const Home = () => import(/* webpackChunkName: "Home" */'@/pages/home/Index.vue')
+const Edit = () => import(/* webpackChunkName: "Home" */'@/pages/edit/Index.vue')
 const Test = () => import(/* webpackChunkName: "Test" */'@/pages/test/Index.vue')
 
 Vue.use(Router)
@@ -12,6 +13,10 @@ export default new Router({
     path: '/(home|index)?',
     name: 'Home',
     component: Home,
+  }, {
+    path: '/edit',
+    name: 'Edit',
+    component: Edit,
   }, {
     path: '/index.html',
     name: 'HomeHtml',

@@ -3,7 +3,7 @@
     <div class="image-container">
       <div class="add-image">
         <i class="iconfont icon-add-image"></i>
-        <span class="label">添加图片</span>
+        <span class="label">添加片</span>
       </div>
     </div>
     <div class="menus">

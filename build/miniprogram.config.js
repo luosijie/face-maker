@@ -11,6 +11,9 @@ module.exports = {
             '/index.html',
             '/test/(home|index)',
         ],
+        edit: [
+            '/edit'
+        ],
         other: [
             '/test/list/:id',
             '/test/detail/:id',
@@ -40,6 +43,11 @@ module.exports = {
         home: {
             extra: {
                 navigationBarTitleText: "图萌"
+            }
+        },
+        edit: {
+            extra: {
+                navigationBarTitleText: "编辑"
             }
         }
     },
