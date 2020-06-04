@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { sync } from 'vuex-router-sync'
 import App from '../../App.vue'
+import Edit from '../..//pages/edit/Index.vue'
 import store from '../../store'
 
 Vue.use(Router)
@@ -9,9 +10,9 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   routes: [{
-    // path: '/test/detail/:id',
-    // name: 'Detail',
-    // component: Detail,
+    path: '/edit',
+    name: 'Edit',
+    component: Edit,
   }],
 })
 

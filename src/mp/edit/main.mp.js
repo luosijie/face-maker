@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import { sync } from 'vuex-router-sync'
 import App from '../../App.vue'
 import store from '../../store'
-import Home from '../../pages/home/Index.vue'
 import Edit from '../../pages/edit/Index.vue'
 
 Vue.use(Router)

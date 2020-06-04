@@ -4,7 +4,6 @@ import { sync } from 'vuex-router-sync'
 import App from '../../App.vue'
 import store from '../../store'
 import Home from '../../pages/home/Index.vue'
-import Edit from '../../pages/edit/Index.vue'
 
 Vue.use(Router)
 
@@ -14,10 +13,6 @@ const router = new Router({
     path: '/(home|index)?',
     name: 'Home',
     component: Home,
-  }, {
-    path: '/edit',
-    name: 'Edit',
-    component: Edit,
   }, {
     path: '/index.html',
     name: 'HomeHtml',
