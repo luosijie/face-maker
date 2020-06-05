@@ -3,4 +3,4 @@ project/deploy_versions/
 project/.temp/
 project/.rn_temp/
 project/node_modules/
-project/.DS_Store
+.DS_Store
