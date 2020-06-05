@@ -1,0 +1,56 @@
+.index {
+  height: 100vh;
+
+  .image-container {
+    width: 100vw;
+    height: 100vw;
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .add-image {
+      color: #bbb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 4rem;
+      }
+
+      .label {
+        margin-top: 1rem;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .menus {
+    width: 100vw;
+    height: calc(100% - 100vw);
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &>.tool {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 8rem;
+      color: #1E3063;
+
+      i {
+        font-size: 2rem;
+      }
+
+      .label {
+        margin-top: 1rem;
+        font-size: 1rem;
+      }
+    }
+  }
+}
