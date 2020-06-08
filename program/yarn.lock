@@ -988,7 +988,7 @@
     resolve "^2.0.0-next.0"
     yauzl "2.10.0"
 
-"@tarojs/mini-runner@2.2.7":
+"@tarojs/mini-runner@^2.2.7":
   version "2.2.7"
   resolved "https://registry.yarnpkg.com/@tarojs/mini-runner/-/mini-runner-2.2.7.tgz#1a9e701dfac91c7479776cef41fb2a287c99c744"
   integrity sha512-gQaL/Kg9YKPCeNz/WQeumWfHUldhM8KRR3puqnrpLoi4PmStUJvTgw//g9uB7lMMMyZaHm7UVkPi8XnV6lb5bw==

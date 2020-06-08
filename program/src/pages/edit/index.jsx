@@ -10,7 +10,7 @@ import './index.scss'
 class Index extends Component {
 
   config = {
-    navigationBarTitleText: '图萌'
+    navigationBarTitleText: '编辑'
   }
 
   componentWillMount () { }
@@ -42,33 +42,32 @@ class Index extends Component {
     counterStore.incrementAsync()
   }
   navigateTo(url) {
-    Taro.navigateTo({
-      url: '/pages/edit/index'
-    })
     // window.location.href = url
   }
 
   render () {
     const { counterStore: { counter } } = this.props
     return (
-      <View className='index'>
+      <div class='index'>
         <div class="image-container">
           <div class="add-image">
             <i class="iconfont icon-add-image"></i>
             <span class="label">添加图片</span>
           </div>
         </div>
-        <div class="menus">
-          <div class="tool add-text" onClick={this.navigateTo('/edit')}>
-            <i class="iconfont icon-text"></i>
-            <span class="label">文字</span>
+        <div class="tool-options">
+          <div class="top">
+            <div class="cancel">
+              <i class="iconfont icon-cancel"></i>
+            </div>
+            <div class="title">文字</div>
+            <div class="confirm">
+              <i class="iconfont icon-confirm"></i>
+            </div>
           </div>
-          <div class="tool add-sticker">
-            <i class="iconfont icon-sticker"></i>
-            <span class="label">贴纸</span>
-          </div>
+          <div class="main">dd</div>
         </div>
-      </View>
+      </div>
     )
   }
 }

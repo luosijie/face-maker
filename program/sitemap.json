@@ -1,0 +1,11 @@
+{
+    "rules":[{
+      "action": "allow",
+      "page": "path/to/page",
+      "params": ["a", "b"],
+      "matching": "exclusive"
+    }, {
+      "action": "disallow",
+      "page": "path/to/page"
+    }]
+  }
