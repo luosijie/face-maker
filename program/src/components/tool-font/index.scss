@@ -1,0 +1,40 @@
+@import '../../assets/iconfont/iconfont.css';
+.index {
+  width: 100vw;
+  height: calc(100% - 100vw);
+  background-color: white;
+  position: relative;
+  .font-container {
+    padding: 15rpx;
+    input {
+      font-size: 50rpx;
+      height: 50rpx;
+      margin: 45rpx;
+      text-align: center;
+    }
+    .style-item {
+      display: flex;
+      margin: 15rpx 0;
+      .label {
+        width: 150rpx;
+        text-align: justify;
+        color: rgb(30,48,99);
+      }
+      .content {
+        width: calc(100% - 150rpx);
+        position: relative;
+        &.color {
+          display: flex;
+          justify-content: space-between;
+          &>view {
+            width: 48rpx;
+            height: 48rpx;
+            border-radius: 50%;
+            background: #eee;
+            border: 4rpx solid #eee;
+          }
+        }
+      }
+    }
+  }
+}

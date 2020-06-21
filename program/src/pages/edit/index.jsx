@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text } from '@tarojs/components'
-import ToolTemplate from '../../components/tool-template'
+import ToolFont from '../../components/tool-font'
 import { observer, inject } from '@tarojs/mobx'
 
 import './index.scss'
@@ -55,9 +55,7 @@ class Index extends Component {
             <View className="label">添加图片</View>
           </View>
         </View>
-        <ToolTemplate title="文字">
-          文字内容
-        </ToolTemplate>
+        <ToolFont/>
       </View>
     )
   }
