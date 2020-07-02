@@ -32,12 +32,15 @@
         &.color {
           display: flex;
           justify-content: space-between;
-          &>view {
+          &>.color-item {
             width: 48rpx;
             height: 48rpx;
             border-radius: 50%;
             background: #eee;
             border: 4rpx solid #eee;
+          }
+          &>.active {
+            border: 6rpx solid #999;
           }
         }
         &.style {
@@ -55,6 +58,10 @@
               font-size: 24rpx;
               margin-top: 14rpx;
             }
+          }
+          // 激活状态
+          &>.active {
+            color: #1e3063;
           }
         }
       }
