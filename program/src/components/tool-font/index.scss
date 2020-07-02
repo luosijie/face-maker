@@ -5,24 +5,30 @@
   background-color: white;
   position: relative;
   .font-container {
-    padding: 15rpx;
+    padding: 0 30rpx;
     input {
       font-size: 50rpx;
       height: 50rpx;
-      margin: 45rpx;
+      margin: 30rpx 0;
       text-align: center;
     }
-    .style-item {
+    .item {
       display: flex;
-      margin: 15rpx 0;
-      .label {
+      &:not(:last-child) {
+        margin-bottom: 20rpx;
+      }
+      &>.label {
         width: 150rpx;
         text-align: justify;
         color: rgb(30,48,99);
       }
       .content {
         width: calc(100% - 150rpx);
+        padding: 0 10rpx;
         position: relative;
+        &.opacity {
+          padding: 0;
+        }
         &.color {
           display: flex;
           justify-content: space-between;
@@ -32,6 +38,23 @@
             border-radius: 50%;
             background: #eee;
             border: 4rpx solid #eee;
+          }
+        }
+        &.style {
+          display: flex;
+          justify-content: space-between;
+          &>.style-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #666;
+            .iconfont {
+              font-size: 28rpx;
+            }
+            .label {
+              font-size: 24rpx;
+              margin-top: 14rpx;
+            }
           }
         }
       }
