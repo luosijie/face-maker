@@ -40,11 +40,27 @@ class Index extends Component {
         // window.location.href = url
     }
 
+    setActiveColor(item) {
+        this.setState({
+            activeColor: item
+        })
+    }
+
+    setActiveStyle(item) {
+        this.setState({
+            activeStyle: item.code
+        })
+    }
+
     render() {
         // 颜色配置
         const colorOptions = ['#000000', '#ffffff', '#0076b6', '#00a948', '#ffb500', '#ff2929', '#a687bd']
         const colorItems = colorOptions.map(item =>
-            <View className={classNames('color-item', item === this.state.activeColor && 'active')} style={{ background: item }} key={item}></View>
+            <View
+                className={classNames('color-item', item === this.state.activeColor && 'active')}
+                style={{ background: item }} key={item}
+                onClick={() => this.setActiveColor(item)}
+            />
         )
 
         // 样式配置
@@ -57,7 +73,11 @@ class Index extends Component {
         ]
         const styleItems = styleOptions.map(item => {
             return (
-                <View className={classNames('style-item', item.code === this.state.activeStyle && 'active')} key={item.icon}>
+                <View
+                    className={classNames('style-item', item.code === this.state.activeStyle && 'active')}
+                    key={item.icon}
+                    onClick={() => this.setActiveStyle(item)}
+                >
                     <View className={classNames('iconfont', item.icon)}></View>
                     <Text className="label">{item.label}</Text>
                 </View>

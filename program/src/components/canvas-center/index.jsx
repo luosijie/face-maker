@@ -1,9 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text, Canvas, CoverView } from '@tarojs/components'
+import { View, Button, Text, Canvas, CoverView, CoverImage } from '@tarojs/components'
 import ToolFont from '../../components/tool-font'
-import CanvasCenter from '../../components/canvas-center'
 import { observer, inject } from '@tarojs/mobx'
-
+import imageAdd from '../../assets/images/icon-add-image.png'
 import './index.scss'
 
 
@@ -49,9 +48,12 @@ class Index extends Component {
   render () {
     const { counterStore: { counter } } = this.props
     return (
-      <View className='index'>
-        <CanvasCenter/>
-        <ToolFont/>
+      <View className="canvas-container">
+        <Canvas id="canvas" type="2d"/>
+        <CoverView className="add-image">
+          <CoverImage className="image" src={imageAdd}/>
+          <CoverView className="label">添加图片</CoverView>
+        </CoverView>
       </View>
     )
   }
