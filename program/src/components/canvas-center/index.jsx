@@ -9,54 +9,67 @@ import './index.scss'
 @inject('counterStore')
 @observer
 class Index extends Component {
-  config = {
-    navigationBarTitleText: '编辑'
-  }
+    config = {
+        navigationBarTitleText: '编辑'
+    }
 
-  componentWillMount () { }
+    componentWillMount() {
+        const context = wx.createCanvasContext('canvas')
+        console.log('context', context)
+        // const query = wx.createSelectorQuery()
+        // query.select('#canvas')
+        // .fileds({ node: true, size: true})
+        // .exec(res => {
+        //     const canvas = res[0].node
+        //     const ctx = canvas.getContext('2d')
+        //     ctx.fillRect(0, 0, 100, 100)
+        // })
+    }
 
-  componentWillReact () {
-    console.log('componentWillReact')
-  }
+    componentWillReact() {
+        console.log('componentWillReact')
+    }
 
-  componentDidMount () { }
+    componentDidMount() {
 
-  componentWillUnmount () { }
+    }
 
-  componentDidShow () { }
+    componentWillUnmount() { }
 
-  componentDidHide () { }
+    componentDidShow() { }
 
-  increment = () => {
-    const { counterStore } = this.props
-    counterStore.increment()
-  }
+    componentDidHide() { }
 
-  decrement = () => {
-    const { counterStore } = this.props
-    counterStore.decrement()
-  }
+    increment = () => {
+        const { counterStore } = this.props
+        counterStore.increment()
+    }
 
-  incrementAsync = () => {
-    const { counterStore } = this.props
-    counterStore.incrementAsync()
-  }
-  navigateTo(url) {
-    // window.location.href = url
-  }
+    decrement = () => {
+        const { counterStore } = this.props
+        counterStore.decrement()
+    }
 
-  render () {
-    const { counterStore: { counter } } = this.props
-    return (
-      <View className="canvas-container">
-        <Canvas id="canvas" type="2d"/>
-        <CoverView className="add-image">
-          <CoverImage className="image" src={imageAdd}/>
-          <CoverView className="label">添加图片</CoverView>
-        </CoverView>
-      </View>
-    )
-  }
+    incrementAsync = () => {
+        const { counterStore } = this.props
+        counterStore.incrementAsync()
+    }
+    navigateTo(url) {
+        // window.location.href = url
+    }
+
+    render() {
+        const { counterStore: { counter } } = this.props
+        return (
+            <View className="canvas-container">
+                <Canvas id="canvas" type="2d" />
+                <CoverView className="add-image">
+                    <CoverImage className="image" src={imageAdd} />
+                    <CoverView className="label">添加图片</CoverView>
+                </CoverView>
+            </View>
+        )
+    }
 }
 
 export default Index 
