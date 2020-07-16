@@ -14,19 +14,19 @@ class Index extends Component {
     navigationBarTitleText: '编辑'
   }
 
-  componentWillMount () { }
+  componentWillMount() { }
 
-  componentWillReact () {
+  componentWillReact() {
     console.log('componentWillReact')
   }
 
-  componentDidMount () { }
+  componentDidMount() { }
 
-  componentWillUnmount () { }
+  componentWillUnmount() { }
 
-  componentDidShow () { }
+  componentDidShow() { }
 
-  componentDidHide () { }
+  componentDidHide() { }
 
   increment = () => {
     const { counterStore } = this.props
@@ -46,12 +46,12 @@ class Index extends Component {
     // window.location.href = url
   }
 
-  render () {
+  render() {
     const { counterStore: { counter } } = this.props
     return (
       <View className='index'>
-        <CanvasCenter/>
-        <ToolFont/>
+        <CanvasCenter />
+        <ToolFont />
       </View>
     )
   }
