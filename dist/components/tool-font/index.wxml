@@ -1,0 +1,29 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="index">
+        <tool-template>
+            <view class="font-container">
+                <input placeholder="请输入文字" />
+                <view class="item">
+                    <view class="label">透明度</view>
+                    <view class="content opacity">
+                        <slider step="{{10}}" value="{{100}}" selected-color="#333333"></slider>
+                    </view>
+                </view>
+                <view class="item">
+                    <view class="label">颜色</view>
+                    <view class="content color">
+                        <view class="{{item.$loopState__temp2}}" style="{{item.$loopState__temp4}}" wx:key="$original" bindtap="anonymousFunc0" wx:for="{{loopArray2}}" wx:for-item="item" wx:for-index="__index0" data-e-tap-so="this" data-e-tap-a-a="{{item._$indexKey}}"></view>
+                    </view>
+                </view>
+                <view class="item">
+                    <view class="label">样式</view>
+                    <view class="content style">
+                        <view class="{{item.$loopState__temp6}}" wx:key="icon" bindtap="anonymousFunc1" wx:for="{{loopArray3}}" wx:for-item="item" wx:for-index="__index1" data-e-tap-so="this" data-e-tap-a-a="{{item._$indexKey2}}">
+                            <view class="{{item.$loopState__temp8}}"></view><text class="label">{{item.$original.label}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </tool-template>
+    </view>
+</block>

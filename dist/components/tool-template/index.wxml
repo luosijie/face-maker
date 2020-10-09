@@ -1,0 +1,16 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="index">
+        <view class="top">
+            <view class="cancel">
+                <i class="iconfont icon-cancel"></i>
+            </view>
+            <view class="title">{{title}}</view>
+            <view class="confirm">
+                <i class="iconfont icon-confirm"></i>
+            </view>
+        </view>
+        <view class="main">
+            <slot></slot>
+        </view>
+    </view>
+</block>

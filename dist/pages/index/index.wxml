@@ -1,0 +1,20 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="index">
+        <div class="image-container">
+            <div class="add-image">
+                <i class="iconfont icon-add-image"></i>
+                <span class="label">添加图片</span>
+            </div>
+        </div>
+        <div class="menus">
+            <div class="tool add-text" bindonclick="anonymousFunc0" __fn_onClick="{{true}}">
+                <i class="iconfont icon-text"></i>
+                <span class="label">文字</span>
+            </div>
+            <div class="tool add-sticker">
+                <i class="iconfont icon-sticker"></i>
+                <span class="label">贴纸</span>
+            </div>
+        </div>
+    </view>
+</block>

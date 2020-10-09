@@ -28,29 +28,14 @@ class Index extends Component {
 
   componentDidHide() { }
 
-  increment = () => {
-    const { counterStore } = this.props
-    counterStore.increment()
-  }
-
-  decrement = () => {
-    const { counterStore } = this.props
-    counterStore.decrement()
-  }
-
-  incrementAsync = () => {
-    const { counterStore } = this.props
-    counterStore.incrementAsync()
-  }
   navigateTo(url) {
     // window.location.href = url
   }
 
   render() {
-    const { counterStore: { counter } } = this.props
     return (
       <View className='index'>
-        <CanvasCenter />
+        <CanvasCenter canvas/>
         <ToolFont />
       </View>
     )

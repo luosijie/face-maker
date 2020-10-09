@@ -1,0 +1,9 @@
+<block wx:if="{{$taroCompReady}}">
+    <view class="canvas-container">
+        <canvas id="myCanvas" type="2d"></canvas>
+        <cover-view class="add-image">
+            <cover-image class="image" src="{{imageAdd}}"></cover-image>
+            <cover-view class="label">添加图片</cover-view>
+        </cover-view>
+    </view>
+</block>

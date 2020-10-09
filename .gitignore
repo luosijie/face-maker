@@ -4,3 +4,4 @@ project/.temp/
 project/.rn_temp/
 project/node_modules/
 .DS_Store
+node_modules
