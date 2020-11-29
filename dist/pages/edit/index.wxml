@@ -1,6 +1,0 @@
-<block wx:if="{{$taroCompReady}}">
-    <view class="index">
-        <canvas-center compid="{{$compid__1}}"></canvas-center>
-        <tool-font></tool-font>
-    </view>
-</block>

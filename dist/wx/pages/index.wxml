@@ -1,0 +1,1 @@
+<view class="main"><playboard mpxPageStatus="{{mpxPageStatus}}"/> <view class="action"></view></view> 

@@ -1,20 +1,22 @@
-# 施工中...
+# code
 
-一个简易的表情制作小程序
+> face maker
 
-## UI
+## Dev
 
-* sketch源文件
-* png预览图
+```bash
+# install dep
+npm i
 
-## 工程
+# for dev
+npm run watch
 
+# for online
+npm run build
 ```
-cd program
-npm run install
-npm run dev:weapp
-```
 
-## License
+npm script规范 [build|watch]:[dev|prod]:[cross|web|none]
 
-MIT 
+build默认prod，watch默认dev。另单独提供了build:dev和watch:prod，用于单次构建分析看未压缩代码分析问题和持续压缩代码便于大体积项目真机调试。
+
+建议自行调整cross的目标。npm-run-all是为了兼容windows下无法同时执行两个npm script，若不需要转web平台，可考虑去掉。

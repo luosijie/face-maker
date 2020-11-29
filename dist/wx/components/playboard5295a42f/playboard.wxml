@@ -1,0 +1,1 @@
+<view class="playboard" style="{{(mpxShow)||(mpxShow)===undefined?'':'display:none;'}}"><image src="/img/icon-add-image51ab40c5a9de8ccd147a201964f4090d.png" alt="添加图片" class="icon-add"/> <canvas type="2d" id="myCanvas" class="my-canvas"></canvas></view> 

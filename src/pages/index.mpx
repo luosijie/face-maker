@@ -1,0 +1,41 @@
+<template>
+  <view class="main">
+    <playboard/>
+    <view class="action"></view>
+  </view>
+</template>
+
+<script>
+import { createPage } from '@mpxjs/core'
+
+createPage({
+  onLoad () {
+    console.log('app is ready')
+  }
+})
+</script>
+
+<style lang="stylus">
+  .main
+    height 100vh
+
+  .playboard
+    width 100vw
+    height 100vw
+    background #f8f8f8
+    
+  .action {
+    width 100vw
+    height calc(100% - 100vw)
+    background white
+  }
+</style>
+
+<script type="application/json">
+  {
+    "usingComponents": {
+      "playboard": "../components/playboard"
+    }
+  }
+</script>
+

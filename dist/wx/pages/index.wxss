@@ -1,0 +1,14 @@
+
+.main {
+  height: 100vh;
+}
+.playboard {
+  width: 100vw;
+  height: 100vw;
+  background: #f8f8f8;
+}
+.action {
+  width: 100vw;
+  height: calc(100% - 100vw);
+  background: #fff;
+}
