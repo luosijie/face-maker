@@ -1,7 +1,7 @@
 {
   "compileType": "miniprogram",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "postcss": true,
     "preloadBackgroundData": false,
@@ -14,6 +14,8 @@
     "checkInvalidKey": true,
     "checkSiteMap": false,
     "uploadWithSourceMap": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -24,9 +26,7 @@
     "userConfirmedUseCompilerModuleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true
+    "minifyWXSS": true
   },
   "appid": "touristappid",
   "projectname": "code",

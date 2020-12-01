@@ -47,6 +47,9 @@ __webpack_require__(438)
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(439);
+/* harmony import */ var _assets_images_example_jpeg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(440);
+/* harmony import */ var _assets_images_example_jpeg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_images_example_jpeg__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createComponent"])({
@@ -79,27 +82,41 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createComponent"])({
 
     touchend(e) {
       console.log('touch-end', e);
+    },
+
+    initCanvas() {
+      var query = this.createSelectorQuery();
+      query.select('#canvas').fields({
+        node: true,
+        size: true
+      }).exec(function (res) {
+        var canvas = res[0].node;
+        var ctx = canvas.getContext('2d');
+        _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setCtx', ctx);
+        var dpr = wx.getSystemInfoSync().pixelRatio;
+        canvas.width = res[0].width * dpr;
+        canvas.height = res[0].height * dpr;
+        ctx.scale(dpr, dpr); // 初始化一张背景图
+
+        var img = canvas.createImage();
+        img.src = _assets_images_example_jpeg__WEBPACK_IMPORTED_MODULE_2___default.a;
+
+        img.onload = function (e) {
+          // console.log('img loaded', e.path[0].width. e.pa)
+          var cWidth = canvas.width / dpr;
+          var cHeight = canvas.height / dpr;
+          var rate = e.path[0].height / cHeight;
+          var width = e.path[0].width / rate;
+          var left = (cWidth - width) / 2;
+          ctx.drawImage(img, left, 0, width, cHeight);
+        };
+      });
     }
 
   },
 
   ready() {
-    console.log('store', _store__WEBPACK_IMPORTED_MODULE_1__["default"]);
-    console.log('playboard is ready');
-    var query = this.createSelectorQuery();
-    query.select('#canvas').fields({
-      node: true,
-      size: true
-    }).exec(function (res) {
-      console.log('res', res);
-      var canvas = res[0].node;
-      var ctx = canvas.getContext('2d');
-      _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setCtx', ctx);
-      var dpr = wx.getSystemInfoSync().pixelRatio;
-      canvas.width = res[0].width * dpr;
-      canvas.height = res[0].height * dpr;
-      ctx.scale(dpr, dpr); // this.ctx.fillRect(10, 10, width - 20, height - 20)
-    });
+    this.initCanvas();
   }
 
 });
@@ -136,16 +153,28 @@ __webpack_require__.r(__webpack_exports__);
 
 var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
   state: {
-    ctx: null
+    ctx: null,
+    eles: []
   },
   mutations: {
     setCtx(state, data) {
       state.ctx = data;
+    },
+
+    setEles(state, data) {
+      state.eles = data;
     }
 
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
+
+/***/ }),
+
+/***/ 440:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "img/example73295048bd4260075333211267a0584d.jpeg";
 
 /***/ })
 

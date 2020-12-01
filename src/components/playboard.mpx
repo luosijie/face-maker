@@ -15,6 +15,7 @@
 <script>
   import { createComponent } from '@mpxjs/core'
   import store from '../store'
+  import example from '../assets/images/example.jpeg'
 
   createComponent({
     data: {
@@ -43,27 +44,38 @@
       },
       touchend (e) {
         console.log('touch-end', e)
+      },
+      initCanvas () {
+        const query = this.createSelectorQuery()
+        query.select('#canvas')
+          .fields({ node: true, size: true })
+          .exec((res) => {
+            const canvas = res[0].node
+            const ctx = canvas.getContext('2d')
+            store.commit('setCtx', ctx)
+
+            const dpr = wx.getSystemInfoSync().pixelRatio
+            canvas.width = res[0].width * dpr
+            canvas.height = res[0].height * dpr
+            ctx.scale(dpr, dpr)
+
+            // 初始化一张背景图
+            const img = canvas.createImage()
+            img.src = example
+            img.onload = e => {
+              // console.log('img loaded', e.path[0].width. e.pa)
+              const cWidth = canvas.width / dpr
+              const cHeight = canvas.height / dpr
+              const rate = e.path[0].height / cHeight
+              const width = e.path[0].width / rate
+              const left = (cWidth - width) / 2
+              ctx.drawImage(img, left, 0, width, cHeight)
+            }
+          })
       }
     },
     ready () {
-      console.log('store', store)
-      console.log('playboard is ready')
-      const query = this.createSelectorQuery()
-      query.select('#canvas')
-        .fields({ node: true, size: true })
-        .exec((res) => {
-          console.log('res', res)
-          const canvas = res[0].node
-          const ctx = canvas.getContext('2d')
-          store.commit('setCtx', ctx)
-
-          const dpr = wx.getSystemInfoSync().pixelRatio
-          canvas.width = res[0].width * dpr
-          canvas.height = res[0].height * dpr
-          ctx.scale(dpr, dpr)
-
-          // this.ctx.fillRect(10, 10, width - 20, height - 20)
-        })
+      this.initCanvas()
     }
   })
 </script>
@@ -76,8 +88,8 @@
     background #f8f8f8
 
   .canvas 
-    width 100%
-    height 100%
+    width 100vw
+    height 100vw
   
   .icon-add 
     position absolute
