@@ -27,13 +27,13 @@ global.currentSrcMode = "wx"
 
 
 /* styles */
-__webpack_require__(443)
-
-/* json */
 __webpack_require__(431)
 
-/* template */
+/* json */
 __webpack_require__(432)
+
+/* template */
+__webpack_require__(433)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
@@ -57,20 +57,20 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
 /***/ }),
 
 /***/ 431:
-/***/ (function(module, exports) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 432:
 /***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
 /***/ }),
 
-/***/ 443:
+/***/ 432:
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 433:
 /***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor

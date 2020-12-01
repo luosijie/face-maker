@@ -1,1 +1,0 @@
-<view class="list" style="{{(mpxShow)||(mpxShow)===undefined?'':'display:none;'}}"><view wx:for="{{listData}}" wx:key="index">{{item}}</view></view> 

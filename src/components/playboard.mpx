@@ -1,32 +1,68 @@
 <template>
   <view class="playboard">
     <image class="icon-add" src="../assets/images/icon-add-image.png" alt="添加图片"/>
-    <canvas type="2d" id="myCanvas" class="my-canvas"></canvas>
+    <canvas
+      type="2d"
+      id="canvas"
+      class="canvas"
+      bindtouchstart="touchstart"
+      bindtouchmove="touchmove"
+      bindtouchend="touchend"
+    />
   </view>
 </template>
 
 <script>
   import { createComponent } from '@mpxjs/core'
+  import store from '../store'
 
   createComponent({
     data: {
-      listData: ['手机', '的d sds', '电脑']
+      startPos: {
+        x: 0,
+        y: 0
+      }
+    },
+    computed: {
+      ctx () {
+        return store.state.ctx
+      }
+    },
+    methods: {
+      touchstart (e) {
+        this.startPos.x = e.touches[0].x
+        this.startPos.y = e.touches[0].y
+        console.log('touch-start', e, this.startPos)
+      },
+      touchmove (e) {
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+        const x = e.touches[0].x
+        const y = e.touches[0].y
+        console.log('touch-move', this.startPos.x, this.startPos.y)
+        this.ctx.fillRect(this.startPos.x, this.startPos.y, x - this.startPos.x, y - this.startPos.y)
+      },
+      touchend (e) {
+        console.log('touch-end', e)
+      }
     },
     ready () {
-      console.log('playboard is read')
-      const query = wx.createSelectorQuery()
-      query.select('#myCanvas')
+      console.log('store', store)
+      console.log('playboard is ready')
+      const query = this.createSelectorQuery()
+      query.select('#canvas')
         .fields({ node: true, size: true })
         .exec((res) => {
+          console.log('res', res)
           const canvas = res[0].node
           const ctx = canvas.getContext('2d')
+          store.commit('setCtx', ctx)
 
           const dpr = wx.getSystemInfoSync().pixelRatio
           canvas.width = res[0].width * dpr
           canvas.height = res[0].height * dpr
           ctx.scale(dpr, dpr)
 
-          ctx.fillRect(0, 0, 100, 100)
+          // this.ctx.fillRect(10, 10, width - 20, height - 20)
         })
     }
   })
@@ -39,7 +75,7 @@
     height 100vw
     background #f8f8f8
 
-  .my-canvas 
+  .canvas 
     width 100%
     height 100%
   
