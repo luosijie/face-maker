@@ -27,6 +27,25 @@
     computed: {
       ctx () {
         return store.state.ctx
+      },
+      elements () {
+        return store.state.elements
+      }
+    },
+    watch: {
+      elements () {
+        // console.log('canvas change', this.elements)
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+        this.elements.forEach(ele => {
+          if (ele.type === 'rect') {
+            console.log(ele.sx, ele.sy)
+            this.ctx.fillRect(ele.sx, ele.sy, ele.ex, ele.ey)
+          }
+          if (ele.type === 'image') {
+            this.ctx.drawImage(ele.data, ele.left, 0, ele.width, ele.height)
+            this.ctx.save()
+          }
+        })
       }
     },
     methods: {
@@ -36,11 +55,25 @@
         console.log('touch-start', e, this.startPos)
       },
       touchmove (e) {
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+        // this.ctx.restore()
+        // this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
         const x = e.touches[0].x
         const y = e.touches[0].y
-        console.log('touch-move', this.startPos.x, this.startPos.y)
-        this.ctx.fillRect(this.startPos.x, this.startPos.y, x - this.startPos.x, y - this.startPos.y)
+        const data = {
+          type: 'rect',
+          sx: this.startPos.x,
+          sy: this.startPos.y,
+          ex: x - this.startPos.x,
+          ey: y - this.startPos.y
+        }
+        const elements = store.state.elements
+        const index = elements.findIndex(e => {
+          return e.type === 'rect'
+        })
+        if (index > -1) {
+          elements.splice(index, 1)
+        }
+        elements.push(data)
       },
       touchend (e) {
         console.log('touch-end', e)
@@ -69,7 +102,17 @@
               const rate = e.path[0].height / cHeight
               const width = e.path[0].width / rate
               const left = (cWidth - width) / 2
-              ctx.drawImage(img, left, 0, width, cHeight)
+              const elements = store.state.elements
+              const data = {
+                type: 'image',
+                data: img,
+                left: left,
+                top: 0,
+                width: width,
+                height: cHeight
+              }
+              elements.push(data)
+              store.commit('setElements', elements)
             }
           })
       }

@@ -3,13 +3,13 @@ import { createStore } from '@mpxjs/core'
 const store = createStore({
   state: {
     ctx: null,
-    eles: []
+    elements: []
   },
   mutations: {
     setCtx (state, data) {
       state.ctx = data
     },
-    setEles (state, data) {
+    setElements (state, data) {
       state.eles = data
     }
   }
