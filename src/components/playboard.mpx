@@ -1,6 +1,5 @@
 <template>
   <view class="playboard">
-    <image class="icon-add" src="../assets/images/icon-add-image.png" alt="添加图片"/>
     <canvas
       type="2d"
       id="canvas"
@@ -9,139 +8,220 @@
       bindtouchmove="touchmove"
       bindtouchend="touchend"
     />
+    <image
+      class="icon-add"
+      src="../assets/images/icon-add-image.png"
+      alt="添加图片"
+      bindtouchstart="chooseImage"
+    />
+    <image
+      class="icon-add"
+      src="../assets/images/icon-add-image.png"
+      alt="添加图片"
+      bindtouchstart="chooseImage"
+    />
   </view>
 </template>
 
 <script>
-  import { createComponent } from '@mpxjs/core'
-  import store from '../store'
-  import example from '../assets/images/example.jpeg'
+import { createComponent } from '@mpxjs/core'
+import store from '../store'
+const imageUrl = 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'
+// import example from '../assets/images/example.jpeg'
+const ACTION_TYEP = {
+  MOVE: 'MOVE', // 移动
+  SCALE: 'SCALE', // 缩放
+  ROTATE: 'ROTATE', // 旋转
+  NULL: 'NULL' // 空闲
+}
 
-  createComponent({
-    data: {
-      startPos: {
-        x: 0,
-        y: 0
-      }
+createComponent({
+  data: {
+    startTouches: [],
+    startSelected: {
+      x: 0,
+      y: 0
     },
-    computed: {
-      ctx () {
-        return store.state.ctx
-      },
-      elements () {
-        return store.state.elements
-      }
+    actionType: '' // move, scale, rotate
+  },
+  computed: {
+    ctx() {
+      return store.state.ctx
     },
-    watch: {
-      elements () {
-        // console.log('canvas change', this.elements)
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-        this.elements.forEach(ele => {
-          if (ele.type === 'rect') {
-            console.log(ele.sx, ele.sy)
-            this.ctx.fillRect(ele.sx, ele.sy, ele.ex, ele.ey)
-          }
-          if (ele.type === 'image') {
-            this.ctx.drawImage(ele.data, ele.left, 0, ele.width, ele.height)
-            this.ctx.save()
-          }
-        })
-      }
+    elements() {
+      return store.state.elements
     },
-    methods: {
-      touchstart (e) {
-        this.startPos.x = e.touches[0].x
-        this.startPos.y = e.touches[0].y
-        console.log('touch-start', e, this.startPos)
-      },
-      touchmove (e) {
-        // this.ctx.restore()
-        // this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-        const x = e.touches[0].x
-        const y = e.touches[0].y
-        const data = {
-          type: 'rect',
-          sx: this.startPos.x,
-          sy: this.startPos.y,
-          ex: x - this.startPos.x,
-          ey: y - this.startPos.y
+    dpr() {
+      return wx.getSystemInfoSync().pixelRatio
+    }
+  },
+  watch: {
+    elements() {
+      // console.log('canvas elements change')
+      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+      this.elements.forEach(ele => {
+        if (ele.type === 'rect') {
+          this.ctx.fillRect(ele.sx, ele.sy, ele.ex, ele.ey)
         }
-        const elements = store.state.elements
-        const index = elements.findIndex(e => {
-          return e.type === 'rect'
-        })
-        if (index > -1) {
-          elements.splice(index, 1)
+        if (ele.type === 'image') {
+          this.ctx.save()
+          const left = ele.left - this.ctx.canvas.width / this.dpr / 2
+          const top = ele.top - this.ctx.canvas.height / this.dpr / 2
+          this.ctx.translate(
+            this.ctx.canvas.width / this.dpr / 2,
+            this.ctx.canvas.height / this.dpr / 2
+          )
+          // this.ctx.rotate(1)
+          this.ctx.drawImage(ele.data, left, top, ele.width, ele.height)
+          this.ctx.restore()
         }
-        elements.push(data)
-      },
-      touchend (e) {
-        console.log('touch-end', e)
-      },
-      initCanvas () {
-        const query = this.createSelectorQuery()
-        query.select('#canvas')
-          .fields({ node: true, size: true })
-          .exec((res) => {
-            const canvas = res[0].node
-            const ctx = canvas.getContext('2d')
-            store.commit('setCtx', ctx)
+      })
+      this.drawGrid()
+      // console.log('touch-move', this.ctx.canvas.width / 2, this.ctx.canvas.height / 2)
+      // this.ctx.rotate(1)
+      // this.ctx.scale(1.1, 1.1)
+      // this.ctx.rotate(Math.PI / 2)
+    }
+  },
+  methods: {
+    chooseImage() {
+      // wx.chooseImage({
+      //   success (res) {
+      //     console.log('res', res)
+      //   }
+      // })
+    },
+    touchstart(e) {
+      if (e.touches.length === 1) this.actionType = ACTION_TYEP.MOVE
+      if (e.touches.length === 2) this.actionType = ACTION_TYEP.SCALE
+      console.log('touch-start', e)
+      this.startTouches = e.touches
+      const image = store.state.elements.find(e => e.type === 'image')
+      if (image) {
+        this.startSelected.x = image.left
+        this.startSelected.y = image.top
+      }
+    },
+    touchmove(e) {
+      if (this.actionType !== ACTION_TYEP.MOVE || e.touches.length > 1) {
+        return
+      }
+      const x = e.touches[0].x
+      const y = e.touches[0].y
+      const dx = this.startTouches[0].x - x
+      const dy = this.startTouches[0].y - y
+      const elements = store.state.elements
+      const index = elements.findIndex(e => e.type === 'image')
+      const image = elements.splice(index, 1)[0]
+      image.left = this.startSelected.x - dx
+      image.top = this.startSelected.y - dy
+      elements.push(image)
+    },
+    touchend(e) {
+      this.moving = false
+      console.log('touch-end', e)
+    },
+    initCanvas() {
+      const query = this.createSelectorQuery()
+      query
+        .select('#canvas')
+        .fields({ node: true, size: true })
+        .exec(res => {
+          const canvas = res[0].node
+          const ctx = canvas.getContext('2d')
+          store.commit('setCtx', ctx)
 
-            const dpr = wx.getSystemInfoSync().pixelRatio
-            canvas.width = res[0].width * dpr
-            canvas.height = res[0].height * dpr
-            ctx.scale(dpr, dpr)
+          canvas.width = res[0].width * this.dpr
+          canvas.height = res[0].height * this.dpr
+          ctx.scale(this.dpr, this.dpr)
 
-            // 初始化一张背景图
-            const img = canvas.createImage()
-            img.src = example
-            img.onload = e => {
-              // console.log('img loaded', e.path[0].width. e.pa)
-              const cWidth = canvas.width / dpr
-              const cHeight = canvas.height / dpr
-              const rate = e.path[0].height / cHeight
-              const width = e.path[0].width / rate
-              const left = (cWidth - width) / 2
-              const elements = store.state.elements
-              const data = {
-                type: 'image',
-                data: img,
-                left: left,
-                top: 0,
-                width: width,
-                height: cHeight
+          // 初始化一张背景图
+          wx.getImageInfo({
+            src: imageUrl,
+            success: res => {
+              console.log('get-image-url', res)
+              const imageData = canvas.createImage()
+              imageData.src = imageUrl
+              imageData.onload = e => {
+                console.log('imageData-loaded', e)
+                // ctx.drawImage(res.path, 0, 0, 100, 100)
+                const cWidth = canvas.width / this.dpr
+                const cHeight = canvas.height / this.dpr
+                const data = {
+                  type: 'image',
+                  data: imageData,
+                  left: 0,
+                  top: 0,
+                  width: 0,
+                  height: 0
+                }
+                if (res.height > res.width) {
+                  const rate = res.height / cHeight
+                  data.width = res.width / rate
+                  data.height = cHeight
+                  data.left = (cWidth - data.width) / 2
+                  data.top = 0
+                } else {
+                  const rate = res.width / cWidth
+                  data.height = res.height / rate
+                  data.width = cWidth
+                  data.left = 0
+                  data.top = (cHeight - data.height) / 2
+                }
+                const elements = store.state.elements
+                elements.push(data)
+                store.commit('setElements', elements)
               }
-              elements.push(data)
-              store.commit('setElements', elements)
             }
           })
-      }
+        })
     },
-    ready () {
-      this.initCanvas()
+    drawGrid() {
+      const lineNums = 3
+      const cWidth = this.ctx.canvas.width / this.dpr
+      // const cHeight = this.ctx.canvas.height
+      const lineGap = cWidth / lineNums
+      this.ctx.strokeStyle = '#ccc'
+      this.ctx.setLineDash([5, 5])
+      // 绘制x轴
+      for (let i = 0; i <= lineNums; i++) {
+        this.ctx.beginPath()
+        this.ctx.moveTo(0, lineGap * i)
+        this.ctx.lineTo(cWidth, lineGap * i)
+        this.ctx.stroke()
+      }
+      // 绘制y轴
+      for (let i = 0; i <= lineNums; i++) {
+        this.ctx.beginPath()
+        this.ctx.moveTo(lineGap * i, 0)
+        this.ctx.lineTo(lineGap * i, cWidth)
+        this.ctx.stroke()
+      }
     }
-  })
+  },
+  ready() {
+    this.initCanvas()
+  }
+})
 </script>
 
 <style lang="stylus">
-  .playboard
-    position relative
-    width 100vw
-    height 100vw
-    background #f8f8f8
-
-  .canvas 
-    width 100vw
-    height 100vw
-  
-  .icon-add 
-    position absolute
-    width 160rpx
-    height 160rpx
-    left 50%
-    top 50%
-    margin-top -80rpx
-    margin-left -80rpx
+.playboard
+  position relative
+  width 100vw
+  height 100vw
+  background #f8f8f8
+.canvas
+  width 100vw
+  height 100vw
+.icon-add
+  position absolute
+  width 160rpx
+  height 160rpx
+  left 50%
+  top 50%
+  margin-top -80rpx
+  margin-left -80rpx
 </style>
 
 <script type="application/json">

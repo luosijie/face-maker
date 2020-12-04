@@ -8,7 +8,7 @@ const eslintConf = {
   },
   extends: 'standard',
   settings: {
-    'html/html-extensions': ['.html', '.mpx'],  // consider .html and .mpx files as HTML
+    'html/html-extensions': ['.html', '.mpx']  // consider .html and .mpx files as HTML
   },
   plugins: [
     'html'
@@ -20,7 +20,9 @@ const eslintConf = {
     __mpx_mode__: true
   },
   rules: {
-    camelcase: ['error', { 'allow': ['__mpx_mode__'] }]
+    camelcase: ['error', { 'allow': ['__mpx_mode__'] }],
+    'no-multi-spaces': 0,
+    'space-before-function-paren': 0
   }
 }
 if (userConf.tsSupport) {

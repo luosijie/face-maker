@@ -31,7 +31,5 @@
   "appid": "touristappid",
   "projectname": "code",
   "description": "face maker",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
   "condition": {}
 }
