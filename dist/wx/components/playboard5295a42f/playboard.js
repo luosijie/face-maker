@@ -119,6 +119,8 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
           _this.ctx.translate(_this.ctx.canvas.width / _this.dpr / 2, _this.ctx.canvas.height / _this.dpr / 2); // this.ctx.rotate(1)
 
 
+          _this.ctx.scale(ele.scale, ele.scale);
+
           _this.ctx.drawImage(ele.data, left, top, ele.width, ele.height);
 
           _this.ctx.restore();
@@ -155,33 +157,53 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
       if (image) {
         this.startSelected.x = image.left;
         this.startSelected.y = image.top;
+        this.startSelected.scale = image.scale;
       }
     },
 
     touchmove(e) {
-      if (this.actionType !== ACTION_TYEP.MOVE || e.touches.length > 1) {
-        return;
+      console.log('this.actionType', this.actionType, e.touches);
+
+      if (this.actionType === ACTION_TYEP.MOVE) {
+        if (e.touches.length > 1) return;
+        var x = e.touches[0].x;
+        var y = e.touches[0].y;
+        var dx = this.startTouches[0].x - x;
+        var dy = this.startTouches[0].y - y;
+        var elements = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
+
+        var index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(elements).call(elements, function (e) {
+          return e.type === 'image';
+        });
+
+        var image = _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(elements).call(elements, index, 1)[0];
+
+        image.left = this.startSelected.x - dx;
+        image.top = this.startSelected.y - dy;
+        elements.push(image);
       }
 
-      var x = e.touches[0].x;
-      var y = e.touches[0].y;
-      var dx = this.startTouches[0].x - x;
-      var dy = this.startTouches[0].y - y;
-      var elements = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
+      if (this.actionType === ACTION_TYEP.SCALE) {
+        if (e.touches.length !== 2) return;
+        var startLength = Math.sqrt(Math.pow(this.startTouches[0].x - this.startTouches[1].x, 2) + Math.pow(this.startTouches[0].y - this.startTouches[1].y, 2));
+        var endLength = Math.sqrt(Math.pow(e.touches[0].x - e.touches[1].x, 2) + Math.pow(e.touches[0].y - e.touches[1].y, 2));
+        var scale = endLength / startLength;
+        var _elements = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
 
-      var index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(elements).call(elements, function (e) {
-        return e.type === 'image';
-      });
+        var _index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(_elements).call(_elements, function (e) {
+          return e.type === 'image';
+        });
 
-      var image = _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(elements).call(elements, index, 1)[0];
+        var _image = _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(_elements).call(_elements, _index, 1)[0];
 
-      image.left = this.startSelected.x - dx;
-      image.top = this.startSelected.y - dy;
-      elements.push(image);
+        _image.scale = this.startSelected.scale * scale;
+
+        _elements.push(_image);
+      }
     },
 
     touchend(e) {
-      this.moving = false;
+      this.actionType = ACTION_TYEP.NULL;
       console.log('touch-end', e);
     },
 
@@ -218,7 +240,9 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
                 left: 0,
                 top: 0,
                 width: 0,
-                height: 0
+                height: 0,
+                scale: 1,
+                rotate: 0
               };
 
               if (res.height > res.width) {

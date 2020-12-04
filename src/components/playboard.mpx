@@ -72,6 +72,7 @@ createComponent({
             this.ctx.canvas.height / this.dpr / 2
           )
           // this.ctx.rotate(1)
+          this.ctx.scale(ele.scale, ele.scale)
           this.ctx.drawImage(ele.data, left, top, ele.width, ele.height)
           this.ctx.restore()
         }
@@ -100,25 +101,43 @@ createComponent({
       if (image) {
         this.startSelected.x = image.left
         this.startSelected.y = image.top
+        this.startSelected.scale = image.scale
       }
     },
     touchmove(e) {
-      if (this.actionType !== ACTION_TYEP.MOVE || e.touches.length > 1) {
-        return
+      console.log('this.actionType', this.actionType, e.touches)
+      if (this.actionType === ACTION_TYEP.MOVE) {
+        if (e.touches.length > 1) return
+        const x = e.touches[0].x
+        const y = e.touches[0].y
+        const dx = this.startTouches[0].x - x
+        const dy = this.startTouches[0].y - y
+        const elements = store.state.elements
+        const index = elements.findIndex(e => e.type === 'image')
+        const image = elements.splice(index, 1)[0]
+        image.left = this.startSelected.x - dx
+        image.top = this.startSelected.y - dy
+        elements.push(image)
       }
-      const x = e.touches[0].x
-      const y = e.touches[0].y
-      const dx = this.startTouches[0].x - x
-      const dy = this.startTouches[0].y - y
-      const elements = store.state.elements
-      const index = elements.findIndex(e => e.type === 'image')
-      const image = elements.splice(index, 1)[0]
-      image.left = this.startSelected.x - dx
-      image.top = this.startSelected.y - dy
-      elements.push(image)
+      if (this.actionType === ACTION_TYEP.SCALE) {
+        if (e.touches.length !== 2) return
+        const startLength = Math.sqrt(
+          (this.startTouches[0].x - this.startTouches[1].x) ** 2 +
+            (this.startTouches[0].y - this.startTouches[1].y) ** 2
+        )
+        const endLength = Math.sqrt(
+          (e.touches[0].x - e.touches[1].x) ** 2 + (e.touches[0].y - e.touches[1].y) ** 2
+        )
+        const scale = endLength / startLength
+        const elements = store.state.elements
+        const index = elements.findIndex(e => e.type === 'image')
+        const image = elements.splice(index, 1)[0]
+        image.scale = this.startSelected.scale * scale
+        elements.push(image)
+      }
     },
     touchend(e) {
-      this.moving = false
+      this.actionType = ACTION_TYEP.NULL
       console.log('touch-end', e)
     },
     initCanvas() {
@@ -153,7 +172,9 @@ createComponent({
                   left: 0,
                   top: 0,
                   width: 0,
-                  height: 0
+                  height: 0,
+                  scale: 1,
+                  rotate: 0
                 }
                 if (res.height > res.width) {
                   const rate = res.height / cHeight
