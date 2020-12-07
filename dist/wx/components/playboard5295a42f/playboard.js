@@ -106,9 +106,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
       _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context = this.elements).call(_context, function (ele) {
-        if (ele.type === 'rect') {
-          _this.ctx.fillRect(ele.sx, ele.sy, ele.ex, ele.ey);
-        }
+        console.log('eles', ele);
 
         if (ele.type === 'image') {
           _this.ctx.save();
@@ -122,6 +120,24 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
           _this.ctx.scale(ele.scale, ele.scale);
 
           _this.ctx.drawImage(ele.data, left, top, ele.width, ele.height);
+
+          _this.ctx.restore();
+        }
+
+        if (ele.type === 'text') {
+          _this.ctx.save();
+
+          console.log('this.ctx', _this.ctx);
+
+          _this.ctx.setLineDash([10, 5], 5);
+
+          _this.ctx.strokeStyle = 'red';
+
+          _this.ctx.strokeRect(ele.left - 5, ele.top + 10, 150 + 10, -30 - 10);
+
+          _this.ctx.font = '30px sans-serif';
+
+          _this.ctx.fillText(ele.data, ele.left, ele.top);
 
           _this.ctx.restore();
         }
@@ -180,7 +196,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
 
         image.left = this.startSelected.x - dx;
         image.top = this.startSelected.y - dy;
-        elements.push(image);
+        elements.unshift(image);
       }
 
       if (this.actionType === ACTION_TYEP.SCALE) {
@@ -211,6 +227,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
       var _this2 = this;
 
       var query = this.createSelectorQuery();
+      var elements = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
       query.select('#canvas').fields({
         node: true,
         size: true
@@ -260,9 +277,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
                 data.top = (cHeight - data.height) / 2;
               }
 
-              var elements = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
-              elements.push(data);
-              _store__WEBPACK_IMPORTED_MODULE_5__["default"].commit('setElements', elements);
+              elements.push(data); // store.commit('setElements', elements)// 初始化一段文字
+
+              var text = {
+                type: 'text',
+                data: '请输入文字',
+                left: 100,
+                top: 100
+              };
+              elements.push(text);
             };
           }
         });

@@ -60,9 +60,7 @@ createComponent({
       // console.log('canvas elements change')
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
       this.elements.forEach(ele => {
-        if (ele.type === 'rect') {
-          this.ctx.fillRect(ele.sx, ele.sy, ele.ex, ele.ey)
-        }
+        console.log('eles', ele)
         if (ele.type === 'image') {
           this.ctx.save()
           const left = ele.left - this.ctx.canvas.width / this.dpr / 2
@@ -74,6 +72,16 @@ createComponent({
           // this.ctx.rotate(1)
           this.ctx.scale(ele.scale, ele.scale)
           this.ctx.drawImage(ele.data, left, top, ele.width, ele.height)
+          this.ctx.restore()
+        }
+        if (ele.type === 'text') {
+          this.ctx.save()
+          console.log('this.ctx', this.ctx)
+          this.ctx.setLineDash([10, 5], 5)
+          this.ctx.strokeStyle = 'red'
+          this.ctx.strokeRect(ele.left - 5, ele.top + 10, 150 + 10, -30 - 10)
+          this.ctx.font = '30px sans-serif'
+          this.ctx.fillText(ele.data, ele.left, ele.top)
           this.ctx.restore()
         }
       })
@@ -117,7 +125,7 @@ createComponent({
         const image = elements.splice(index, 1)[0]
         image.left = this.startSelected.x - dx
         image.top = this.startSelected.y - dy
-        elements.push(image)
+        elements.unshift(image)
       }
       if (this.actionType === ACTION_TYEP.SCALE) {
         if (e.touches.length !== 2) return
@@ -142,6 +150,7 @@ createComponent({
     },
     initCanvas() {
       const query = this.createSelectorQuery()
+      const elements = store.state.elements
       query
         .select('#canvas')
         .fields({ node: true, size: true })
@@ -189,9 +198,15 @@ createComponent({
                   data.left = 0
                   data.top = (cHeight - data.height) / 2
                 }
-                const elements = store.state.elements
                 elements.push(data)
-                store.commit('setElements', elements)
+                // store.commit('setElements', elements)// 初始化一段文字
+                const text = {
+                  type: 'text',
+                  data: '请输入文字',
+                  left: 100,
+                  top: 100
+                }
+                elements.push(text)
               }
             }
           })
