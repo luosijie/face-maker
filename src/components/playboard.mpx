@@ -10,13 +10,7 @@
     />
     <image
       class="icon-add"
-      src="../assets/images/icon-add-image.png"
-      alt="添加图片"
-      bindtouchstart="chooseImage"
-    />
-    <image
-      class="icon-add"
-      src="../assets/images/icon-add-image.png"
+      src="./images/icon-add-image.png"
       alt="添加图片"
       bindtouchstart="chooseImage"
     />
@@ -48,11 +42,17 @@ createComponent({
     mode() {
       return store.state.mode
     },
+    canvas() {
+      return store.state.canvas
+    },
     ctx() {
       return store.state.ctx
     },
     elements() {
       return store.state.elements
+    },
+    activeIndex() {
+      return store.state.activeIndex
     },
     dpr() {
       return wx.getSystemInfoSync().pixelRatio
@@ -80,15 +80,11 @@ createComponent({
         if (ele.type === 'text') {
           this.ctx.save()
           console.log('this.ctx', this.ctx)
-          // this.ctx.setTextBaseline('top')
-          this.ctx.setLineDash([10, 5], 5)
-          // this.ctx.setTextBaseline('top')
-          this.ctx.strokeStyle = 'red'
+          this.ctx.font = `${ele.size}px sans-serif`
           this.ctx.textBaseline = 'top'
-          this.ctx.strokeRect(ele.left - 5, ele.top - 5, 150 + 10, 30 + 10)
-          this.ctx.font = '30px sans-serif'
           this.ctx.fillText(ele.data, ele.left, ele.top)
           this.ctx.restore()
+          this.initController('text')
         }
       })
       this.drawGrid()
@@ -172,6 +168,7 @@ createComponent({
         .exec(res => {
           const canvas = res[0].node
           const ctx = canvas.getContext('2d')
+          store.commit('setCanvas', canvas)
           store.commit('setCtx', ctx)
 
           canvas.width = res[0].width * this.dpr
@@ -218,6 +215,7 @@ createComponent({
                 const text = {
                   type: 'text',
                   data: '请输入文字',
+                  size: 50,
                   left: 100,
                   top: 100
                 }
@@ -226,6 +224,61 @@ createComponent({
             }
           })
         })
+    },
+    initController(type) {
+      if (!this.activeIndex) return
+      const activeElement = this.elements[this.activeIndex]
+      this.ctx.save()
+      // this.ctx.setTextBaseline('top')
+      // this.ctx.setTextBaseline('top')
+      this.ctx.strokeStyle = '#eee'
+      let left, top, width, height
+      if (type === 'text') {
+        left = activeElement.left - 5
+        top = activeElement.top - 5
+        width = activeElement.size * activeElement.data.length + 10
+        height = activeElement.size + 10
+      }
+      this.ctx.save()
+      this.ctx.setLineDash([10, 5], 5)
+      this.ctx.strokeRect(left, top, width, height)
+      this.ctx.restore()
+      // 绘制控制点-移动
+      const imageMove = this.canvas.createImage()
+      imageMove.src = '/images/icon-move.png'
+      imageMove.onload = e => {
+        this.ctx.save()
+        this.ctx.translate(left, top)
+        this.ctx.drawImage(imageMove, -10, -10, 20, 20)
+        this.ctx.restore()
+      }
+      // 绘制控制点-缩放
+      const imageScale = this.canvas.createImage()
+      imageScale.src = '/images/icon-scale.png'
+      imageScale.onload = e => {
+        this.ctx.save()
+        this.ctx.translate(left , top + height)
+        this.ctx.drawImage(imageScale, -10, -10, 20, 20)
+        this.ctx.restore()
+      }
+      // 绘制控制点-旋转
+      const imageRotate = this.canvas.createImage()
+      imageRotate.src = '/images/icon-rotate.png'
+      imageRotate.onload = e => {
+        this.ctx.save()
+        this.ctx.translate(left + width, top + height)
+        this.ctx.drawImage(imageRotate, -10, -10, 20, 20)
+        this.ctx.restore()
+      }
+      // 绘制控制点-删除
+      const imageDelete = this.canvas.createImage()
+      imageDelete.src = '/images/icon-delete.png'
+      imageDelete.onload = e => {
+        this.ctx.save()
+        this.ctx.translate(left + width, top)
+        this.ctx.drawImage(imageDelete, -10, -10, 20, 20)
+        this.ctx.restore()
+      }
     },
     drawGrid() {
       const lineNums = 3

@@ -91,12 +91,20 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_5__["createComponent"])({
       return _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.mode;
     },
 
+    canvas() {
+      return _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.canvas;
+    },
+
     ctx() {
       return _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.ctx;
     },
 
     elements() {
       return _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.elements;
+    },
+
+    activeIndex() {
+      return _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.activeIndex;
     },
 
     dpr() {
@@ -134,21 +142,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_5__["createComponent"])({
         if (ele.type === 'text') {
           _this.ctx.save();
 
-          console.log('this.ctx', _this.ctx); // this.ctx.setTextBaseline('top')
-
-          _this.ctx.setLineDash([10, 5], 5); // this.ctx.setTextBaseline('top')
-
-
-          _this.ctx.strokeStyle = 'red';
+          console.log('this.ctx', _this.ctx);
+          _this.ctx.font = "".concat(ele.size, "px sans-serif");
           _this.ctx.textBaseline = 'top';
-
-          _this.ctx.strokeRect(ele.left - 5, ele.top - 5, 150 + 10, 30 + 10);
-
-          _this.ctx.font = '30px sans-serif';
 
           _this.ctx.fillText(ele.data, ele.left, ele.top);
 
           _this.ctx.restore();
+
+          _this.initController('text');
         }
       });
 
@@ -259,6 +261,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_5__["createComponent"])({
       }).exec(function (res) {
         var canvas = res[0].node;
         var ctx = canvas.getContext('2d');
+        _store__WEBPACK_IMPORTED_MODULE_6__["default"].commit('setCanvas', canvas);
         _store__WEBPACK_IMPORTED_MODULE_6__["default"].commit('setCtx', ctx);
         canvas.width = res[0].width * _this3.dpr;
         canvas.height = res[0].height * _this3.dpr;
@@ -307,6 +310,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_5__["createComponent"])({
               var text = {
                 type: 'text',
                 data: '请输入文字',
+                size: 50,
                 left: 100,
                 top: 100
               };
@@ -315,6 +319,85 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_5__["createComponent"])({
           }
         });
       });
+    },
+
+    initController(type) {
+      var _this4 = this;
+
+      if (!this.activeIndex) return;
+      var activeElement = this.elements[this.activeIndex];
+      this.ctx.save(); // this.ctx.setTextBaseline('top')
+      // this.ctx.setTextBaseline('top')
+
+      this.ctx.strokeStyle = '#eee';
+      var left, top, width, height;
+
+      if (type === 'text') {
+        left = activeElement.left - 5;
+        top = activeElement.top - 5;
+        width = activeElement.size * activeElement.data.length + 10;
+        height = activeElement.size + 10;
+      }
+
+      this.ctx.save();
+      this.ctx.setLineDash([10, 5], 5);
+      this.ctx.strokeRect(left, top, width, height);
+      this.ctx.restore(); // 绘制控制点-移动
+
+      var imageMove = this.canvas.createImage();
+      imageMove.src = '/images/icon-move.png';
+
+      imageMove.onload = function (e) {
+        _this4.ctx.save();
+
+        _this4.ctx.translate(left, top);
+
+        _this4.ctx.drawImage(imageMove, -10, -10, 20, 20);
+
+        _this4.ctx.restore();
+      }; // 绘制控制点-缩放
+
+
+      var imageScale = this.canvas.createImage();
+      imageScale.src = '/images/icon-scale.png';
+
+      imageScale.onload = function (e) {
+        _this4.ctx.save();
+
+        _this4.ctx.translate(left, top + height);
+
+        _this4.ctx.drawImage(imageScale, -10, -10, 20, 20);
+
+        _this4.ctx.restore();
+      }; // 绘制控制点-旋转
+
+
+      var imageRotate = this.canvas.createImage();
+      imageRotate.src = '/images/icon-rotate.png';
+
+      imageRotate.onload = function (e) {
+        _this4.ctx.save();
+
+        _this4.ctx.translate(left + width, top + height);
+
+        _this4.ctx.drawImage(imageRotate, -10, -10, 20, 20);
+
+        _this4.ctx.restore();
+      }; // 绘制控制点-删除
+
+
+      var imageDelete = this.canvas.createImage();
+      imageDelete.src = '/images/icon-delete.png';
+
+      imageDelete.onload = function (e) {
+        _this4.ctx.save();
+
+        _this4.ctx.translate(left + width, top);
+
+        _this4.ctx.drawImage(imageDelete, -10, -10, 20, 20);
+
+        _this4.ctx.restore();
+      };
     },
 
     drawGrid() {
@@ -510,12 +593,19 @@ __webpack_require__.r(__webpack_exports__);
 
 var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
   state: {
+    cavas: null,
     ctx: null,
     elements: [],
+    activeIndex: 1,
+    // 当前编辑中的元素下标
     mode: 'text' // background, text, image
 
   },
   mutations: {
+    setCanvas(state, data) {
+      state.canvas = data;
+    },
+
     setCtx(state, data) {
       state.ctx = data;
     },
@@ -526,6 +616,10 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
 
     setMode(state, data) {
       state.mode = data;
+    },
+
+    setActiveIndex(state, data) {
+      state.activeIndex = data;
     }
 
   }

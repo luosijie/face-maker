@@ -2,11 +2,16 @@ import { createStore } from '@mpxjs/core'
 
 const store = createStore({
   state: {
+    cavas: null,
     ctx: null,
     elements: [],
+    activeIndex: 1, // 当前编辑中的元素下标
     mode: 'text'      // background, text, image
   },
   mutations: {
+    setCanvas (state, data) {
+      state.canvas = data
+    },
     setCtx (state, data) {
       state.ctx = data
     },
@@ -15,6 +20,9 @@ const store = createStore({
     },
     setMode (state, data) {
       state.mode = data
+    },
+    setActiveIndex (state, data) {
+      state.activeIndex = data
     }
   }
 })
