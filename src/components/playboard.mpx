@@ -77,6 +77,7 @@ createComponent({
         if (ele.type === 'text') {
           this.ctx.save()
           console.log('this.ctx', this.ctx)
+          this.ctx.setTextBaseline('top')
           this.ctx.setLineDash([10, 5], 5)
           this.ctx.strokeStyle = 'red'
           this.ctx.strokeRect(ele.left - 5, ele.top + 10, 150 + 10, -30 - 10)

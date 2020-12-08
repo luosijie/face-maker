@@ -129,6 +129,8 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
 
           console.log('this.ctx', _this.ctx);
 
+          _this.ctx.setTextBaseline('top');
+
           _this.ctx.setLineDash([10, 5], 5);
 
           _this.ctx.strokeStyle = 'red';
