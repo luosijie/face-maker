@@ -10,7 +10,7 @@
     />
     <image
       class="icon-add"
-      src="./images/icon-add-image.png"
+      src="../assets/images/icon-add-image.png"
       alt="添加图片"
       bindtouchstart="chooseImage"
     />
@@ -36,7 +36,13 @@ createComponent({
       x: 0,
       y: 0
     },
-    actionType: '' // move, scale, rotate
+    actionType: '', // move, scale, rotate
+    icon: {
+      move: null,
+      scale: null,
+      delete: null,
+      rotate: null
+    }
   },
   computed: {
     mode() {
@@ -62,8 +68,8 @@ createComponent({
     elements() {
       console.log('canvas elements change')
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-      this.elements.forEach(ele => {
-        console.log('eles', ele)
+      for (let i = 0; i < this.elements.length; i++) {
+        const ele = this.elements[i]
         if (ele.type === 'image') {
           this.ctx.save()
           const left = ele.left - this.ctx.canvas.width / this.dpr / 2
@@ -72,26 +78,19 @@ createComponent({
             this.ctx.canvas.width / this.dpr / 2,
             this.ctx.canvas.height / this.dpr / 2
           )
-          // this.ctx.rotate(1)
           this.ctx.scale(ele.scale, ele.scale)
           this.ctx.drawImage(ele.data, left, top, ele.width, ele.height)
           this.ctx.restore()
         }
         if (ele.type === 'text') {
-          this.ctx.save()
-          console.log('this.ctx', this.ctx)
-          this.ctx.font = `${ele.size}px sans-serif`
-          this.ctx.textBaseline = 'top'
-          this.ctx.fillText(ele.data, ele.left, ele.top)
-          this.ctx.restore()
-          this.initController('text')
+          this.initController('text', (offsetLeft, offsetTop) => {
+            this.ctx.font = `${ele.size}px sans-serif`
+            this.ctx.textBaseline = 'top'
+            this.ctx.fillText(ele.data, ele.left - offsetLeft, ele.top - offsetTop)
+          })
         }
-      })
+      }
       this.drawGrid()
-      // console.log('touch-move', this.ctx.canvas.width / 2, this.ctx.canvas.height / 2)
-      // this.ctx.rotate(1)
-      // this.ctx.scale(1.1, 1.1)
-      // this.ctx.rotate(Math.PI / 2)
     }
   },
   methods: {
@@ -107,11 +106,11 @@ createComponent({
       if (e.touches.length === 2) this.actionType = ACTION_TYEP.SCALE
       console.log('touch-start', e)
       this.startTouches = e.touches
-      const image = store.state.elements.find(e => e.type === this.mode)
-      if (image) {
-        this.startSelected.x = image.left
-        this.startSelected.y = image.top
-        this.startSelected.scale = image.scale
+      const selected = store.state.elements.find(e => e.type === this.mode)
+      if (selected) {
+        this.startSelected.x = selected.left
+        this.startSelected.y = selected.top
+        this.startSelected.scale = selected.scale
       }
     },
     touchmove(e) {
@@ -165,11 +164,25 @@ createComponent({
       query
         .select('#canvas')
         .fields({ node: true, size: true })
-        .exec(res => {
+        .exec(async res => {
           const canvas = res[0].node
           const ctx = canvas.getContext('2d')
           store.commit('setCanvas', canvas)
           store.commit('setCtx', ctx)
+
+          await this.loadImage('/images/icon-move.png').then(res => {
+            console.log('this', this)
+            this.icon.move = res
+          })
+          await this.loadImage('/images/icon-scale.png').then(res => {
+            this.icon.scale = res
+          })
+          await this.loadImage('/images/icon-delete.png').then(res => {
+            this.icon.delete = res
+          })
+          await this.loadImage('/images/icon-rotate.png').then(res => {
+            this.icon.rotate = res
+          })
 
           canvas.width = res[0].width * this.dpr
           canvas.height = res[0].height * this.dpr
@@ -225,7 +238,21 @@ createComponent({
           })
         })
     },
-    initController(type) {
+    loadImage(src) {
+      const image = this.canvas.createImage()
+      image.src = src
+      return new Promise((resolve, reject) => {
+        try {
+          image.onload = e => {
+            resolve(image)
+            // this.ctx.drawImage(imageMove, left - 10, top - 10, 20, 20)
+          }
+        } catch (err) {
+          reject(err)
+        }
+      })
+    },
+    initController(type, fn) {
       if (!this.activeIndex) return
       const activeElement = this.elements[this.activeIndex]
       this.ctx.save()
@@ -239,48 +266,45 @@ createComponent({
         width = activeElement.size * activeElement.data.length + 10
         height = activeElement.size + 10
       }
-      this.ctx.save()
+      const offsetLeft = left + width / 2
+      const offsetTop = top + height / 2
+      this.ctx.translate(offsetLeft, offsetTop)
+      this.ctx.rotate(12)
       this.ctx.setLineDash([10, 5], 5)
-      this.ctx.strokeRect(left, top, width, height)
-      this.ctx.restore()
+      this.ctx.strokeRect(left - offsetLeft, top - offsetTop, width, height)
       // 绘制控制点-移动
-      const imageMove = this.canvas.createImage()
-      imageMove.src = '/images/icon-move.png'
-      imageMove.onload = e => {
-        this.ctx.save()
-        this.ctx.translate(left, top)
-        this.ctx.drawImage(imageMove, -10, -10, 20, 20)
-        this.ctx.restore()
-      }
+      this.ctx.drawImage(this.icon.move, left - 10 - offsetLeft, top - 10 - offsetTop, 20, 20)
+      // await this.loadImage('/images/icon-move.png').then(res => {
+      // })
       // 绘制控制点-缩放
-      const imageScale = this.canvas.createImage()
-      imageScale.src = '/images/icon-scale.png'
-      imageScale.onload = e => {
-        this.ctx.save()
-        this.ctx.translate(left , top + height)
-        this.ctx.drawImage(imageScale, -10, -10, 20, 20)
-        this.ctx.restore()
-      }
-      // 绘制控制点-旋转
-      const imageRotate = this.canvas.createImage()
-      imageRotate.src = '/images/icon-rotate.png'
-      imageRotate.onload = e => {
-        this.ctx.save()
-        this.ctx.translate(left + width, top + height)
-        this.ctx.drawImage(imageRotate, -10, -10, 20, 20)
-        this.ctx.restore()
-      }
+      this.ctx.drawImage(
+        this.icon.scale,
+        left - 10 - offsetLeft,
+        top + height - 10 - offsetTop,
+        20,
+        20
+      )
       // 绘制控制点-删除
-      const imageDelete = this.canvas.createImage()
-      imageDelete.src = '/images/icon-delete.png'
-      imageDelete.onload = e => {
-        this.ctx.save()
-        this.ctx.translate(left + width, top)
-        this.ctx.drawImage(imageDelete, -10, -10, 20, 20)
-        this.ctx.restore()
-      }
+      this.ctx.drawImage(
+        this.icon.delete,
+        left + width - 10 - offsetLeft,
+        top - 10 - offsetTop,
+        20,
+        20
+      )
+      // 绘制控制点-旋转
+      this.ctx.drawImage(
+        this.icon.rotate,
+        left + width - 10 - offsetLeft,
+        top + height - 10 - offsetTop,
+        20,
+        20
+      )
+      fn(offsetLeft, offsetTop)
+      this.ctx.restore()
     },
     drawGrid() {
+      this.ctx.save()
       const lineNums = 3
       const cWidth = this.ctx.canvas.width / this.dpr
       // const cHeight = this.ctx.canvas.height
@@ -301,6 +325,7 @@ createComponent({
         this.ctx.lineTo(lineGap * i, cWidth)
         this.ctx.stroke()
       }
+      this.ctx.restore()
     }
   },
   ready() {
