@@ -1,5 +1,7 @@
 {
+  "navigationBarTitleText": "Face",
   "usingComponents": {
     "playboard": "/components/playboard5295a42f/playboard"
-  }
+  },
+  "disableScroll": true
 }

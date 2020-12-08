@@ -33,9 +33,11 @@ createPage({
 
 <script type="application/json">
   {
+    "navigationBarTitleText": "Face",
     "usingComponents": {
       "playboard": "../components/playboard"
-    }
+    },
+    "disableScroll" : true
   }
 </script>
 
