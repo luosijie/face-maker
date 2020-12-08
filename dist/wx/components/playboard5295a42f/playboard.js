@@ -79,6 +79,8 @@ var ACTION_TYEP = {
   // 缩放
   ROTATE: 'ROTATE',
   // 旋转
+  DELETE: 'DELETE',
+  // 旋转
   NULL: 'NULL' // 空闲
 
 };
@@ -178,7 +180,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
     isCollided(x, y, ele) {
       var controllerSize = this.convert2ControllerSize(ele);
       var unrotatedSize = this.convert2unrotatedSize(x, y, controllerSize.centerX, controllerSize.centerY, ele.rotate);
-      return unrotatedSize.left > controllerSize.left && unrotatedSize.top > controllerSize.top && unrotatedSize.left < controllerSize.left + controllerSize.width && unrotatedSize.top < controllerSize.top + controllerSize.height;
+      return unrotatedSize.left > controllerSize.left && unrotatedSize.top > controllerSize.top && unrotatedSize.left < controllerSize.left + controllerSize.width && unrotatedSize.top < controllerSize.top + controllerSize.height ? unrotatedSize : null;
     },
 
     convert2ControllerSize(ele) {
@@ -229,17 +231,41 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
       if (selected) {
         var controllerSize = this.convert2ControllerSize(selected);
         console.log('controllerSize', controllerSize, e.touches);
-        var unrotatedSize = this.convert2unrotatedSize(e.touches[0].x, e.touches[0].y, controllerSize.centerX, controllerSize.centerY, selected.rotate);
         console.log('unrotatedSize', selected); // 检测鼠标是否与canvas元素发生碰撞
 
         var collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected);
 
         if (collided) {
-          this.startSelected.left = selected.left;
-          this.startSelected.top = selected.top;
-          this.startSelected.scale = selected.scale;
-          if (e.touches.length === 1) this.actionType = ACTION_TYEP.MOVE;
-          if (e.touches.length === 2) this.actionType = ACTION_TYEP.SCALE;
+          this.startSelected = {
+            left: selected.left,
+            top: selected.top,
+            scale: selected.scale,
+            rotate: selected.rotate
+          };
+
+          var _controllerSize = this.convert2ControllerSize(selected);
+
+          console.log('selected------>', selected);
+
+          if (Math.sqrt(Math.pow(collided.left - _controllerSize.left, 2) + Math.pow(collided.top - _controllerSize.top, 2)) < 20) {
+            console.log('移动模式');
+            this.actionType = ACTION_TYEP.MOVE;
+          } else if (Math.sqrt(Math.pow(collided.left - _controllerSize.left - _controllerSize.width, 2) + Math.pow(collided.top - _controllerSize.top, 2)) < 20) {
+            console.log('删除模式');
+            this.actionType = ACTION_TYEP.DELETE;
+          } else if (Math.sqrt(Math.pow(collided.left - _controllerSize.left - _controllerSize.width, 2) + Math.pow(collided.top - _controllerSize.top - _controllerSize.height, 2)) < 20) {
+            console.log('旋转模式');
+            this.actionType = ACTION_TYEP.ROTATE;
+          } else if (Math.sqrt(Math.pow(collided.left - _controllerSize.left, 2) + Math.pow(collided.top - _controllerSize.top - _controllerSize.height, 2)) < 20) {
+            console.log('缩放模式');
+            this.actionType = ACTION_TYEP.SCALE;
+          } else if (e.touches.length === 1) {
+            console.log('单指触发');
+            this.actionType = ACTION_TYEP.MOVE;
+          } else if (e.touches.length === 2) {
+            console.log('双指触发');
+            this.actionType = ACTION_TYEP.SCALE;
+          }
         }
       }
     },
