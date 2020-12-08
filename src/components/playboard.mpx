@@ -119,6 +119,11 @@ createComponent({
       ) ? unrotatedSize
         : null
     },
+    /**
+     * 将canvas尺寸转为控制点的尺寸
+     * @param { Object } ele canvas元素
+     * @return { Object } 坐标集合
+     */
     convert2ControllerSize(ele) {
       let left, top, width, height, centerX, centerY
       if (ele.type === 'text') {

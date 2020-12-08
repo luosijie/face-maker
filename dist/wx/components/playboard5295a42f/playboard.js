@@ -183,6 +183,11 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
       return unrotatedSize.left > controllerSize.left && unrotatedSize.top > controllerSize.top && unrotatedSize.left < controllerSize.left + controllerSize.width && unrotatedSize.top < controllerSize.top + controllerSize.height ? unrotatedSize : null;
     },
 
+    /**
+     * 将canvas尺寸转为控制点的尺寸
+     * @param { Object } ele canvas元素
+     * @return { Object } 坐标集合
+     */
     convert2ControllerSize(ele) {
       var left, top, width, height, centerX, centerY;
 
