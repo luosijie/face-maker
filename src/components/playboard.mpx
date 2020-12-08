@@ -45,6 +45,9 @@ createComponent({
     actionType: '' // move, scale, rotate
   },
   computed: {
+    mode() {
+      return store.state.mode
+    },
     ctx() {
       return store.state.ctx
     },
@@ -57,7 +60,7 @@ createComponent({
   },
   watch: {
     elements() {
-      // console.log('canvas elements change')
+      console.log('canvas elements change')
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
       this.elements.forEach(ele => {
         console.log('eles', ele)
@@ -77,10 +80,12 @@ createComponent({
         if (ele.type === 'text') {
           this.ctx.save()
           console.log('this.ctx', this.ctx)
-          this.ctx.setTextBaseline('top')
+          // this.ctx.setTextBaseline('top')
           this.ctx.setLineDash([10, 5], 5)
+          // this.ctx.setTextBaseline('top')
           this.ctx.strokeStyle = 'red'
-          this.ctx.strokeRect(ele.left - 5, ele.top + 10, 150 + 10, -30 - 10)
+          this.ctx.textBaseline = 'top'
+          this.ctx.strokeRect(ele.left - 5, ele.top - 5, 150 + 10, 30 + 10)
           this.ctx.font = '30px sans-serif'
           this.ctx.fillText(ele.data, ele.left, ele.top)
           this.ctx.restore()
@@ -106,7 +111,7 @@ createComponent({
       if (e.touches.length === 2) this.actionType = ACTION_TYEP.SCALE
       console.log('touch-start', e)
       this.startTouches = e.touches
-      const image = store.state.elements.find(e => e.type === 'image')
+      const image = store.state.elements.find(e => e.type === this.mode)
       if (image) {
         this.startSelected.x = image.left
         this.startSelected.y = image.top
@@ -121,12 +126,21 @@ createComponent({
         const y = e.touches[0].y
         const dx = this.startTouches[0].x - x
         const dy = this.startTouches[0].y - y
-        const elements = store.state.elements
-        const index = elements.findIndex(e => e.type === 'image')
-        const image = elements.splice(index, 1)[0]
-        image.left = this.startSelected.x - dx
-        image.top = this.startSelected.y - dy
-        elements.unshift(image)
+        const elements = store.state.elements.slice()
+        if (this.mode === 'image') {
+          const index = elements.findIndex(e => e.type === 'image')
+          // const image = elements.splice(index, 1)[0]
+          elements[index].left = this.startSelected.x - dx
+          elements[index].top = this.startSelected.y - dy
+          store.commit('setElements', elements)
+        }
+        if (this.mode === 'text') {
+          const index = elements.findIndex(e => e.type === 'text')
+          // const image = elements.splice(index, 1)[0]
+          elements[index].left = this.startSelected.x - dx
+          elements[index].top = this.startSelected.y - dy
+          store.commit('setElements', elements)
+        }
       }
       if (this.actionType === ACTION_TYEP.SCALE) {
         if (e.touches.length !== 2) return

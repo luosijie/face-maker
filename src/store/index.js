@@ -4,7 +4,7 @@ const store = createStore({
   state: {
     ctx: null,
     elements: [],
-    mode: ''
+    mode: 'text'      // background, text, image
   },
   mutations: {
     setCtx (state, data) {

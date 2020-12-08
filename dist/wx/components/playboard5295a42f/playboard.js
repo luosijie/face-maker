@@ -49,12 +49,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(436);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(441);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(136);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(446);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(125);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(441);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(136);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(3);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(446);
+
 
 
 
@@ -73,7 +76,7 @@ var ACTION_TYEP = {
   NULL: 'NULL' // 空闲
 
 };
-Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
+Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_5__["createComponent"])({
   data: {
     startTouches: [],
     startSelected: {
@@ -84,12 +87,16 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
 
   },
   computed: {
+    mode() {
+      return _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.mode;
+    },
+
     ctx() {
-      return _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.ctx;
+      return _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.ctx;
     },
 
     elements() {
-      return _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
+      return _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.elements;
     },
 
     dpr() {
@@ -102,10 +109,10 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
       var _context,
           _this = this;
 
-      // console.log('canvas elements change')
+      console.log('canvas elements change');
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
-      _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context = this.elements).call(_context, function (ele) {
+      _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_4___default()(_context = this.elements).call(_context, function (ele) {
         console.log('eles', ele);
 
         if (ele.type === 'image') {
@@ -127,15 +134,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
         if (ele.type === 'text') {
           _this.ctx.save();
 
-          console.log('this.ctx', _this.ctx);
+          console.log('this.ctx', _this.ctx); // this.ctx.setTextBaseline('top')
 
-          _this.ctx.setTextBaseline('top');
+          _this.ctx.setLineDash([10, 5], 5); // this.ctx.setTextBaseline('top')
 
-          _this.ctx.setLineDash([10, 5], 5);
 
           _this.ctx.strokeStyle = 'red';
+          _this.ctx.textBaseline = 'top';
 
-          _this.ctx.strokeRect(ele.left - 5, ele.top + 10, 150 + 10, -30 - 10);
+          _this.ctx.strokeRect(ele.left - 5, ele.top - 5, 150 + 10, 30 + 10);
 
           _this.ctx.font = '30px sans-serif';
 
@@ -161,15 +168,16 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
     },
 
     touchstart(e) {
-      var _context2;
+      var _context2,
+          _this2 = this;
 
       if (e.touches.length === 1) this.actionType = ACTION_TYEP.MOVE;
       if (e.touches.length === 2) this.actionType = ACTION_TYEP.SCALE;
       console.log('touch-start', e);
       this.startTouches = e.touches;
 
-      var image = _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_2___default()(_context2 = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements).call(_context2, function (e) {
-        return e.type === 'image';
+      var image = _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_3___default()(_context2 = _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.elements).call(_context2, function (e) {
+        return e.type === _this2.mode;
       });
 
       if (image) {
@@ -183,22 +191,37 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
       console.log('this.actionType', this.actionType, e.touches);
 
       if (this.actionType === ACTION_TYEP.MOVE) {
+        var _context3;
+
         if (e.touches.length > 1) return;
         var x = e.touches[0].x;
         var y = e.touches[0].y;
         var dx = this.startTouches[0].x - x;
         var dy = this.startTouches[0].y - y;
-        var elements = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
 
-        var index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(elements).call(elements, function (e) {
-          return e.type === 'image';
-        });
+        var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_2___default()(_context3 = _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.elements).call(_context3);
 
-        var image = _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(elements).call(elements, index, 1)[0];
+        if (this.mode === 'image') {
+          var index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(elements).call(elements, function (e) {
+            return e.type === 'image';
+          }); // const image = elements.splice(index, 1)[0]
 
-        image.left = this.startSelected.x - dx;
-        image.top = this.startSelected.y - dy;
-        elements.unshift(image);
+
+          elements[index].left = this.startSelected.x - dx;
+          elements[index].top = this.startSelected.y - dy;
+          _store__WEBPACK_IMPORTED_MODULE_6__["default"].commit('setElements', elements);
+        }
+
+        if (this.mode === 'text') {
+          var _index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(elements).call(elements, function (e) {
+            return e.type === 'text';
+          }); // const image = elements.splice(index, 1)[0]
+
+
+          elements[_index].left = this.startSelected.x - dx;
+          elements[_index].top = this.startSelected.y - dy;
+          _store__WEBPACK_IMPORTED_MODULE_6__["default"].commit('setElements', elements);
+        }
       }
 
       if (this.actionType === ACTION_TYEP.SCALE) {
@@ -206,17 +229,17 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
         var startLength = Math.sqrt(Math.pow(this.startTouches[0].x - this.startTouches[1].x, 2) + Math.pow(this.startTouches[0].y - this.startTouches[1].y, 2));
         var endLength = Math.sqrt(Math.pow(e.touches[0].x - e.touches[1].x, 2) + Math.pow(e.touches[0].y - e.touches[1].y, 2));
         var scale = endLength / startLength;
-        var _elements = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
+        var _elements = _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.elements;
 
-        var _index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(_elements).call(_elements, function (e) {
+        var _index2 = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(_elements).call(_elements, function (e) {
           return e.type === 'image';
         });
 
-        var _image = _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(_elements).call(_elements, _index, 1)[0];
+        var image = _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(_elements).call(_elements, _index2, 1)[0];
 
-        _image.scale = this.startSelected.scale * scale;
+        image.scale = this.startSelected.scale * scale;
 
-        _elements.push(_image);
+        _elements.push(image);
       }
     },
 
@@ -226,20 +249,20 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
     },
 
     initCanvas() {
-      var _this2 = this;
+      var _this3 = this;
 
       var query = this.createSelectorQuery();
-      var elements = _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
+      var elements = _store__WEBPACK_IMPORTED_MODULE_6__["default"].state.elements;
       query.select('#canvas').fields({
         node: true,
         size: true
       }).exec(function (res) {
         var canvas = res[0].node;
         var ctx = canvas.getContext('2d');
-        _store__WEBPACK_IMPORTED_MODULE_5__["default"].commit('setCtx', ctx);
-        canvas.width = res[0].width * _this2.dpr;
-        canvas.height = res[0].height * _this2.dpr;
-        ctx.scale(_this2.dpr, _this2.dpr); // 初始化一张背景图
+        _store__WEBPACK_IMPORTED_MODULE_6__["default"].commit('setCtx', ctx);
+        canvas.width = res[0].width * _this3.dpr;
+        canvas.height = res[0].height * _this3.dpr;
+        ctx.scale(_this3.dpr, _this3.dpr); // 初始化一张背景图
 
         wx.getImageInfo({
           src: imageUrl,
@@ -251,8 +274,8 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
             imageData.onload = function (e) {
               console.log('imageData-loaded', e); // ctx.drawImage(res.path, 0, 0, 100, 100)
 
-              var cWidth = canvas.width / _this2.dpr;
-              var cHeight = canvas.height / _this2.dpr;
+              var cWidth = canvas.width / _this3.dpr;
+              var cHeight = canvas.height / _this3.dpr;
               var data = {
                 type: 'image',
                 data: imageData,
@@ -489,7 +512,8 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
   state: {
     ctx: null,
     elements: [],
-    mode: ''
+    mode: 'text' // background, text, image
+
   },
   mutations: {
     setCtx(state, data) {
