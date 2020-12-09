@@ -356,10 +356,11 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
       var radian = this.convert2Radian(start, end, center);
       var scale = endLength / startLength;
 
-      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context4 = this.elements).call(_context4);
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context4 = this.elements).call(_context4); // 旋转
 
-      elements[this.activeIndex].rotate = this.startSelected.rotate - radian;
-      console.log('this.startSelected', this.startSelected);
+
+      elements[this.activeIndex].rotate = this.startSelected.rotate - radian; // 缩放
+
       elements[this.activeIndex].left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2;
       elements[this.activeIndex].top = this.startSelected.centerY - this.startSelected.size * scale / 2;
       elements[this.activeIndex].size = this.startSelected.size * scale;
@@ -539,9 +540,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
     initController(type, fn) {
       if (!this.activeIndex) return;
       var activeElement = this.elements[this.activeIndex];
-      this.ctx.save(); // this.ctx.setTextBaseline('top')
-      // this.ctx.setTextBaseline('top')
-
+      this.ctx.save();
       this.ctx.strokeStyle = '#eee';
       var left, top, width, height;
 
@@ -552,8 +551,8 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
         height = activeElement.size + 10;
       }
 
-      var offsetLeft = this.startSelected ? this.startSelected.centerX : left + width / 2;
-      var offsetTop = this.startSelected ? this.startSelected.centerY : top + height / 2;
+      var offsetLeft = left + width / 2;
+      var offsetTop = top + height / 2;
       this.ctx.translate(offsetLeft, offsetTop);
       this.ctx.rotate(activeElement.rotate); // this.ctx.scale(activeElement.scale, activeElement.scale)
 

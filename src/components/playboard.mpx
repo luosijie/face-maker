@@ -237,8 +237,9 @@ createComponent({
       const radian = this.convert2Radian(start, end, center)
       const scale = endLength / startLength
       const elements = this.elements.slice()
+      // 旋转
       elements[this.activeIndex].rotate = this.startSelected.rotate - radian
-      console.log('this.startSelected', this.startSelected)
+      // 缩放
       elements[this.activeIndex].left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2
       elements[this.activeIndex].top = this.startSelected.centerY - this.startSelected.size * scale / 2
       elements[this.activeIndex].size = this.startSelected.size * scale
@@ -381,8 +382,6 @@ createComponent({
       if (!this.activeIndex) return
       const activeElement = this.elements[this.activeIndex]
       this.ctx.save()
-      // this.ctx.setTextBaseline('top')
-      // this.ctx.setTextBaseline('top')
       this.ctx.strokeStyle = '#eee'
       let left, top, width, height
       if (type === 'text') {
@@ -391,8 +390,8 @@ createComponent({
         width = activeElement.size * activeElement.data.length + 10
         height = activeElement.size + 10
       }
-      const offsetLeft = this.startSelected ? this.startSelected.centerX : left + width / 2
-      const offsetTop = this.startSelected ? this.startSelected.centerY : top + height / 2
+      const offsetLeft = left + width / 2
+      const offsetTop = top + height / 2
       this.ctx.translate(offsetLeft, offsetTop)
       this.ctx.rotate(activeElement.rotate)
       // this.ctx.scale(activeElement.scale, activeElement.scale)
