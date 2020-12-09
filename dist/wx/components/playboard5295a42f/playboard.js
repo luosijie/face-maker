@@ -45,28 +45,54 @@ __webpack_require__(449)
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(273);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(450);
-/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(452);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(254);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(436);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(125);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(441);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(3);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(446);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(264);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(313);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_define_properties__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(317);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(136);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(302);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_filter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(202);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_filter__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_filter__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(322);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(132);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(273);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(450);
+/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(452);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(125);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(325);
+/* harmony import */ var _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(441);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(3);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(446);
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7___default()(object); if (_babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6___default.a) { var symbols = _babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6___default()(object); if (enumerableOnly) symbols = _babel_runtime_corejs3_core_js_stable_instance_filter__WEBPACK_IMPORTED_MODULE_5___default()(symbols).call(symbols, function (sym) { return _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { var _context6; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context6 = ownKeys(Object(source), true)).call(_context6, function (key) { _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12___default()(target, key, source[key]); }); } else if (_babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs3_core_js_stable_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { var _context7; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context7 = ownKeys(Object(source))).call(_context7, function (key) { _babel_runtime_corejs3_core_js_stable_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default()(source, key)); }); } } return target; }
 
 
 
@@ -84,13 +110,10 @@ var ACTION_TYEP = {
   NULL: 'NULL' // 空闲
 
 };
-Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
+Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
   data: {
     startTouches: [],
-    startSelected: {
-      left: 0,
-      top: 0
-    },
+    startSelected: null,
     actionType: '',
     // move, scale, rotate
     image: {
@@ -102,23 +125,23 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
   },
   computed: {
     mode() {
-      return _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.mode;
+      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.mode;
     },
 
     canvas() {
-      return _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.canvas;
+      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.canvas;
     },
 
     ctx() {
-      return _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.ctx;
+      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.ctx;
     },
 
     elements() {
-      return _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.elements;
+      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.elements;
     },
 
     activeIndex() {
-      return _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.activeIndex;
+      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.activeIndex;
     },
 
     dpr() {
@@ -229,27 +252,24 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
       this.actionType = ACTION_TYEP.NULL;
       this.startTouches = e.touches;
 
-      var selected = _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_6___default()(_context = _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.elements).call(_context, function (e) {
+      var selected = _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13___default()(_context = _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.elements).call(_context, function (e) {
         return e.type === _this2.mode;
       });
 
       if (selected) {
         var controllerSize = this.convert2ControllerSize(selected);
-        console.log('controllerSize', controllerSize, e.touches);
-        console.log('unrotatedSize', selected); // 检测鼠标是否与canvas元素发生碰撞
+        console.log('controllerSize', controllerSize, e.touches); // 检测鼠标是否与canvas元素发生碰撞
 
         var collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected);
 
         if (collided) {
-          this.startSelected = {
-            left: selected.left,
-            top: selected.top,
-            scale: selected.scale,
-            rotate: selected.rotate
-          };
+          var _controllerSize = this.convert2ControllerSize(selected); // console.log('controllerSize', controllerSize)
 
-          var _controllerSize = this.convert2ControllerSize(selected);
 
+          this.startSelected = _objectSpread(_objectSpread({}, selected), {}, {
+            centerX: _controllerSize.centerX,
+            centerY: _controllerSize.centerY
+          });
           console.log('selected------>', selected);
 
           if (Math.sqrt(Math.pow(collided.left - _controllerSize.left, 2) + Math.pow(collided.top - _controllerSize.top, 2)) < 20) {
@@ -276,59 +296,10 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
     },
 
     touchmove(e) {
-      console.log('this.actionType', this.actionType, e.touches);
-
-      if (this.actionType === ACTION_TYEP.MOVE) {
-        var _context2;
-
-        if (e.touches.length > 1) return;
-        var x = e.touches[0].x;
-        var y = e.touches[0].y;
-        var dx = this.startTouches[0].x - x;
-        var dy = this.startTouches[0].y - y;
-
-        var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_5___default()(_context2 = _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.elements).call(_context2);
-
-        if (this.mode === 'image') {
-          var index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_4___default()(elements).call(elements, function (e) {
-            return e.type === 'image';
-          }); // const image = elements.splice(index, 1)[0]
-
-
-          elements[index].left = this.startSelected.left - dx;
-          elements[index].top = this.startSelected.top - dy;
-          _store__WEBPACK_IMPORTED_MODULE_8__["default"].commit('setElements', elements);
-        }
-
-        if (this.mode === 'text') {
-          var _index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_4___default()(elements).call(elements, function (e) {
-            return e.type === 'text';
-          }); // const image = elements.splice(index, 1)[0]
-
-
-          elements[_index].left = this.startSelected.left - dx;
-          elements[_index].top = this.startSelected.top - dy;
-          _store__WEBPACK_IMPORTED_MODULE_8__["default"].commit('setElements', elements);
-        }
-      }
-
-      if (this.actionType === ACTION_TYEP.SCALE) {
-        if (e.touches.length !== 2) return;
-        var startLength = Math.sqrt(Math.pow(this.startTouches[0].x - this.startTouches[1].x, 2) + Math.pow(this.startTouches[0].y - this.startTouches[1].y, 2));
-        var endLength = Math.sqrt(Math.pow(e.touches[0].x - e.touches[1].x, 2) + Math.pow(e.touches[0].y - e.touches[1].y, 2));
-        var scale = endLength / startLength;
-        var _elements = _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.elements;
-
-        var _index2 = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_4___default()(_elements).call(_elements, function (e) {
-          return e.type === 'image';
-        });
-
-        var image = _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_3___default()(_elements).call(_elements, _index2, 1)[0];
-
-        image.scale = this.startSelected.scale * scale;
-
-        _elements.push(image);
-      }
+      console.log(this.actionType === ACTION_TYEP.ROTATE);
+      if (this.actionType === ACTION_TYEP.MOVE) this.handleMove(e);
+      if (this.actionType === ACTION_TYEP.SCALE) this.handleScale(e);
+      if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e);
     },
 
     touchend(e) {
@@ -336,7 +307,66 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
       console.log('touch-end', e);
     },
 
-    initSelectStatue() {//
+    // 移动事件绑定函数
+    handleMove(e) {
+      var _context2;
+
+      if (e.touches.length > 1) return;
+      var x = e.touches[0].x;
+      var y = e.touches[0].y;
+      var dx = this.startTouches[0].x - x;
+      var dy = this.startTouches[0].y - y;
+
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context2 = this.elements).call(_context2);
+
+      elements[this.activeIndex].left = this.startSelected.left - dx;
+      elements[this.activeIndex].top = this.startSelected.top - dy;
+      _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setElements', elements);
+    },
+
+    // 缩放事件绑定函数
+    handleScale(e) {
+      var _context3;
+
+      if (e.touches.length !== 2) return;
+      var startLength = Math.sqrt(Math.pow(this.startTouches[0].x - this.startTouches[1].x, 2) + Math.pow(this.startTouches[0].y - this.startTouches[1].y, 2));
+      var endLength = Math.sqrt(Math.pow(e.touches[0].x - e.touches[1].x, 2) + Math.pow(e.touches[0].y - e.touches[1].y, 2));
+      var scale = endLength / startLength;
+
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context3 = this.elements).call(_context3);
+
+      elements[this.activeIndex].scale = this.startSelected.scale * scale;
+      _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setElements', elements);
+    },
+
+    // 旋转绑定函数
+    handleRotate(e) {
+      var _context4;
+
+      console.log('handleRotate');
+      var start = this.startTouches[0];
+      var end = e.touches[0];
+      var center = {
+        x: this.startSelected.centerX,
+        y: this.startSelected.centerY
+      };
+      var startLength = Math.sqrt(Math.pow(center.x - start.x, 2) + Math.pow(center.y - start.y, 2));
+      var endLength = Math.sqrt(Math.pow(center.x - end.x, 2) + Math.pow(center.y - end.y, 2));
+      var radian = this.convert2Radian(start, end, center);
+      var scale = endLength / startLength;
+
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context4 = this.elements).call(_context4);
+
+      elements[this.activeIndex].rotate = this.startSelected.rotate - radian; // elements[this.activeIndex].size = this.startSelected.size * scale
+
+      _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setElements', elements);
+    },
+
+    // 删除绑定函数
+    handleDelete() {//
+    },
+
+    initSelectStatus() {//
     },
 
     convert2unrotatedSize(x, y, ox, oy, r) {
@@ -352,41 +382,41 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
       var _this3 = this;
 
       var query = this.createSelectorQuery();
-      var elements = _store__WEBPACK_IMPORTED_MODULE_8__["default"].state.elements;
+      var elements = _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.elements;
       query.select('#canvas').fields({
         node: true,
         size: true
       }).exec( /*#__PURE__*/function () {
-        var _ref = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee(res) {
+        var _ref = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.mark(function _callee(res) {
           var canvas, ctx;
-          return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context3) {
+          return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.wrap(function _callee$(_context5) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context5.prev = _context5.next) {
                 case 0:
                   canvas = res[0].node;
                   ctx = canvas.getContext('2d');
-                  _store__WEBPACK_IMPORTED_MODULE_8__["default"].commit('setCanvas', canvas);
-                  _store__WEBPACK_IMPORTED_MODULE_8__["default"].commit('setCtx', ctx);
-                  _context3.next = 6;
+                  _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setCanvas', canvas);
+                  _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setCtx', ctx);
+                  _context5.next = 6;
                   return _this3.loadImage('/images/icon-move.png').then(function (res) {
                     console.log('this', _this3);
                     _this3.image.move = res;
                   });
 
                 case 6:
-                  _context3.next = 8;
+                  _context5.next = 8;
                   return _this3.loadImage('/images/icon-scale.png').then(function (res) {
                     _this3.image.scale = res;
                   });
 
                 case 8:
-                  _context3.next = 10;
+                  _context5.next = 10;
                   return _this3.loadImage('/images/icon-delete.png').then(function (res) {
                     _this3.image.delete = res;
                   });
 
                 case 10:
-                  _context3.next = 12;
+                  _context5.next = 12;
                   return _this3.loadImage('/images/icon-rotate.png').then(function (res) {
                     _this3.image.rotate = res;
                   });
@@ -439,6 +469,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
                         var text = {
                           type: 'text',
                           data: '请输入文字',
+                          scale: 1,
                           size: 50,
                           left: 100,
                           top: 100,
@@ -451,7 +482,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
 
                 case 16:
                 case "end":
-                  return _context3.stop();
+                  return _context5.stop();
               }
             }
           }, _callee);
@@ -463,18 +494,40 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
       }());
     },
 
+    /**
+     * 图片要放在 image 里才可以被 canvas 渲染
+     * @param { String } src 本地文件路径
+     * @return { Promise } 返回 image 元素
+     */
     loadImage(src) {
       var image = this.canvas.createImage();
       image.src = src;
-      return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (resolve, reject) {
+      return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8___default.a(function (resolve, reject) {
         try {
           image.onload = function (e) {
-            resolve(image); // this.ctx.drawImage(imageMove, left - 10, top - 10, 20, 20)
+            resolve(image);
           };
         } catch (err) {
           reject(err);
         }
       });
+    },
+
+    /**
+     * 已知2点坐标，求旋转弧度
+     * @param { Object } s 开始坐标
+     * @param { Object } e 结束坐标
+     * @param { Object } c 原点坐标
+     * @return { Number } 旋转弧度
+     */
+    convert2Radian(s, e, c) {
+      var sx = s.x - c.x;
+      var sy = s.y - c.y;
+      var ex = e.x - c.x;
+      var ey = e.y - c.y;
+      var rs = Math.atan2(sy, sx);
+      var re = Math.atan2(ey, ex);
+      return rs - re;
     },
 
     initController(type, fn) {
@@ -496,7 +549,8 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
       var offsetLeft = left + width / 2;
       var offsetTop = top + height / 2;
       this.ctx.translate(offsetLeft, offsetTop);
-      this.ctx.rotate(activeElement.rotate);
+      this.ctx.rotate(activeElement.rotate); // this.ctx.scale(activeElement.scale, activeElement.scale)
+
       this.ctx.setLineDash([10, 5], 5);
       this.ctx.strokeRect(left - offsetLeft, top - offsetTop, width, height); // 绘制控制点-移动
 
@@ -547,81 +601,6 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_7__["createComponent"])({
   }
 
 });
-
-/***/ }),
-
-/***/ 436:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(437);
-
-/***/ }),
-
-/***/ 437:
-/***/ (function(module, exports, __webpack_require__) {
-
-var parent = __webpack_require__(438);
-
-module.exports = parent;
-
-
-/***/ }),
-
-/***/ 438:
-/***/ (function(module, exports, __webpack_require__) {
-
-var findIndex = __webpack_require__(439);
-
-var ArrayPrototype = Array.prototype;
-
-module.exports = function (it) {
-  var own = it.findIndex;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.findIndex) ? findIndex : own;
-};
-
-
-/***/ }),
-
-/***/ 439:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(440);
-var entryVirtual = __webpack_require__(131);
-
-module.exports = entryVirtual('Array').findIndex;
-
-
-/***/ }),
-
-/***/ 440:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__(37);
-var $findIndex = __webpack_require__(98).findIndex;
-var addToUnscopables = __webpack_require__(13);
-var arrayMethodUsesToLength = __webpack_require__(130);
-
-var FIND_INDEX = 'findIndex';
-var SKIPS_HOLES = true;
-
-var USES_TO_LENGTH = arrayMethodUsesToLength(FIND_INDEX);
-
-// Shouldn't skip holes
-if (FIND_INDEX in []) Array(1)[FIND_INDEX](function () { SKIPS_HOLES = false; });
-
-// `Array.prototype.findIndex` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.findindex
-$({ target: 'Array', proto: true, forced: SKIPS_HOLES || !USES_TO_LENGTH }, {
-  findIndex: function findIndex(callbackfn /* , that = undefined */) {
-    return $findIndex(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables(FIND_INDEX);
-
 
 /***/ }),
 
