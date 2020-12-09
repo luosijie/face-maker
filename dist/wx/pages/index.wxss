@@ -11,4 +11,32 @@
   width: 100vw;
   height: calc(100% - 100vw);
   background: #fff;
+  position: relative;
+}
+.nav {
+  box-sizing: border-box;
+  padding: 10rpx 10rpx 0 10rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.nav .export {
+  font-size: 28rpx;
+  color: #666;
+}
+.content {
+  height: calc(100% - 160rpx);
+  padding: 10rpx;
+}
+.menu {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1rpx solid #eee;
+  line-height: 100rpx;
+}
+.menu .menu-item {
+  color: #666;
+}
+.menu .active {
+  color: #333;
+  font-weight: bold;
 }

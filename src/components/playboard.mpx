@@ -8,12 +8,6 @@
       bindtouchmove="touchmove"
       bindtouchend="touchend"
     />
-    <image
-      class="icon-add"
-      src="../assets/images/icon-add-image.png"
-      alt="添加图片"
-      bindtouchstart="chooseImage"
-    />
   </view>
 </template>
 
@@ -21,7 +15,6 @@
 import { createComponent } from '@mpxjs/core'
 import store from '../store'
 const imageUrl = 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'
-// import example from '../assets/images/example.jpeg'
 const ACTION_TYEP = {
   MOVE: 'MOVE', // 移动
   SCALE: 'SCALE', // 缩放
@@ -64,8 +57,18 @@ createComponent({
   },
   watch: {
     elements() {
+      this.renderCanvas()
+    },
+    mode() {
+      this.renderCanvas()
+    }
+  },
+  methods: {
+    // 画布渲染函数
+    renderCanvas() {
       console.log('canvas elements change')
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+      this.drawGrid()
       for (let i = 0; i < this.elements.length; i++) {
         const ele = this.elements[i]
         if (ele.type === 'image') {
@@ -90,10 +93,8 @@ createComponent({
           })
         }
       }
-      this.drawGrid()
-    }
-  },
-  methods: {
+      // if (this.mode === 'background') 
+    },
     /**
      * 检测鼠标是否与物体发生碰撞
      * @param { Number } x 鼠标坐标X

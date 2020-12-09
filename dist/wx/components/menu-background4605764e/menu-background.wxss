@@ -1,0 +1,27 @@
+@import "../../styles/iconfont1b6690a7.wxss";
+
+.menu-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  padding: 20rpx;
+}
+.menu-background .item {
+  color: #666;
+  font-size: 28rpx;
+  margin: 10rpx;
+}
+.menu-background .replace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+}
+.menu-background .replace i {
+  font-size: 80rpx;
+}
+.menu-background .replace text {
+  font-size: 20rpx;
+}

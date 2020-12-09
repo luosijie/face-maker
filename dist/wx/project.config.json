@@ -28,10 +28,8 @@
     "packNpmRelationList": [],
     "minifyWXSS": true
   },
-  "appid": "wxa3f81d284576329e",
-  "projectname": "%E8%A1%A8%E6%83%85%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83",
+  "appid": "touristappid",
+  "projectname": "code",
   "description": "face maker",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
   "condition": {}
 }

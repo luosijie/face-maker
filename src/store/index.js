@@ -6,7 +6,12 @@ const store = createStore({
     ctx: null,
     elements: [],
     activeIndex: 1, // 当前编辑中的元素下标
-    mode: 'text'      // background, text, image
+    mode: 'background',   // background, text, image
+    fontStyle: {
+      opacity: 1,
+      color: '#000000',
+      borderColor: '#000000'
+    }
   },
   mutations: {
     setCanvas (state, data) {
@@ -23,6 +28,9 @@ const store = createStore({
     },
     setActiveIndex (state, data) {
       state.activeIndex = data
+    },
+    setFontStyle (state, { key, data }) {
+      state.fontStyle[key] = data
     }
   }
 })

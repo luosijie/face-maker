@@ -21,9 +21,10 @@ global.currentSrcMode = "wx"
 
 /* styles */
 __webpack_require__(427)
+__webpack_require__(428)
 
 /* json */
-__webpack_require__(428)
+__webpack_require__(429)
 
 /* template */
 
@@ -1381,6 +1382,13 @@ function promisify(listObj, whiteList, customBlackList) {
 /***/ }),
 
 /***/ 428:
+/***/ (function(module, exports, __webpack_require__) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 429:
 /***/ (function(module, exports) {
 
 // removed by extractor

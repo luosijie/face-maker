@@ -19,7 +19,7 @@ const baseRules = [
     enforce: 'pre'
   },
   {
-    test: /\.(png|jpe?g|gif|svg)$/,
+    test: /\.(png|jpe?g|gif|svg|eot|woff|woff2|ttf)$/,
     loader: MpxWebpackPlugin.urlLoader({
       name: 'img/[name][hash].[ext]'
     })

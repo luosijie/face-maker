@@ -2,9 +2,9 @@
 var window = window || {};
 
 window["webpackJsonp"] = require("../../bundle.js");
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ 434:
+/***/ 442:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21,26 +21,26 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_playboard_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(435);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_playboard_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(443);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(447)
+__webpack_require__(458)
 
 /* json */
-__webpack_require__(448)
+__webpack_require__(459)
 
 /* template */
-__webpack_require__(449)
+__webpack_require__(460)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 435:
+/***/ 443:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63,18 +63,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(273);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(450);
+/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(444);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(452);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(446);
 /* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(125);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(325);
 /* harmony import */ var _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(441);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(453);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(3);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(446);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(433);
 
 
 
@@ -96,8 +96,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-var imageUrl = 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'; // import example from '../assets/images/example.jpeg'
-
+var imageUrl = 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg';
 var ACTION_TYEP = {
   MOVE: 'MOVE',
   // 移动
@@ -150,10 +149,22 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
   },
   watch: {
     elements() {
+      this.renderCanvas();
+    },
+
+    mode() {
+      this.renderCanvas();
+    }
+
+  },
+  methods: {
+    // 画布渲染函数
+    renderCanvas() {
       var _this = this;
 
       console.log('canvas elements change');
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+      this.drawGrid();
 
       var _loop = function _loop(i) {
         var ele = _this.elements[i];
@@ -187,13 +198,10 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
 
       for (var i = 0; i < this.elements.length; i++) {
         _loop(i);
-      }
+      } // if (this.mode === 'background') 
 
-      this.drawGrid();
-    }
+    },
 
-  },
-  methods: {
     /**
      * 检测鼠标是否与物体发生碰撞
      * @param { Number } x 鼠标坐标X
@@ -607,155 +615,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
 
 /***/ }),
 
-/***/ 441:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(442);
-
-/***/ }),
-
-/***/ 442:
-/***/ (function(module, exports, __webpack_require__) {
-
-var parent = __webpack_require__(443);
-
-module.exports = parent;
-
-
-/***/ }),
-
-/***/ 443:
-/***/ (function(module, exports, __webpack_require__) {
-
-var find = __webpack_require__(444);
-
-var ArrayPrototype = Array.prototype;
-
-module.exports = function (it) {
-  var own = it.find;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.find) ? find : own;
-};
-
-
-/***/ }),
-
 /***/ 444:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(445);
-var entryVirtual = __webpack_require__(131);
-
-module.exports = entryVirtual('Array').find;
+module.exports = __webpack_require__(445);
 
 
 /***/ }),
 
 /***/ 445:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__(37);
-var $find = __webpack_require__(98).find;
-var addToUnscopables = __webpack_require__(13);
-var arrayMethodUsesToLength = __webpack_require__(130);
-
-var FIND = 'find';
-var SKIPS_HOLES = true;
-
-var USES_TO_LENGTH = arrayMethodUsesToLength(FIND);
-
-// Shouldn't skip holes
-if (FIND in []) Array(1)[FIND](function () { SKIPS_HOLES = false; });
-
-// `Array.prototype.find` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.find
-$({ target: 'Array', proto: true, forced: SKIPS_HOLES || !USES_TO_LENGTH }, {
-  find: function find(callbackfn /* , that = undefined */) {
-    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables(FIND);
-
-
-/***/ }),
-
-/***/ 446:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-
-var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
-  state: {
-    cavas: null,
-    ctx: null,
-    elements: [],
-    activeIndex: 1,
-    // 当前编辑中的元素下标
-    mode: 'text' // background, text, image
-
-  },
-  mutations: {
-    setCanvas(state, data) {
-      state.canvas = data;
-    },
-
-    setCtx(state, data) {
-      state.ctx = data;
-    },
-
-    setElements(state, data) {
-      state.elements = data;
-    },
-
-    setMode(state, data) {
-      state.mode = data;
-    },
-
-    setActiveIndex(state, data) {
-      state.activeIndex = data;
-    }
-
-  }
-});
-/* harmony default export */ __webpack_exports__["default"] = (store);
-
-/***/ }),
-
-/***/ 447:
-/***/ (function(module, exports) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 448:
-/***/ (function(module, exports) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 449:
-/***/ (function(module, exports) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 450:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(451);
-
-
-/***/ }),
-
-/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1510,10 +1378,10 @@ try {
 
 /***/ }),
 
-/***/ 452:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
-var _Promise = __webpack_require__(453);
+var _Promise = __webpack_require__(447);
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1555,29 +1423,29 @@ module.exports = _asyncToGenerator;
 
 /***/ }),
 
-/***/ 453:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(454);
+module.exports = __webpack_require__(448);
 
 /***/ }),
 
-/***/ 454:
+/***/ 448:
 /***/ (function(module, exports, __webpack_require__) {
 
 var parent = __webpack_require__(275);
-__webpack_require__(455);
+__webpack_require__(449);
 // TODO: Remove from `core-js@4`
-__webpack_require__(456);
-__webpack_require__(457);
-__webpack_require__(458);
+__webpack_require__(450);
+__webpack_require__(451);
+__webpack_require__(452);
 
 module.exports = parent;
 
 
 /***/ }),
 
-/***/ 455:
+/***/ 449:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -1586,7 +1454,7 @@ __webpack_require__(276);
 
 /***/ }),
 
-/***/ 456:
+/***/ 450:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -1595,7 +1463,7 @@ __webpack_require__(291);
 
 /***/ }),
 
-/***/ 457:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1618,14 +1486,110 @@ $({ target: 'Promise', stat: true }, {
 
 /***/ }),
 
-/***/ 458:
+/***/ 452:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
 __webpack_require__(292);
 
 
+/***/ }),
+
+/***/ 453:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(454);
+
+/***/ }),
+
+/***/ 454:
+/***/ (function(module, exports, __webpack_require__) {
+
+var parent = __webpack_require__(455);
+
+module.exports = parent;
+
+
+/***/ }),
+
+/***/ 455:
+/***/ (function(module, exports, __webpack_require__) {
+
+var find = __webpack_require__(456);
+
+var ArrayPrototype = Array.prototype;
+
+module.exports = function (it) {
+  var own = it.find;
+  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.find) ? find : own;
+};
+
+
+/***/ }),
+
+/***/ 456:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(457);
+var entryVirtual = __webpack_require__(131);
+
+module.exports = entryVirtual('Array').find;
+
+
+/***/ }),
+
+/***/ 457:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(37);
+var $find = __webpack_require__(98).find;
+var addToUnscopables = __webpack_require__(13);
+var arrayMethodUsesToLength = __webpack_require__(130);
+
+var FIND = 'find';
+var SKIPS_HOLES = true;
+
+var USES_TO_LENGTH = arrayMethodUsesToLength(FIND);
+
+// Shouldn't skip holes
+if (FIND in []) Array(1)[FIND](function () { SKIPS_HOLES = false; });
+
+// `Array.prototype.find` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.find
+$({ target: 'Array', proto: true, forced: SKIPS_HOLES || !USES_TO_LENGTH }, {
+  find: function find(callbackfn /* , that = undefined */) {
+    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
+
+// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
+addToUnscopables(FIND);
+
+
+/***/ }),
+
+/***/ 458:
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 459:
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 460:
+/***/ (function(module, exports) {
+
+// removed by extractor
+
 /***/ })
 
-},[[434,1]]]);
+},[[442,1]]]);
 //# sourceMappingURL=playboard.js.map

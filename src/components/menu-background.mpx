@@ -1,0 +1,66 @@
+<template>
+  <view class="menu-background">
+      <view class="item replace">
+        <i class="iconfont icon-image"></i>
+        <text>替换图片</text>
+      </view>
+  </view>
+</template>
+
+<script>
+import { createComponent } from '@mpxjs/core'
+import store from '../store'
+
+createComponent({
+  data: {
+    colors: ['#000000', '#ffffff', '#0076B6', '#00A948', '#FFB500', '#FF2929']
+  },
+  computed: {
+  },
+  watch: {
+  },
+  methods: {
+    opacityChange(e) {
+      console.log(e)
+    }
+  },
+  ready() {
+    // this.initCanvas()
+  }
+})
+</script>
+
+<style lang="stylus">
+@import url('../assets/iconfont/iconfont.css');
+
+.menu-background
+  display flex
+  justify-content center
+  align-items center
+  height 100%
+  position relative
+  padding 20rpx
+
+  .item 
+    color #666
+    font-size 28rpx
+    margin 10rpx
+  
+  .replace
+    display flex
+    flex-direction column
+    align-items center
+    color #999
+
+    i
+      font-size 80rpx
+
+    text
+      font-size 20rpx
+</style>
+
+<script type="application/json">
+  {
+    "component": true
+  }
+</script>

@@ -1,17 +1,17 @@
 <script>
-  import mpx, { createApp } from '@mpxjs/core'
-  import apiProxy from '@mpxjs/api-proxy'
+import mpx, { createApp } from '@mpxjs/core'
+import apiProxy from '@mpxjs/api-proxy'
 
-  mpx.use(apiProxy, { usePromise: true })
+mpx.use(apiProxy, { usePromise: true })
 
-  createApp({
-    onLaunch () {
-    }
-  })
+createApp({
+  onLaunch() {}
+})
 </script>
 
+<style lang="css" src="./assets/iconfont/iconfont.css"></style>
 <style>
-  /*此处编写全局样式*/
+/*此处编写全局样式*/
 </style>
 
 <script type="application/json">

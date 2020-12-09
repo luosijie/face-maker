@@ -1,0 +1,138 @@
+<template>
+  <view class="menu-text">
+      <input type="text" placeholder="请输入文字"/>
+      <view class="item">
+        <view class="label">透明度</view>
+        <view class="content">
+          <slider bindchange="opacityChange" show-value backgroundColor="#eee" activeColor="#ccc" value="{{ opacity }}"/>
+        </view>
+      </view>
+      <view class="item">
+        <view class="label">颜色</view>
+        <view class="content colors">
+          <view
+            bindtap="colorChange(item)"
+            class="color"
+            wx:class="{{ {active: color === item} }}"
+            wx:for="{{colors}}"
+            wx:key="{{item}}"
+            wx:style="{{{background: item}}}"
+          />
+        </view>
+      </view>
+      <view class="item">
+        <view class="label">描边</view>
+        <view class="content colors">
+          <view
+            bindtap="borderColorChange(item)"
+            class="color"
+            wx:class="{{ {active: borderColor === item} }}"
+            wx:for="{{ colors }}"
+            wx:key="{{ item }}"
+            wx:style="{{ {background: item} }}"
+          />
+        </view>
+      </view>
+  </view>
+</template>
+
+<script>
+import { createComponent } from '@mpxjs/core'
+import store from '../store'
+
+createComponent({
+  data: {
+    colors: ['#000000', '#ffffff', '#0076B6', '#00A948', '#FFB500', '#FF2929']
+  },
+  computed: {
+    opacity() {
+      return store.state.fontStyle.opacity
+    },
+    color() {
+      return store.state.fontStyle.color
+    },
+    borderColor() {
+      return store.state.fontStyle.borderColor
+    }
+  },
+  watch: {
+    opacity(val) {
+      console.log('opacity-change', val)
+    }
+  },
+  methods: {
+    opacityChange(e) {
+      store.commit('setFontStyle', { key: 'opacity', data: e.detail.value })
+    },
+    colorChange(e) {
+      store.commit('setFontStyle', { key: 'color', data: e })
+    },
+    borderColorChange(e) {
+      store.commit('setFontStyle', { key: 'borderColor', data: e })
+    }
+  },
+  ready() {
+    // this.initCanvas()
+  }
+})
+</script>
+
+<style lang="stylus">
+.menu-text
+  display flex
+  flex-direction column
+  justify-content center
+  height 100%
+  position relative
+  padding 20rpx
+  
+  input 
+    box-sizing border-box
+    text-align center
+    width 100%
+    font-size 40rpx
+    margin-bottom 20rpx
+    font-weight bold
+    color #ccc
+    border 1rpx dashed #ccc
+    border-radius 5rpx
+    padding 10rpx
+    height 90rpx
+
+  .item
+    padding 10rpx 0
+    height 80rpx
+    display flex
+    align-items center
+    width 100%
+
+    .label
+      color #1E3063
+      font-size 28rpx
+      font-weight bold
+      width 120rpx
+    
+    .content
+      width calc(100% - 120rpx)
+    
+    .colors
+      padding 0 10rpx
+      display flex
+      justify-content space-between
+      
+      .color
+        box-sizing border-box
+        width 48rpx
+        height 48rpx
+        border-radius 50%
+        border 4rpx solid #eee
+
+      .active 
+        border-color #1E3063
+</style>
+
+<script type="application/json">
+  {
+    "component": true
+  }
+</script>

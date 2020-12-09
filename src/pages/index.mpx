@@ -1,14 +1,49 @@
 <template>
   <view class="main">
     <playboard/>
-    <view class="action"></view>
+    <view class="action">
+      <view class="nav">
+        <view class="history"></view>
+        <view class="export">  
+          <text class="iconfont icon-download"></text>
+        </view>
+      </view>
+      <view class="content">
+        <menu-text wx:if="{{ mode === 'text' }}"/>
+        <menu-background wx:if="{{ mode === 'background' }}"/>
+        <menu-sticker wx:if="{{ mode === 'sticker' }}"/>
+      </view>
+      <view class="menu">
+        <view bindtap="switchMenu(item.code)" class="menu-item" wx:class="{{ { active: item.code === mode } }}" wx:for="{{menuData}}" wx:key="code">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script>
 import { createPage } from '@mpxjs/core'
+import store from '../store'
 
 createPage({
+  data: {
+    menuData: [
+      { name: '背景', code: 'background' },
+      { name: '文字', code: 'text' },
+      { name: '贴图', code: 'sticker' }
+    ]
+  },
+  computed: {
+    mode() {
+      return store.state.mode
+    }
+  },
+  methods: {
+    switchMenu(e) {
+      store.commit('setMode', e)
+    }
+  },
   onLoad () {
     console.log('app is ready')
   }
@@ -24,20 +59,51 @@ createPage({
     height 100vw
     background #f8f8f8
     
-  .action {
+  .action 
     width 100vw
     height calc(100% - 100vw)
     background white
-  }
+    position relative
+  
+  .nav 
+    box-sizing border-box
+    padding 10rpx 10rpx 0 10rpx
+    display flex
+    justify-content space-between
+
+    .export
+      font-size 28rpx
+      color #666
+
+  .content 
+    height calc(100% - 160rpx)
+    padding 10rpx
+
+  .menu
+    display flex
+    justify-content space-around
+    border-top 1rpx solid #eee
+    line-height 100rpx
+
+    .menu-item 
+      color #666
+    
+    .active
+      color #333
+      font-weight bold
 </style>
 
 <script type="application/json">
   {
     "navigationBarTitleText": "Face",
     "usingComponents": {
-      "playboard": "../components/playboard"
+      "playboard": "../components/playboard",
+      "menu-background": "../components/menu-background",
+      "menu-text": "../components/menu-text",
+      "menu-sticker": "../components/menu-sticker"
     },
     "disableScroll" : true
   }
 </script>
+
 

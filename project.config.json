@@ -28,7 +28,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.13.1",
 	"appid": "wxa3f81d284576329e",
-	"projectname": "%E5%9B%BE%E8%90%8C",
+	"projectname": "表情管理中心",
 	"miniprogramRoot": "dist/",
 	"cloudfunctionTemplateRoot": "",
 	"watchOptions": {

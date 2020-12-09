@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1471611",
+      "name": "image",
+      "font_class": "image",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "6057550",
+      "name": "返回",
+      "font_class": "return",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "6057563",
+      "name": "前进",
+      "font_class": "forward",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "705693",
+      "name": "下载",
+      "font_class": "download",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
       "icon_id": "14887107",
       "name": "sticker",
       "font_class": "sticker",
