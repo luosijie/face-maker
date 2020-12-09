@@ -115,7 +115,6 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
     startTouches: [],
     startSelected: null,
     actionType: '',
-    // move, scale, rotate
     image: {
       move: null,
       scale: null,
@@ -177,7 +176,9 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
         if (ele.type === 'text') {
           _this.initController('text', function (offsetLeft, offsetTop) {
             _this.ctx.font = "".concat(ele.size, "px sans-serif");
-            _this.ctx.textBaseline = 'top';
+            _this.ctx.textBaseline = 'top'; // this.ctx.textAlign = 'center'
+
+            console.log('this.ctx', _this.ctx);
 
             _this.ctx.fillText(ele.data, ele.left - offsetLeft, ele.top - offsetTop);
           });
@@ -357,8 +358,11 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
 
       var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context4 = this.elements).call(_context4);
 
-      elements[this.activeIndex].rotate = this.startSelected.rotate - radian; // elements[this.activeIndex].size = this.startSelected.size * scale
-
+      elements[this.activeIndex].rotate = this.startSelected.rotate - radian;
+      console.log('this.startSelected', this.startSelected);
+      elements[this.activeIndex].left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2;
+      elements[this.activeIndex].top = this.startSelected.centerY - this.startSelected.size * scale / 2;
+      elements[this.activeIndex].size = this.startSelected.size * scale;
       _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setElements', elements);
     },
 
@@ -466,11 +470,13 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
 
                         elements.push(data); // store.commit('setElements', elements)// 初始化一段文字
 
+                        var size = 50;
+                        var string = '请输入文字';
                         var text = {
                           type: 'text',
-                          data: '请输入文字',
+                          data: string,
                           scale: 1,
-                          size: 50,
+                          size,
                           left: 100,
                           top: 100,
                           rotate: Math.PI / 4
@@ -546,17 +552,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
         height = activeElement.size + 10;
       }
 
-      var offsetLeft = left + width / 2;
-      var offsetTop = top + height / 2;
+      var offsetLeft = this.startSelected ? this.startSelected.centerX : left + width / 2;
+      var offsetTop = this.startSelected ? this.startSelected.centerY : top + height / 2;
       this.ctx.translate(offsetLeft, offsetTop);
       this.ctx.rotate(activeElement.rotate); // this.ctx.scale(activeElement.scale, activeElement.scale)
 
       this.ctx.setLineDash([10, 5], 5);
       this.ctx.strokeRect(left - offsetLeft, top - offsetTop, width, height); // 绘制控制点-移动
 
-      this.ctx.drawImage(this.image.move, left - 10 - offsetLeft, top - 10 - offsetTop, 20, 20); // await this.loadImage('/images/icon-move.png').then(res => {
-      // })
-      // 绘制控制点-缩放
+      this.ctx.drawImage(this.image.move, left - 10 - offsetLeft, top - 10 - offsetTop, 20, 20); // 绘制控制点-缩放
 
       this.ctx.drawImage(this.image.scale, left - 10 - offsetLeft, top + height - 10 - offsetTop, 20, 20); // 绘制控制点-删除
 

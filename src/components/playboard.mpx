@@ -34,7 +34,7 @@ createComponent({
   data: {
     startTouches: [],
     startSelected: null,
-    actionType: '', // move, scale, rotate
+    actionType: '',
     image: {
       move: null,
       scale: null,
@@ -84,6 +84,8 @@ createComponent({
           this.initController('text', (offsetLeft, offsetTop) => {
             this.ctx.font = `${ele.size}px sans-serif`
             this.ctx.textBaseline = 'top'
+            // this.ctx.textAlign = 'center'
+            console.log('this.ctx', this.ctx)
             this.ctx.fillText(ele.data, ele.left - offsetLeft, ele.top - offsetTop)
           })
         }
@@ -162,35 +164,16 @@ createComponent({
             centerY: controllerSize.centerY
           }
           console.log('selected------>', selected)
-          if (
-            Math.sqrt(
-              (collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top) ** 2
-            ) < 20
-          ) {
+          if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
             console.log('移动模式')
             this.actionType = ACTION_TYEP.MOVE
-          } else if (
-            Math.sqrt(
-              (collided.left - controllerSize.left - controllerSize.width) ** 2 +
-                (collided.top - controllerSize.top) ** 2
-            ) < 20
-          ) {
+          } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
             console.log('删除模式')
             this.actionType = ACTION_TYEP.DELETE
-          } else if (
-            Math.sqrt(
-              (collided.left - controllerSize.left - controllerSize.width) ** 2 +
-                (collided.top - controllerSize.top - controllerSize.height) ** 2
-            ) < 20
-          ) {
+          } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
             console.log('旋转模式')
             this.actionType = ACTION_TYEP.ROTATE
-          } else if (
-            Math.sqrt(
-              (collided.left - controllerSize.left) ** 2 +
-                (collided.top - controllerSize.top - controllerSize.height) ** 2
-            ) < 20
-          ) {
+          } else if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
             console.log('缩放模式')
             this.actionType = ACTION_TYEP.SCALE
           } else if (e.touches.length === 1) {
@@ -255,7 +238,10 @@ createComponent({
       const scale = endLength / startLength
       const elements = this.elements.slice()
       elements[this.activeIndex].rotate = this.startSelected.rotate - radian
-      // elements[this.activeIndex].size = this.startSelected.size * scale
+      console.log('this.startSelected', this.startSelected)
+      elements[this.activeIndex].left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2
+      elements[this.activeIndex].top = this.startSelected.centerY - this.startSelected.size * scale / 2
+      elements[this.activeIndex].size = this.startSelected.size * scale
       store.commit('setElements', elements)
     },
     // 删除绑定函数
@@ -340,11 +326,13 @@ createComponent({
                 }
                 elements.push(data)
                 // store.commit('setElements', elements)// 初始化一段文字
+                const size = 50
+                const string = '请输入文字'
                 const text = {
                   type: 'text',
-                  data: '请输入文字',
+                  data: string,
                   scale: 1,
-                  size: 50,
+                  size,
                   left: 100,
                   top: 100,
                   rotate: Math.PI / 4
@@ -403,8 +391,8 @@ createComponent({
         width = activeElement.size * activeElement.data.length + 10
         height = activeElement.size + 10
       }
-      const offsetLeft = left + width / 2
-      const offsetTop = top + height / 2
+      const offsetLeft = this.startSelected ? this.startSelected.centerX : left + width / 2
+      const offsetTop = this.startSelected ? this.startSelected.centerY : top + height / 2
       this.ctx.translate(offsetLeft, offsetTop)
       this.ctx.rotate(activeElement.rotate)
       // this.ctx.scale(activeElement.scale, activeElement.scale)
@@ -412,8 +400,6 @@ createComponent({
       this.ctx.strokeRect(left - offsetLeft, top - offsetTop, width, height)
       // 绘制控制点-移动
       this.ctx.drawImage(this.image.move, left - 10 - offsetLeft, top - 10 - offsetTop, 20, 20)
-      // await this.loadImage('/images/icon-move.png').then(res => {
-      // })
       // 绘制控制点-缩放
       this.ctx.drawImage(
         this.image.scale,
