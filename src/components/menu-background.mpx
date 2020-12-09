@@ -1,9 +1,9 @@
 <template>
   <view class="menu-background">
-      <view class="item replace">
-        <i class="iconfont icon-image"></i>
-        <text>替换图片</text>
-      </view>
+    <view class="item replace" bindtap="chooseImage">
+      <i class="iconfont icon-image"></i>
+      <text>替换图片</text>
+    </view>
   </view>
 </template>
 
@@ -12,16 +12,74 @@ import { createComponent } from '@mpxjs/core'
 import store from '../store'
 
 createComponent({
-  data: {
-    colors: ['#000000', '#ffffff', '#0076B6', '#00A948', '#FFB500', '#FF2929']
-  },
+  data: {},
   computed: {
-  },
-  watch: {
+    canvas() {
+      return store.state.canvas
+    },
+    ctx() {
+      return store.state.ctx
+    },
+    elements() {
+      return store.state.elements
+    },
+    dpr() {
+      return wx.getSystemInfoSync().pixelRatio
+    }
   },
   methods: {
-    opacityChange(e) {
-      console.log(e)
+    chooseImage() {
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: res => {
+          if (res.errMsg === 'chooseImage:ok') {
+            const path = res.tempFilePaths[0]
+            console.log('image from chooseImage', path)
+            const image = this.canvas.createImage()
+            image.src = path
+            image.onload = e => {
+              console.log('imageData-loaded', e)
+              // ctx.drawImage(res.path, 0, 0, 100, 100)
+              const cWidth = this.canvas.width / this.dpr
+              const cHeight = this.canvas.height / this.dpr
+              const data = {
+                type: 'background',
+                data: image,
+                left: 0,
+                top: 0,
+                width: 0,
+                height: 0,
+                scale: 1,
+                rotate: 0
+              }
+              if (image.height > image.width) {
+                // 图片高大于宽
+                const rate = image.height / cHeight
+                data.width = image.width / rate
+                data.height = cHeight
+                data.left = (cWidth - data.width) / 2
+                data.top = 0
+              } else {
+                // 图片宽大于高
+                const rate = image.width / cWidth
+                data.height = image.height / rate
+                data.width = cWidth
+                data.left = 0
+                data.top = (cHeight - data.height) / 2
+              }
+              console.log('new background', data)
+              const index = this.elements.findIndex(e => e.type === 'background')
+              if (index > -1) {
+                this.elements.splice(index, 1, data)
+              } else {
+                this.elements.push(data)
+              }
+            }
+          }
+        }
+      })
     }
   },
   ready() {
@@ -31,7 +89,7 @@ createComponent({
 </script>
 
 <style lang="stylus">
-@import url('../assets/iconfont/iconfont.css');
+@import url('../assets/iconfont/iconfont.css')
 
 .menu-background
   display flex
@@ -40,21 +98,17 @@ createComponent({
   height 100%
   position relative
   padding 20rpx
-
-  .item 
+  .item
     color #666
     font-size 28rpx
     margin 10rpx
-  
   .replace
     display flex
     flex-direction column
     align-items center
     color #999
-
     i
       font-size 80rpx
-
     text
       font-size 20rpx
 </style>

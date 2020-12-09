@@ -3,7 +3,10 @@
     <playboard/>
     <view class="action">
       <view class="nav">
-        <view class="history"></view>
+        <view class="history">
+          <text class="iconfont icon-return"></text>
+          <text class="iconfont icon-forward"></text>
+        </view>
         <view class="export">  
           <text class="iconfont icon-download"></text>
         </view>
@@ -70,6 +73,13 @@ createPage({
     padding 10rpx 10rpx 0 10rpx
     display flex
     justify-content space-between
+
+    .history
+      text
+       font-size 28rpx
+       padding 0 20rpx
+       color #aaa
+       font-weight bold
 
     .export
       font-size 28rpx

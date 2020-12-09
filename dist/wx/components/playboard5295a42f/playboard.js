@@ -71,11 +71,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(325);
 /* harmony import */ var _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(453);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(3);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(433);
-
+/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(3);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(433);
 
 
 
@@ -92,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7___default()(object); if (_babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6___default.a) { var symbols = _babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6___default()(object); if (enumerableOnly) symbols = _babel_runtime_corejs3_core_js_stable_instance_filter__WEBPACK_IMPORTED_MODULE_5___default()(symbols).call(symbols, function (sym) { return _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { var _context6; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context6 = ownKeys(Object(source), true)).call(_context6, function (key) { _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12___default()(target, key, source[key]); }); } else if (_babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs3_core_js_stable_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { var _context7; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context7 = ownKeys(Object(source))).call(_context7, function (key) { _babel_runtime_corejs3_core_js_stable_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default()(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { var _context5; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context5 = ownKeys(Object(source), true)).call(_context5, function (key) { _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12___default()(target, key, source[key]); }); } else if (_babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs3_core_js_stable_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { var _context6; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context6 = ownKeys(Object(source))).call(_context6, function (key) { _babel_runtime_corejs3_core_js_stable_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default()(source, key)); }); } } return target; }
 
 
 
@@ -109,7 +106,7 @@ var ACTION_TYEP = {
   NULL: 'NULL' // 空闲
 
 };
-Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
+Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
   data: {
     startTouches: [],
     startSelected: null,
@@ -123,23 +120,23 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
   },
   computed: {
     mode() {
-      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.mode;
+      return _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.mode;
     },
 
     canvas() {
-      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.canvas;
+      return _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.canvas;
     },
 
     ctx() {
-      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.ctx;
+      return _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.ctx;
     },
 
     elements() {
-      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.elements;
+      return _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.elements;
     },
 
     activeIndex() {
-      return _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.activeIndex;
+      return _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.activeIndex;
     },
 
     dpr() {
@@ -162,14 +159,14 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
     renderCanvas() {
       var _this = this;
 
-      console.log('canvas elements change');
+      console.log('canvas elements change', this.elements);
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.drawGrid();
 
       var _loop = function _loop(i) {
         var ele = _this.elements[i];
 
-        if (ele.type === 'image') {
+        if (ele.type === 'background') {
           _this.ctx.save();
 
           var left = ele.left - _this.ctx.canvas.width / _this.dpr / 2;
@@ -198,8 +195,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
 
       for (var i = 0; i < this.elements.length; i++) {
         _loop(i);
-      } // if (this.mode === 'background') 
-
+      }
     },
 
     /**
@@ -247,65 +243,62 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
       };
     },
 
-    chooseImage() {// wx.chooseImage({
-      //   success (res) {
-      //     console.log('res', res)
-      //   }
-      // })
-    },
-
     touchstart(e) {
-      var _context,
-          _this2 = this;
-
       this.actionType = ACTION_TYEP.NULL;
       this.startTouches = e.touches;
+      var collidedEle, collided;
 
-      var selected = _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_13___default()(_context = _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.elements).call(_context, function (e) {
-        return e.type === _this2.mode;
-      });
+      for (var i = this.elements.length - 1; i > 0; i--) {
+        var selected = this.elements[i];
+        console.log('controllerSize', selected);
 
-      if (selected) {
-        var controllerSize = this.convert2ControllerSize(selected);
-        console.log('controllerSize', controllerSize, e.touches); // 检测鼠标是否与canvas元素发生碰撞
+        var _controllerSize = this.convert2ControllerSize(selected); // 检测鼠标是否与canvas元素发生碰撞
 
-        var collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected);
+
+        collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected);
 
         if (collided) {
-          var _controllerSize = this.convert2ControllerSize(selected); // console.log('controllerSize', controllerSize)
-
-
-          this.startSelected = _objectSpread(_objectSpread({}, selected), {}, {
-            centerX: _controllerSize.centerX,
-            centerY: _controllerSize.centerY
-          });
-          console.log('selected------>', selected);
-
-          if (Math.sqrt(Math.pow(collided.left - _controllerSize.left, 2) + Math.pow(collided.top - _controllerSize.top, 2)) < 20) {
-            console.log('移动模式');
-            this.actionType = ACTION_TYEP.MOVE;
-          } else if (Math.sqrt(Math.pow(collided.left - _controllerSize.left - _controllerSize.width, 2) + Math.pow(collided.top - _controllerSize.top, 2)) < 20) {
-            console.log('删除模式');
-            this.actionType = ACTION_TYEP.DELETE;
-          } else if (Math.sqrt(Math.pow(collided.left - _controllerSize.left - _controllerSize.width, 2) + Math.pow(collided.top - _controllerSize.top - _controllerSize.height, 2)) < 20) {
-            console.log('旋转模式');
-            this.actionType = ACTION_TYEP.ROTATE;
-          } else if (Math.sqrt(Math.pow(collided.left - _controllerSize.left, 2) + Math.pow(collided.top - _controllerSize.top - _controllerSize.height, 2)) < 20) {
-            console.log('缩放模式');
-            this.actionType = ACTION_TYEP.SCALE;
-          } else if (e.touches.length === 1) {
-            console.log('单指触发');
-            this.actionType = ACTION_TYEP.MOVE;
-          } else if (e.touches.length === 2) {
-            console.log('双指触发');
-            this.actionType = ACTION_TYEP.SCALE;
-          }
+          collidedEle = selected;
+          break;
         }
+      }
+
+      if (!collided) {
+        _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setMode', 'background');
+        return;
+      }
+
+      console.log('collideEle', collidedEle);
+      _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setMode', collidedEle.type);
+      var controllerSize = this.convert2ControllerSize(collidedEle);
+      this.startSelected = _objectSpread(_objectSpread({}, collidedEle), {}, {
+        centerX: controllerSize.centerX,
+        centerY: controllerSize.centerY
+      });
+      console.log('selected------>', collidedEle);
+
+      if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 20) {
+        console.log('移动模式');
+        this.actionType = ACTION_TYEP.MOVE;
+      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 20) {
+        console.log('删除模式');
+        this.actionType = ACTION_TYEP.DELETE;
+      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 20) {
+        console.log('旋转模式');
+        this.actionType = ACTION_TYEP.ROTATE;
+      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 20) {
+        console.log('缩放模式');
+        this.actionType = ACTION_TYEP.SCALE;
+      } else if (e.touches.length === 1) {
+        console.log('单指触发');
+        this.actionType = ACTION_TYEP.MOVE;
+      } else if (e.touches.length === 2) {
+        console.log('双指触发');
+        this.actionType = ACTION_TYEP.SCALE;
       }
     },
 
     touchmove(e) {
-      console.log(this.actionType === ACTION_TYEP.ROTATE);
       if (this.actionType === ACTION_TYEP.MOVE) this.handleMove(e);
       if (this.actionType === ACTION_TYEP.SCALE) this.handleScale(e);
       if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e);
@@ -318,7 +311,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
 
     // 移动事件绑定函数
     handleMove(e) {
-      var _context2;
+      var _context;
 
       if (e.touches.length > 1) return;
       var x = e.touches[0].x;
@@ -326,31 +319,31 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
       var dx = this.startTouches[0].x - x;
       var dy = this.startTouches[0].y - y;
 
-      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context2 = this.elements).call(_context2);
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context = this.elements).call(_context);
 
       elements[this.activeIndex].left = this.startSelected.left - dx;
       elements[this.activeIndex].top = this.startSelected.top - dy;
-      _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setElements', elements);
+      _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setElements', elements);
     },
 
     // 缩放事件绑定函数
     handleScale(e) {
-      var _context3;
+      var _context2;
 
       if (e.touches.length !== 2) return;
       var startLength = Math.sqrt(Math.pow(this.startTouches[0].x - this.startTouches[1].x, 2) + Math.pow(this.startTouches[0].y - this.startTouches[1].y, 2));
       var endLength = Math.sqrt(Math.pow(e.touches[0].x - e.touches[1].x, 2) + Math.pow(e.touches[0].y - e.touches[1].y, 2));
       var scale = endLength / startLength;
 
-      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context3 = this.elements).call(_context3);
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context2 = this.elements).call(_context2);
 
       elements[this.activeIndex].scale = this.startSelected.scale * scale;
-      _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setElements', elements);
+      _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setElements', elements);
     },
 
     // 旋转绑定函数
     handleRotate(e) {
-      var _context4;
+      var _context3;
 
       console.log('handleRotate');
       var start = this.startTouches[0];
@@ -364,7 +357,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
       var radian = this.convert2Radian(start, end, center);
       var scale = endLength / startLength;
 
-      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context4 = this.elements).call(_context4); // 旋转
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context3 = this.elements).call(_context3); // 旋转
 
 
       elements[this.activeIndex].rotate = this.startSelected.rotate - radian; // 缩放
@@ -372,7 +365,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
       elements[this.activeIndex].left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2;
       elements[this.activeIndex].top = this.startSelected.centerY - this.startSelected.size * scale / 2;
       elements[this.activeIndex].size = this.startSelected.size * scale;
-      _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setElements', elements);
+      _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setElements', elements);
     },
 
     // 删除绑定函数
@@ -392,52 +385,52 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
     },
 
     initCanvas() {
-      var _this3 = this;
+      var _this2 = this;
 
       var query = this.createSelectorQuery();
-      var elements = _store__WEBPACK_IMPORTED_MODULE_15__["default"].state.elements;
+      var elements = _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.elements;
       query.select('#canvas').fields({
         node: true,
         size: true
       }).exec( /*#__PURE__*/function () {
         var _ref = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.mark(function _callee(res) {
           var canvas, ctx;
-          return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.wrap(function _callee$(_context5) {
+          return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.wrap(function _callee$(_context4) {
             while (1) {
-              switch (_context5.prev = _context5.next) {
+              switch (_context4.prev = _context4.next) {
                 case 0:
                   canvas = res[0].node;
                   ctx = canvas.getContext('2d');
-                  _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setCanvas', canvas);
-                  _store__WEBPACK_IMPORTED_MODULE_15__["default"].commit('setCtx', ctx);
-                  _context5.next = 6;
-                  return _this3.loadImage('/images/icon-move.png').then(function (res) {
-                    console.log('this', _this3);
-                    _this3.image.move = res;
+                  _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCanvas', canvas);
+                  _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCtx', ctx);
+                  _context4.next = 6;
+                  return _this2.loadImage('/images/icon-move.png').then(function (res) {
+                    console.log('this', _this2);
+                    _this2.image.move = res;
                   });
 
                 case 6:
-                  _context5.next = 8;
-                  return _this3.loadImage('/images/icon-scale.png').then(function (res) {
-                    _this3.image.scale = res;
+                  _context4.next = 8;
+                  return _this2.loadImage('/images/icon-scale.png').then(function (res) {
+                    _this2.image.scale = res;
                   });
 
                 case 8:
-                  _context5.next = 10;
-                  return _this3.loadImage('/images/icon-delete.png').then(function (res) {
-                    _this3.image.delete = res;
+                  _context4.next = 10;
+                  return _this2.loadImage('/images/icon-delete.png').then(function (res) {
+                    _this2.image.delete = res;
                   });
 
                 case 10:
-                  _context5.next = 12;
-                  return _this3.loadImage('/images/icon-rotate.png').then(function (res) {
-                    _this3.image.rotate = res;
+                  _context4.next = 12;
+                  return _this2.loadImage('/images/icon-rotate.png').then(function (res) {
+                    _this2.image.rotate = res;
                   });
 
                 case 12:
-                  canvas.width = res[0].width * _this3.dpr;
-                  canvas.height = res[0].height * _this3.dpr;
-                  ctx.scale(_this3.dpr, _this3.dpr); // 初始化一张背景图
+                  canvas.width = res[0].width * _this2.dpr;
+                  canvas.height = res[0].height * _this2.dpr;
+                  ctx.scale(_this2.dpr, _this2.dpr); // 初始化一张背景图
 
                   wx.getImageInfo({
                     src: imageUrl,
@@ -449,10 +442,10 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
                       imageData.onload = function (e) {
                         console.log('imageData-loaded', e); // ctx.drawImage(res.path, 0, 0, 100, 100)
 
-                        var cWidth = canvas.width / _this3.dpr;
-                        var cHeight = canvas.height / _this3.dpr;
+                        var cWidth = canvas.width / _this2.dpr;
+                        var cHeight = canvas.height / _this2.dpr;
                         var data = {
-                          type: 'image',
+                          type: 'background',
                           data: imageData,
                           left: 0,
                           top: 0,
@@ -497,7 +490,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
 
                 case 16:
                 case "end":
-                  return _context5.stop();
+                  return _context4.stop();
               }
             }
           }, _callee);
@@ -578,6 +571,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_14__["createComponent"])({
       this.ctx.restore();
     },
 
+    // 绘制网格做地图
     drawGrid() {
       this.ctx.save();
       var lineNums = 3;
@@ -1491,81 +1485,6 @@ $({ target: 'Promise', stat: true }, {
 
 // TODO: Remove from `core-js@4`
 __webpack_require__(292);
-
-
-/***/ }),
-
-/***/ 453:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(454);
-
-/***/ }),
-
-/***/ 454:
-/***/ (function(module, exports, __webpack_require__) {
-
-var parent = __webpack_require__(455);
-
-module.exports = parent;
-
-
-/***/ }),
-
-/***/ 455:
-/***/ (function(module, exports, __webpack_require__) {
-
-var find = __webpack_require__(456);
-
-var ArrayPrototype = Array.prototype;
-
-module.exports = function (it) {
-  var own = it.find;
-  return it === ArrayPrototype || (it instanceof Array && own === ArrayPrototype.find) ? find : own;
-};
-
-
-/***/ }),
-
-/***/ 456:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(457);
-var entryVirtual = __webpack_require__(131);
-
-module.exports = entryVirtual('Array').find;
-
-
-/***/ }),
-
-/***/ 457:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__(37);
-var $find = __webpack_require__(98).find;
-var addToUnscopables = __webpack_require__(13);
-var arrayMethodUsesToLength = __webpack_require__(130);
-
-var FIND = 'find';
-var SKIPS_HOLES = true;
-
-var USES_TO_LENGTH = arrayMethodUsesToLength(FIND);
-
-// Shouldn't skip holes
-if (FIND in []) Array(1)[FIND](function () { SKIPS_HOLES = false; });
-
-// `Array.prototype.find` method
-// https://tc39.github.io/ecma262/#sec-array.prototype.find
-$({ target: 'Array', proto: true, forced: SKIPS_HOLES || !USES_TO_LENGTH }, {
-  find: function find(callbackfn /* , that = undefined */) {
-    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-// https://tc39.github.io/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables(FIND);
 
 
 /***/ }),

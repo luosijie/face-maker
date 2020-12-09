@@ -19,6 +19,12 @@
   display: flex;
   justify-content: space-between;
 }
+.nav .history text {
+  font-size: 28rpx;
+  padding: 0 20rpx;
+  color: #aaa;
+  font-weight: bold;
+}
 .nav .export {
   font-size: 28rpx;
   color: #666;

@@ -5,7 +5,7 @@
   justify-content: center;
   height: 100%;
   position: relative;
-  padding: 20rpx;
+  padding: 0 20rpx;
 }
 .menu-text input {
   box-sizing: border-box;
@@ -21,7 +21,6 @@
   height: 90rpx;
 }
 .menu-text .item {
-  padding: 10rpx 0;
   height: 80rpx;
   display: flex;
   align-items: center;

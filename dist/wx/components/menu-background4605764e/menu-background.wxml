@@ -1,1 +1,1 @@
-<view class="menu-background" style="{{(mpxShow)||(mpxShow)===undefined?'':'display:none;'}}"><view class="item replace"><i class="iconfont icon-image"></i> <text>替换图片</text></view></view> 
+<view class="menu-background" style="{{(mpxShow)||(mpxShow)===undefined?'':'display:none;'}}"><view bindtap="chooseImage" class="item replace"><i class="iconfont icon-image"></i> <text>替换图片</text></view></view> 

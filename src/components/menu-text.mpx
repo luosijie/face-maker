@@ -4,7 +4,16 @@
       <view class="item">
         <view class="label">透明度</view>
         <view class="content">
-          <slider bindchange="opacityChange" show-value backgroundColor="#eee" activeColor="#ccc" value="{{ opacity }}"/>
+          <slider
+            bindchange="opacityChange"
+            show-value
+            backgroundColor="#eee"
+            activeColor="#ccc"
+            value="{{ opacity }}"
+            min="0"
+            max="1"
+            step="0.1"
+          />
         </view>
       </view>
       <view class="item">
@@ -15,7 +24,7 @@
             class="color"
             wx:class="{{ {active: color === item} }}"
             wx:for="{{colors}}"
-            wx:key="{{item}}"
+            wx:key="item"
             wx:style="{{{background: item}}}"
           />
         </view>
@@ -28,7 +37,7 @@
             class="color"
             wx:class="{{ {active: borderColor === item} }}"
             wx:for="{{ colors }}"
-            wx:key="{{ item }}"
+            wx:key="item"
             wx:style="{{ {background: item} }}"
           />
         </view>
@@ -84,7 +93,7 @@ createComponent({
   justify-content center
   height 100%
   position relative
-  padding 20rpx
+  padding 0 20rpx
   
   input 
     box-sizing border-box
@@ -100,7 +109,6 @@ createComponent({
     height 90rpx
 
   .item
-    padding 10rpx 0
     height 80rpx
     display flex
     align-items center

@@ -66,12 +66,12 @@ createComponent({
   methods: {
     // 画布渲染函数
     renderCanvas() {
-      console.log('canvas elements change')
+      console.log('canvas elements change', this.elements)
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
       this.drawGrid()
       for (let i = 0; i < this.elements.length; i++) {
         const ele = this.elements[i]
-        if (ele.type === 'image') {
+        if (ele.type === 'background') {
           this.ctx.save()
           const left = ele.left - this.ctx.canvas.width / this.dpr / 2
           const top = ele.top - this.ctx.canvas.height / this.dpr / 2
@@ -93,7 +93,6 @@ createComponent({
           })
         }
       }
-      // if (this.mode === 'background') 
     },
     /**
      * 检测鼠标是否与物体发生碰撞
@@ -140,55 +139,55 @@ createComponent({
       centerY = top + height / 2
       return { left, top, width, height, centerX, centerY }
     },
-    chooseImage() {
-      // wx.chooseImage({
-      //   success (res) {
-      //     console.log('res', res)
-      //   }
-      // })
-    },
     touchstart(e) {
       this.actionType = ACTION_TYEP.NULL
       this.startTouches = e.touches
-      const selected = store.state.elements.find(e => e.type === this.mode)
-      if (selected) {
+      let collidedEle, collided
+      for (let i = this.elements.length - 1; i > 0; i--) {
+        const selected = this.elements[i]
+        console.log('controllerSize', selected)
         const controllerSize = this.convert2ControllerSize(selected)
-        console.log('controllerSize', controllerSize, e.touches)
         // 检测鼠标是否与canvas元素发生碰撞
-        const collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected)
+        collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected)
         if (collided) {
-          const controllerSize = this.convert2ControllerSize(selected)
-          // console.log('controllerSize', controllerSize)
-          this.startSelected = {
-            ...selected,
-            centerX: controllerSize.centerX,
-            centerY: controllerSize.centerY
-          }
-          console.log('selected------>', selected)
-          if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
-            console.log('移动模式')
-            this.actionType = ACTION_TYEP.MOVE
-          } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
-            console.log('删除模式')
-            this.actionType = ACTION_TYEP.DELETE
-          } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
-            console.log('旋转模式')
-            this.actionType = ACTION_TYEP.ROTATE
-          } else if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
-            console.log('缩放模式')
-            this.actionType = ACTION_TYEP.SCALE
-          } else if (e.touches.length === 1) {
-            console.log('单指触发')
-            this.actionType = ACTION_TYEP.MOVE
-          } else if (e.touches.length === 2) {
-            console.log('双指触发')
-            this.actionType = ACTION_TYEP.SCALE
-          }
+          collidedEle = selected
+          break
         }
+      }
+      if (!collided) {
+        store.commit('setMode', 'background')
+        return
+      }
+      console.log('collideEle', collidedEle)
+      store.commit('setMode', collidedEle.type)
+      const controllerSize = this.convert2ControllerSize(collidedEle)
+      this.startSelected = {
+        ...collidedEle,
+        centerX: controllerSize.centerX,
+        centerY: controllerSize.centerY
+      }
+      console.log('selected------>', collidedEle)
+      if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
+        console.log('移动模式')
+        this.actionType = ACTION_TYEP.MOVE
+      } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
+        console.log('删除模式')
+        this.actionType = ACTION_TYEP.DELETE
+      } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
+        console.log('旋转模式')
+        this.actionType = ACTION_TYEP.ROTATE
+      } else if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
+        console.log('缩放模式')
+        this.actionType = ACTION_TYEP.SCALE
+      } else if (e.touches.length === 1) {
+        console.log('单指触发')
+        this.actionType = ACTION_TYEP.MOVE
+      } else if (e.touches.length === 2) {
+        console.log('双指触发')
+        this.actionType = ACTION_TYEP.SCALE
       }
     },
     touchmove(e) {
-      console.log(this.actionType === ACTION_TYEP.ROTATE)
       if (this.actionType === ACTION_TYEP.MOVE) this.handleMove(e)
       if (this.actionType === ACTION_TYEP.SCALE) this.handleScale(e)
       if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e)
@@ -304,7 +303,7 @@ createComponent({
                 const cWidth = canvas.width / this.dpr
                 const cHeight = canvas.height / this.dpr
                 const data = {
-                  type: 'image',
+                  type: 'background',
                   data: imageData,
                   left: 0,
                   top: 0,
@@ -427,6 +426,7 @@ createComponent({
       fn(offsetLeft, offsetTop)
       this.ctx.restore()
     },
+    // 绘制网格做地图
     drawGrid() {
       this.ctx.save()
       const lineNums = 3
