@@ -14973,9 +14973,12 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(254);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 
-var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
+
+var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
   state: {
     cavas: null,
     ctx: null,
@@ -15041,6 +15044,12 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
     addSticker(state, data) {
       state.elements.push(data);
       state.activeIndex = state.elements.length - 1;
+    },
+
+    deleteActiveELement(state) {
+      var _context;
+
+      _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(_context = state.elements).call(_context, state.activeIndex, 1);
     }
 
   }

@@ -275,8 +275,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
       var collided;
 
       for (var i = this.elements.length - 1; i > 0; i--) {
-        var selected = this.elements[i];
-        console.log('touch-start', selected); // 检测鼠标是否与canvas元素发生碰撞
+        var selected = this.elements[i]; // 检测鼠标是否与canvas元素发生碰撞
 
         collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected);
 
@@ -307,19 +306,19 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
         _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setActiveIndex', null);
         this.renderCanvas();
         return;
-      } // console.log('touch-start', e.touches)
+      }
 
-
-      if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 20) {
+      if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 40) {
         console.log('移动模式');
         this.actionType = ACTION_TYEP.MOVE;
-      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 20) {
+      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 40) {
         console.log('删除模式');
         this.actionType = ACTION_TYEP.DELETE;
-      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 20) {
+        this.handleDelete();
+      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 40) {
         console.log('旋转模式');
         this.actionType = ACTION_TYEP.ROTATE;
-      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 20) {
+      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 40) {
         console.log('缩放模式');
         this.actionType = ACTION_TYEP.SCALE;
       } else if (e.touches.length === 1) {
@@ -423,7 +422,18 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
     },
 
     // 删除绑定函数
-    handleDelete() {//
+    handleDelete() {
+      wx.showModal({
+        title: '提示',
+        content: '确认删除元素吗',
+
+        success(res) {
+          if (res.confirm) {
+            _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('deleteActiveELement');
+          }
+        }
+
+      });
     },
 
     initSelectStatus() {//
@@ -438,6 +448,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
       };
     },
 
+    // 初始化画布
     initCanvas() {
       var _this = this;
 
@@ -1507,7 +1518,7 @@ __webpack_require__(292);
 /***/ }),
 
 /***/ 448:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 
@@ -1521,7 +1532,7 @@ __webpack_require__(292);
 /***/ }),
 
 /***/ 450:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 

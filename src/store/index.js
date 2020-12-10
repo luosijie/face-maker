@@ -54,6 +54,9 @@ const store = createStore({
     addSticker (state, data) {
       state.elements.push(data)
       state.activeIndex = state.elements.length - 1
+    },
+    deleteActiveELement (state) {
+      state.elements.splice(state.activeIndex, 1)
     }
   }
 })
