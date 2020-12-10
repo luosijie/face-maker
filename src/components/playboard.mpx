@@ -91,10 +91,15 @@ createComponent({
       const centerY = ele.top + height / 2
       this.ctx.translate(centerX, centerY)
       this.ctx.rotate(ele.rotate)
-      this.ctx.font = `${ele.size}px sans-serif`
+      this.ctx.font = `${ele.size}px bold sans-serif`
+      this.ctx.globalAlpha = ele.opacity
+      this.ctx.fillStyle = ele.fillStyle
+      this.ctx.strokeStyle = ele.strokeStyle
+      // this.ctx.lineWidth = 2
       this.ctx.textBaseline = 'top'
-      console.log('this.ctx', this.ctx)
+      console.log('draw-text', ele)
       this.ctx.fillText(ele.data, ele.left - centerX, ele.top - centerY)
+      this.ctx.strokeText(ele.data, ele.left - centerX, ele.top - centerY)
       this.ctx.restore()
     },
     // 画布渲染函数
@@ -316,6 +321,16 @@ createComponent({
     initSelectStatus() {
       //
     },
+    /**
+     * 将坐标转化为旋转前的坐标
+     * 用于碰撞检测
+     * @param { Number } x
+     * @param { Number } y
+     * @param { Number } ox 原点坐标x
+     * @param { Number } oy 原点坐标y
+     * @param { Number } r 旋转弧度
+     * @return { Object } {left, top} 旋转前的坐标
+     */
     convert2unrotatedSize(x, y, ox, oy, r) {
       x = x - ox
       y = y - oy

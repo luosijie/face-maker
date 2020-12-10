@@ -1,6 +1,13 @@
 <template>
   <view class="menu-text">
-      <input type="text" class="input-text" placeholder="请输入文字" wx:if="{{ editing }}"/>
+      <input
+        value="{{ activeElement.data }}" 
+        type="text"
+        class="input-text"
+        placeholder="请输入文字" 
+        wx:if="{{ activeIndex }}"
+        bindblur="textChange"
+      />
       <view class="input-text" wx:else bindtap="addText">添加文字</view>
       <view class="item">
         <view class="label">透明度</view>
@@ -21,9 +28,9 @@
         <view class="label">颜色</view>
         <view class="content colors">
           <view
-            bindtap="colorChange(item)"
+            bindtap="fillStyleChange(item)"
             class="color"
-            wx:class="{{ {active: color === item} }}"
+            wx:class="{{ {active: fillStyle === item} }}"
             wx:for="{{colors}}"
             wx:key="item"
             wx:style="{{{background: item}}}"
@@ -34,9 +41,9 @@
         <view class="label">描边</view>
         <view class="content colors">
           <view
-            bindtap="borderColorChange(item)"
+            bindtap="strokeStyleChange(item)"
             class="color"
-            wx:class="{{ {active: borderColor === item} }}"
+            wx:class="{{ {active: strokeStyle === item} }}"
             wx:for="{{ colors }}"
             wx:key="item"
             wx:style="{{ {background: item} }}"
@@ -55,25 +62,30 @@ createComponent({
     colors: ['#000000', '#ffffff', '#0076B6', '#00A948', '#FFB500', '#FF2929']
   },
   computed: {
-    editing() {
+    activeElement() {
+      return store.state.elements[store.state.activeIndex]
+    },
+    activeIndex() {
       return store.state.activeIndex
     },
     opacity() {
-      return store.state.fontStyle.opacity
+      return this.activeIndex ? this.activeElement.opacity : store.state.fontStyle.opacity
     },
-    color() {
-      return store.state.fontStyle.color
+    fillStyle() {
+      return this.activeIndex ? this.activeElement.fillStyle : store.state.fontStyle.fillStyle
     },
-    borderColor() {
-      return store.state.fontStyle.borderColor
-    }
-  },
-  watch: {
-    opacity(val) {
-      console.log('opacity-change', val)
+    strokeStyle() {
+      return this.activeIndex ? this.activeElement.strokeStyle : store.state.fontStyle.strokeStyle
     }
   },
   methods: {
+    textChange(e) {
+      const text = e.detail.value || '请输入文字'
+      console.log('text-change', e)
+      const elements =  store.state.elements.slice()
+      elements[store.state.activeIndex].data = text
+      store.commit('setElements', elements)
+    },
     addText() {
       const background = store.state.elements.find(e => e.type === 'background')
       if (!background) {
@@ -87,12 +99,27 @@ createComponent({
     },
     opacityChange(e) {
       store.commit('setFontStyle', { key: 'opacity', data: e.detail.value })
+      if (this.activeIndex) {
+        const elements =  store.state.elements.slice()
+        elements[this.activeIndex].opacity = e.detail.value
+        store.commit('setElements', elements)
+      }
     },
-    colorChange(e) {
-      store.commit('setFontStyle', { key: 'color', data: e })
+    fillStyleChange(e) {
+      store.commit('setFontStyle', { key: 'fillStyle', data: e })
+      if (this.activeIndex) {
+        const elements =  store.state.elements.slice()
+        elements[this.activeIndex].fillStyle = e
+        store.commit('setElements', elements)
+      }
     },
-    borderColorChange(e) {
-      store.commit('setFontStyle', { key: 'borderColor', data: e })
+    strokeStyleChange(e) {
+      store.commit('setFontStyle', { key: 'strokeStyle', data: e })
+      if (this.activeIndex) {
+        const elements =  store.state.elements.slice()
+        elements[this.activeIndex].strokeStyle = e
+        store.commit('setElements', elements)
+      }
     }
   },
   ready() {

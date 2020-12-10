@@ -183,10 +183,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
       var centerY = ele.top + height / 2;
       this.ctx.translate(centerX, centerY);
       this.ctx.rotate(ele.rotate);
-      this.ctx.font = "".concat(ele.size, "px sans-serif");
+      this.ctx.font = "".concat(ele.size, "px bold sans-serif");
+      this.ctx.globalAlpha = ele.opacity;
+      this.ctx.fillStyle = ele.fillStyle;
+      this.ctx.strokeStyle = ele.strokeStyle; // this.ctx.lineWidth = 2
+
       this.ctx.textBaseline = 'top';
-      console.log('this.ctx', this.ctx);
+      console.log('draw-text', ele);
       this.ctx.fillText(ele.data, ele.left - centerX, ele.top - centerY);
+      this.ctx.strokeText(ele.data, ele.left - centerX, ele.top - centerY);
       this.ctx.restore();
     },
 
@@ -439,6 +444,16 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
     initSelectStatus() {//
     },
 
+    /**
+     * 将坐标转化为旋转前的坐标
+     * 用于碰撞检测
+     * @param { Number } x
+     * @param { Number } y
+     * @param { Number } ox 原点坐标x
+     * @param { Number } oy 原点坐标y
+     * @param { Number } r 旋转弧度
+     * @return { Object } {left, top} 旋转前的坐标
+     */
     convert2unrotatedSize(x, y, ox, oy, r) {
       x = x - ox;
       y = y - oy;
@@ -1518,7 +1533,7 @@ __webpack_require__(292);
 /***/ }),
 
 /***/ 448:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
@@ -1532,7 +1547,7 @@ __webpack_require__(292);
 /***/ }),
 
 /***/ 450:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 

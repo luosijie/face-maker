@@ -18,17 +18,19 @@ global.currentSrcMode = "wx"
   moduleId: "m254ba0d0",
   render: function () {
     this._c("mpxShow", this.mpxShow) || this._c("mpxShow", this.mpxShow) === undefined ? '' : 'display:none;';
-    if (this._c("editing", this.editing)) {} else {}
+    if (this._c("activeIndex", this.activeIndex)) {
+      this._c("activeElement.data", this.activeElement.data);
+    } else {}
     this._c("opacity", this.opacity);
     this._i(this._c("colors", this.colors), function (item, index) {
-      __stringify__.stringifyClass("color", { active: this._c("color", this.color) === item });
+      __stringify__.stringifyClass("color", { active: this._c("fillStyle", this.fillStyle) === item });
       __stringify__.stringifyStyle("", { background: item });
-      ({ tap: [["colorChange", item]] });
+      ({ tap: [["fillStyleChange", item]] });
     });
     this._i(this._c("colors", this.colors), function (item, index) {
-      __stringify__.stringifyClass("color", { active: this._c("borderColor", this.borderColor) === item });
+      __stringify__.stringifyClass("color", { active: this._c("strokeStyle", this.strokeStyle) === item });
       __stringify__.stringifyStyle("", { background: item });
-      ({ tap: [["borderColorChange", item]] });
+      ({ tap: [["strokeStyleChange", item]] });
     });
     this._r();
   }
@@ -59,44 +61,57 @@ __webpack_require__(476)
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(469);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(433);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(125);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(433);
 
 
 
-Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createComponent"])({
+
+Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
   data: {
     colors: ['#000000', '#ffffff', '#0076B6', '#00A948', '#FFB500', '#FF2929']
   },
   computed: {
-    editing() {
-      return _store__WEBPACK_IMPORTED_MODULE_2__["default"].state.activeIndex;
+    activeElement() {
+      return _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.elements[_store__WEBPACK_IMPORTED_MODULE_3__["default"].state.activeIndex];
+    },
+
+    activeIndex() {
+      return _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.activeIndex;
     },
 
     opacity() {
-      return _store__WEBPACK_IMPORTED_MODULE_2__["default"].state.fontStyle.opacity;
+      return this.activeIndex ? this.activeElement.opacity : _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.fontStyle.opacity;
     },
 
-    color() {
-      return _store__WEBPACK_IMPORTED_MODULE_2__["default"].state.fontStyle.color;
+    fillStyle() {
+      return this.activeIndex ? this.activeElement.fillStyle : _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.fontStyle.fillStyle;
     },
 
-    borderColor() {
-      return _store__WEBPACK_IMPORTED_MODULE_2__["default"].state.fontStyle.borderColor;
-    }
-
-  },
-  watch: {
-    opacity(val) {
-      console.log('opacity-change', val);
+    strokeStyle() {
+      return this.activeIndex ? this.activeElement.strokeStyle : _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.fontStyle.strokeStyle;
     }
 
   },
   methods: {
-    addText() {
+    textChange(e) {
       var _context;
 
-      var background = _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0___default()(_context = _store__WEBPACK_IMPORTED_MODULE_2__["default"].state.elements).call(_context, function (e) {
+      var text = e.detail.value || '请输入文字';
+      console.log('text-change', e);
+
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1___default()(_context = _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.elements).call(_context);
+
+      elements[_store__WEBPACK_IMPORTED_MODULE_3__["default"].state.activeIndex].data = text;
+      _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('setElements', elements);
+    },
+
+    addText() {
+      var _context2;
+
+      var background = _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0___default()(_context2 = _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.elements).call(_context2, function (e) {
         return e.type === 'background';
       });
 
@@ -108,28 +123,55 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createComponent"])({
         return;
       }
 
-      _store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('addText');
+      _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('addText');
     },
 
     opacityChange(e) {
-      _store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('setFontStyle', {
+      _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('setFontStyle', {
         key: 'opacity',
         data: e.detail.value
       });
+
+      if (this.activeIndex) {
+        var _context3;
+
+        var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1___default()(_context3 = _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.elements).call(_context3);
+
+        elements[this.activeIndex].opacity = e.detail.value;
+        _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('setElements', elements);
+      }
     },
 
-    colorChange(e) {
-      _store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('setFontStyle', {
-        key: 'color',
+    fillStyleChange(e) {
+      _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('setFontStyle', {
+        key: 'fillStyle',
         data: e
       });
+
+      if (this.activeIndex) {
+        var _context4;
+
+        var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1___default()(_context4 = _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.elements).call(_context4);
+
+        elements[this.activeIndex].fillStyle = e;
+        _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('setElements', elements);
+      }
     },
 
-    borderColorChange(e) {
-      _store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('setFontStyle', {
-        key: 'borderColor',
+    strokeStyleChange(e) {
+      _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('setFontStyle', {
+        key: 'strokeStyle',
         data: e
       });
+
+      if (this.activeIndex) {
+        var _context5;
+
+        var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1___default()(_context5 = _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.elements).call(_context5);
+
+        elements[this.activeIndex].strokeStyle = e;
+        _store__WEBPACK_IMPORTED_MODULE_3__["default"].commit('setElements', elements);
+      }
     }
 
   },
@@ -142,7 +184,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createComponent"])({
 /***/ }),
 
 /***/ 474:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 
@@ -156,7 +198,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createComponent"])({
 /***/ }),
 
 /***/ 476:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 

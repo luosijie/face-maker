@@ -14990,8 +14990,8 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
     // background, text, sticker
     fontStyle: {
       opacity: 1,
-      color: '#000000',
-      borderColor: '#000000'
+      fillStyle: '#000000',
+      strokeStyle: '#000000'
     }
   },
   mutations: {
@@ -15035,7 +15035,10 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
         size,
         left: 100,
         top: 100,
-        rotate: 0
+        rotate: 0,
+        opacity: state.fontStyle.opacity,
+        fillStyle: state.fontStyle.fillStyle,
+        strokeStyle: state.fontStyle.strokeStyle
       };
       state.elements.push(text);
       state.activeIndex = state.elements.length - 1;
