@@ -14979,10 +14979,11 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
   state: {
     cavas: null,
     ctx: null,
+    background: null,
     elements: [],
-    activeIndex: 1,
+    activeIndex: null,
     // 当前编辑中的元素下标
-    mode: 'background',
+    mode: 'text',
     // background, text, image
     fontStyle: {
       opacity: 1,
@@ -14997,6 +14998,10 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
 
     setCtx(state, data) {
       state.ctx = data;
+    },
+
+    setBackground(state, data) {
+      state.background = data;
     },
 
     setElements(state, data) {
@@ -15015,6 +15020,22 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
       var key = _ref.key,
           data = _ref.data;
       state.fontStyle[key] = data;
+    },
+
+    addText(state) {
+      var size = 50;
+      var string = '请输入文字';
+      var text = {
+        type: 'text',
+        data: string,
+        scale: 1,
+        size,
+        left: 100,
+        top: 100,
+        rotate: 0
+      };
+      state.elements.push(text);
+      state.activeIndex = state.elements.length - 1;
     }
 
   }

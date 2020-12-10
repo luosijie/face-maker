@@ -1,6 +1,7 @@
 <template>
   <view class="menu-text">
-      <input type="text" placeholder="请输入文字"/>
+      <input type="text" class="input-text" placeholder="请输入文字" wx:if="{{ editing }}"/>
+      <view class="input-text" wx:else bindtap="addText">添加文字</view>
       <view class="item">
         <view class="label">透明度</view>
         <view class="content">
@@ -54,6 +55,9 @@ createComponent({
     colors: ['#000000', '#ffffff', '#0076B6', '#00A948', '#FFB500', '#FF2929']
   },
   computed: {
+    editing() {
+      return store.state.activeIndex
+    },
     opacity() {
       return store.state.fontStyle.opacity
     },
@@ -70,6 +74,17 @@ createComponent({
     }
   },
   methods: {
+    addText() {
+      const background = store.state.elements.find(e => e.type === 'background')
+      if (!background) {
+        wx.showToast({
+          title: '请先选择背景图',
+          icon: 'none'
+        })
+        return
+      }
+      store.commit('addText')
+    },
     opacityChange(e) {
       store.commit('setFontStyle', { key: 'opacity', data: e.detail.value })
     },
@@ -95,14 +110,14 @@ createComponent({
   position relative
   padding 0 20rpx
   
-  input 
+  .input-text
     box-sizing border-box
     text-align center
     width 100%
     font-size 40rpx
     margin-bottom 20rpx
     font-weight bold
-    color #ccc
+    color #999
     border 1rpx dashed #ccc
     border-radius 5rpx
     padding 10rpx

@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7___default()(object); if (_babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6___default.a) { var symbols = _babel_runtime_corejs3_core_js_stable_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_6___default()(object); if (enumerableOnly) symbols = _babel_runtime_corejs3_core_js_stable_instance_filter__WEBPACK_IMPORTED_MODULE_5___default()(symbols).call(symbols, function (sym) { return _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { var _context5; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context5 = ownKeys(Object(source), true)).call(_context5, function (key) { _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12___default()(target, key, source[key]); }); } else if (_babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs3_core_js_stable_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { var _context6; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context6 = ownKeys(Object(source))).call(_context6, function (key) { _babel_runtime_corejs3_core_js_stable_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default()(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { var _context7; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context7 = ownKeys(Object(source), true)).call(_context7, function (key) { _babel_runtime_corejs3_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_12___default()(target, key, source[key]); }); } else if (_babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs3_core_js_stable_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { var _context8; _babel_runtime_corejs3_core_js_stable_instance_for_each__WEBPACK_IMPORTED_MODULE_3___default()(_context8 = ownKeys(Object(source))).call(_context8, function (key) { _babel_runtime_corejs3_core_js_stable_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs3_core_js_stable_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_4___default()(source, key)); }); } } return target; }
 
 
 
@@ -146,6 +146,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
   },
   watch: {
     elements() {
+      console.log('canvas elements change', this.elements);
       this.renderCanvas();
     },
 
@@ -155,46 +156,54 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
   },
   methods: {
+    drawImage(ele) {
+      this.ctx.save();
+      var left = ele.left - this.ctx.canvas.width / this.dpr / 2;
+      var top = ele.top - this.ctx.canvas.height / this.dpr / 2;
+      this.ctx.translate(this.ctx.canvas.width / this.dpr / 2, this.ctx.canvas.height / this.dpr / 2);
+      this.ctx.scale(ele.scale, ele.scale);
+      this.ctx.drawImage(ele.data, left, top, ele.width, ele.height);
+      this.ctx.restore();
+    },
+
+    drawText(ele) {
+      this.ctx.save();
+      var width = ele.size * ele.data.length;
+      var height = ele.size;
+      var centerX = ele.left + width / 2;
+      var centerY = ele.top + height / 2;
+      this.ctx.translate(centerX, centerY);
+      this.ctx.rotate(ele.rotate);
+      this.ctx.font = "".concat(ele.size, "px sans-serif");
+      this.ctx.textBaseline = 'top';
+      console.log('this.ctx', this.ctx);
+      this.ctx.fillText(ele.data, ele.left - centerX, ele.top - centerY);
+      this.ctx.restore();
+    },
+
     // 画布渲染函数
     renderCanvas() {
-      var _this = this;
-
-      console.log('canvas elements change', this.elements);
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.drawGrid();
-
-      var _loop = function _loop(i) {
-        var ele = _this.elements[i];
-
-        if (ele.type === 'background') {
-          _this.ctx.save();
-
-          var left = ele.left - _this.ctx.canvas.width / _this.dpr / 2;
-          var top = ele.top - _this.ctx.canvas.height / _this.dpr / 2;
-
-          _this.ctx.translate(_this.ctx.canvas.width / _this.dpr / 2, _this.ctx.canvas.height / _this.dpr / 2);
-
-          _this.ctx.scale(ele.scale, ele.scale);
-
-          _this.ctx.drawImage(ele.data, left, top, ele.width, ele.height);
-
-          _this.ctx.restore();
-        }
-
-        if (ele.type === 'text') {
-          _this.initController('text', function (offsetLeft, offsetTop) {
-            _this.ctx.font = "".concat(ele.size, "px sans-serif");
-            _this.ctx.textBaseline = 'top'; // this.ctx.textAlign = 'center'
-
-            console.log('this.ctx', _this.ctx);
-
-            _this.ctx.fillText(ele.data, ele.left - offsetLeft, ele.top - offsetTop);
-          });
-        }
-      };
+      console.log('draw-background', this.background);
+      if (this.background) this.drawImage(this.background);
 
       for (var i = 0; i < this.elements.length; i++) {
-        _loop(i);
+        var ele = this.elements[i]; // 渲染背景
+
+        if (ele.type === 'background') {
+          this.drawImage(ele);
+        } // 渲染文字
+
+
+        if (ele.type === 'text') {
+          this.drawText(ele);
+        } // 选中元素添加控制元件
+
+
+        if (this.activeIndex === i) {
+          this.initController(ele);
+        }
       }
     },
 
@@ -217,7 +226,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
      * @return { Object } 坐标集合
      */
     convert2ControllerSize(ele) {
-      var left, top, width, height, centerX, centerY;
+      var left, top, width, height, centerX, centerY, rotate;
 
       if (ele.type === 'text') {
         left = ele.left - 5;
@@ -231,6 +240,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
         height = ele.height;
       }
 
+      rotate = ele.rotate;
       centerX = left + width / 2;
       centerY = top + height / 2;
       return {
@@ -238,6 +248,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
         top,
         width,
         height,
+        rotate,
         centerX,
         centerY
       };
@@ -258,24 +269,25 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
         collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected);
 
         if (collided) {
+          console.log('碰撞成功', collidedEle);
           collidedEle = selected;
+          _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setActiveIndex', i);
+          _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setMode', collidedEle.type);
           break;
         }
       }
 
       if (!collided) {
-        _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setMode', 'background');
+        _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setActiveIndex', null);
+        this.renderCanvas();
         return;
       }
 
-      console.log('collideEle', collidedEle);
-      _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setMode', collidedEle.type);
       var controllerSize = this.convert2ControllerSize(collidedEle);
       this.startSelected = _objectSpread(_objectSpread({}, collidedEle), {}, {
         centerX: controllerSize.centerX,
         centerY: controllerSize.centerY
       });
-      console.log('selected------>', collidedEle);
 
       if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 20) {
         console.log('移动模式');
@@ -296,6 +308,8 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
         console.log('双指触发');
         this.actionType = ACTION_TYEP.SCALE;
       }
+
+      this.renderCanvas();
     },
 
     touchmove(e) {
@@ -385,121 +399,82 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
     },
 
     initCanvas() {
-      var _this2 = this;
+      var _this = this;
 
-      var query = this.createSelectorQuery();
-      var elements = _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.elements;
-      query.select('#canvas').fields({
-        node: true,
-        size: true
-      }).exec( /*#__PURE__*/function () {
-        var _ref = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.mark(function _callee(res) {
-          var canvas, ctx;
-          return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.wrap(function _callee$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  canvas = res[0].node;
-                  ctx = canvas.getContext('2d');
-                  _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCanvas', canvas);
-                  _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCtx', ctx);
-                  _context4.next = 6;
-                  return _this2.loadImage('/images/icon-move.png').then(function (res) {
-                    console.log('this', _this2);
-                    _this2.image.move = res;
-                  });
+      return _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.mark(function _callee2() {
+        var query, elements;
+        return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.wrap(function _callee2$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                query = _this.createSelectorQuery();
+                elements = _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.elements;
+                query.select('#canvas').fields({
+                  node: true,
+                  size: true
+                }).exec( /*#__PURE__*/function () {
+                  var _ref = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.mark(function _callee(res) {
+                    var canvas, ctx;
+                    return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.wrap(function _callee$(_context4) {
+                      while (1) {
+                        switch (_context4.prev = _context4.next) {
+                          case 0:
+                            canvas = res[0].node;
+                            ctx = canvas.getContext('2d');
+                            _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCanvas', canvas);
+                            _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCtx', ctx);
+                            _context4.next = 6;
+                            return _this.loadImage('/images/icon-move.png').then(function (res) {
+                              console.log('this', _this);
+                              _this.image.move = res;
+                            });
 
-                case 6:
-                  _context4.next = 8;
-                  return _this2.loadImage('/images/icon-scale.png').then(function (res) {
-                    _this2.image.scale = res;
-                  });
+                          case 6:
+                            _context4.next = 8;
+                            return _this.loadImage('/images/icon-scale.png').then(function (res) {
+                              _this.image.scale = res;
+                            });
 
-                case 8:
-                  _context4.next = 10;
-                  return _this2.loadImage('/images/icon-delete.png').then(function (res) {
-                    _this2.image.delete = res;
-                  });
+                          case 8:
+                            _context4.next = 10;
+                            return _this.loadImage('/images/icon-delete.png').then(function (res) {
+                              _this.image.delete = res;
+                            });
 
-                case 10:
-                  _context4.next = 12;
-                  return _this2.loadImage('/images/icon-rotate.png').then(function (res) {
-                    _this2.image.rotate = res;
-                  });
+                          case 10:
+                            _context4.next = 12;
+                            return _this.loadImage('/images/icon-rotate.png').then(function (res) {
+                              _this.image.rotate = res;
+                            });
 
-                case 12:
-                  canvas.width = res[0].width * _this2.dpr;
-                  canvas.height = res[0].height * _this2.dpr;
-                  ctx.scale(_this2.dpr, _this2.dpr); // 初始化一张背景图
+                          case 12:
+                            _this.canvas.width = res[0].width * _this.dpr;
+                            _this.canvas.height = res[0].height * _this.dpr;
 
-                  wx.getImageInfo({
-                    src: imageUrl,
-                    success: function success(res) {
-                      console.log('get-image-url', res);
-                      var imageData = canvas.createImage();
-                      imageData.src = imageUrl;
+                            _this.ctx.scale(_this.dpr, _this.dpr);
 
-                      imageData.onload = function (e) {
-                        console.log('imageData-loaded', e); // ctx.drawImage(res.path, 0, 0, 100, 100)
+                            _this.drawGrid();
 
-                        var cWidth = canvas.width / _this2.dpr;
-                        var cHeight = canvas.height / _this2.dpr;
-                        var data = {
-                          type: 'background',
-                          data: imageData,
-                          left: 0,
-                          top: 0,
-                          width: 0,
-                          height: 0,
-                          scale: 1,
-                          rotate: 0
-                        };
-
-                        if (res.height > res.width) {
-                          var rate = res.height / cHeight;
-                          data.width = res.width / rate;
-                          data.height = cHeight;
-                          data.left = (cWidth - data.width) / 2;
-                          data.top = 0;
-                        } else {
-                          var _rate = res.width / cWidth;
-
-                          data.height = res.height / _rate;
-                          data.width = cWidth;
-                          data.left = 0;
-                          data.top = (cHeight - data.height) / 2;
+                          case 16:
+                          case "end":
+                            return _context4.stop();
                         }
+                      }
+                    }, _callee);
+                  }));
 
-                        elements.push(data); // store.commit('setElements', elements)// 初始化一段文字
+                  return function (_x) {
+                    return _ref.apply(this, arguments);
+                  };
+                }());
 
-                        var size = 50;
-                        var string = '请输入文字';
-                        var text = {
-                          type: 'text',
-                          data: string,
-                          scale: 1,
-                          size,
-                          left: 100,
-                          top: 100,
-                          rotate: Math.PI / 4
-                        };
-                        elements.push(text);
-                      };
-                    }
-                  });
-
-                case 16:
-                case "end":
-                  return _context4.stop();
-              }
+              case 3:
+              case "end":
+                return _context5.stop();
             }
-          }, _callee);
-        }));
-
-        return function (_x) {
-          return _ref.apply(this, arguments);
-        };
-      }());
+          }
+        }, _callee2);
+      }))();
     },
 
     /**
@@ -538,36 +513,23 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
       return rs - re;
     },
 
-    initController(type, fn) {
-      if (!this.activeIndex) return;
-      var activeElement = this.elements[this.activeIndex];
+    initController(ele) {
+      var cs = this.convert2ControllerSize(ele);
       this.ctx.save();
       this.ctx.strokeStyle = '#eee';
-      var left, top, width, height;
-
-      if (type === 'text') {
-        left = activeElement.left - 5;
-        top = activeElement.top - 5;
-        width = activeElement.size * activeElement.data.length + 10;
-        height = activeElement.size + 10;
-      }
-
-      var offsetLeft = left + width / 2;
-      var offsetTop = top + height / 2;
-      this.ctx.translate(offsetLeft, offsetTop);
-      this.ctx.rotate(activeElement.rotate); // this.ctx.scale(activeElement.scale, activeElement.scale)
+      this.ctx.translate(cs.centerX, cs.centerY);
+      this.ctx.rotate(cs.rotate); // this.ctx.scale(activeElement.scale, activeElement.scale)
 
       this.ctx.setLineDash([10, 5], 5);
-      this.ctx.strokeRect(left - offsetLeft, top - offsetTop, width, height); // 绘制控制点-移动
+      this.ctx.strokeRect(cs.left - cs.centerX, cs.top - cs.centerY, cs.width, cs.height); // 绘制控制点-移动
 
-      this.ctx.drawImage(this.image.move, left - 10 - offsetLeft, top - 10 - offsetTop, 20, 20); // 绘制控制点-缩放
+      this.ctx.drawImage(this.image.move, cs.left - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20); // 绘制控制点-缩放
 
-      this.ctx.drawImage(this.image.scale, left - 10 - offsetLeft, top + height - 10 - offsetTop, 20, 20); // 绘制控制点-删除
+      this.ctx.drawImage(this.image.scale, cs.left - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20); // 绘制控制点-删除
 
-      this.ctx.drawImage(this.image.delete, left + width - 10 - offsetLeft, top - 10 - offsetTop, 20, 20); // 绘制控制点-旋转
+      this.ctx.drawImage(this.image.delete, cs.left + cs.width - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20); // 绘制控制点-旋转
 
-      this.ctx.drawImage(this.image.rotate, left + width - 10 - offsetLeft, top + height - 10 - offsetTop, 20, 20);
-      fn(offsetLeft, offsetTop);
+      this.ctx.drawImage(this.image.rotate, cs.left + cs.width - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20);
       this.ctx.restore();
     },
 
@@ -602,7 +564,23 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
   },
 
   ready() {
-    this.initCanvas();
+    var _this2 = this;
+
+    return _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.mark(function _callee3() {
+      return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.wrap(function _callee3$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return _this2.initCanvas();
+
+            case 2:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee3);
+    }))();
   }
 
 });

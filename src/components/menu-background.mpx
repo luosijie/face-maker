@@ -74,7 +74,7 @@ createComponent({
               if (index > -1) {
                 this.elements.splice(index, 1, data)
               } else {
-                this.elements.push(data)
+                this.elements.unshift(data)
               }
             }
           }

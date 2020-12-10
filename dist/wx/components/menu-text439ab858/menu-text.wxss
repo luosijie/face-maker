@@ -7,14 +7,14 @@
   position: relative;
   padding: 0 20rpx;
 }
-.menu-text input {
+.menu-text .input-text {
   box-sizing: border-box;
   text-align: center;
   width: 100%;
   font-size: 40rpx;
   margin-bottom: 20rpx;
   font-weight: bold;
-  color: #ccc;
+  color: #999;
   border: 1rpx dashed #ccc;
   border-radius: 5rpx;
   padding: 10rpx;

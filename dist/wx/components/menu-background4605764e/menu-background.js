@@ -138,7 +138,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
 
                 _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(_context2 = _this.elements).call(_context2, index, 1, data);
               } else {
-                _this.elements.push(data);
+                _this.elements.unshift(data);
               }
             };
           }
