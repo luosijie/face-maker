@@ -44,6 +44,7 @@ createPage({
   },
   methods: {
     switchMenu(e) {
+      store.commit('setActiveIndex', null)
       store.commit('setMode', e)
     }
   },

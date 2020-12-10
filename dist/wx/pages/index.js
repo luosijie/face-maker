@@ -84,6 +84,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
   },
   methods: {
     switchMenu(e) {
+      _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setActiveIndex', null);
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setMode', e);
     }
 

@@ -156,16 +156,26 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
   },
   methods: {
+    /**
+     * 绘制图片
+     * @param { Object } ele canvas元素
+     */
     drawImage(ele) {
       this.ctx.save();
       var left = ele.left - this.ctx.canvas.width / this.dpr / 2;
       var top = ele.top - this.ctx.canvas.height / this.dpr / 2;
-      this.ctx.translate(this.ctx.canvas.width / this.dpr / 2, this.ctx.canvas.height / this.dpr / 2);
+      var width = ele.width * ele.scale;
+      var height = ele.height * ele.scale;
+      this.ctx.translate(ele.left + ele.width / 2, ele.top + ele.height / 2);
       this.ctx.scale(ele.scale, ele.scale);
-      this.ctx.drawImage(ele.data, left, top, ele.width, ele.height);
+      this.ctx.drawImage(ele.data, left, top, width, height);
       this.ctx.restore();
     },
 
+    /**
+     * 绘制文字
+     * @param { Object } ele canvas元素
+     */
     drawText(ele) {
       this.ctx.save();
       var width = ele.size * ele.data.length;
@@ -255,9 +265,11 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
     },
 
     touchstart(e) {
+      if (!this.elements.length) return;
       this.actionType = ACTION_TYEP.NULL;
       this.startTouches = e.touches;
-      var collidedEle, collided;
+      var collidedEle = this.elements[0],
+          collided;
 
       for (var i = this.elements.length - 1; i > 0; i--) {
         var selected = this.elements[i];
@@ -277,17 +289,26 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
         }
       }
 
-      if (!collided) {
-        _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setActiveIndex', null);
-        this.renderCanvas();
-        return;
-      }
-
       var controllerSize = this.convert2ControllerSize(collidedEle);
       this.startSelected = _objectSpread(_objectSpread({}, collidedEle), {}, {
         centerX: controllerSize.centerX,
         centerY: controllerSize.centerY
       });
+
+      if (!collided) {
+        if (e.touches.length === 1) {
+          console.log('单指触发');
+          this.actionType = ACTION_TYEP.MOVE;
+        } else if (e.touches.length === 2) {
+          console.log('双指触发');
+          this.actionType = ACTION_TYEP.SCALE;
+        }
+
+        _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setActiveIndex', null);
+        this.renderCanvas();
+        return;
+      } // console.log('touch-start', e.touches)
+
 
       if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 20) {
         console.log('移动模式');
@@ -313,6 +334,8 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
     },
 
     touchmove(e) {
+      console.log(this.actionType);
+      if (this.activeIndex === null && this.mode !== 'background') return;
       if (this.actionType === ACTION_TYEP.MOVE) this.handleMove(e);
       if (this.actionType === ACTION_TYEP.SCALE) this.handleScale(e);
       if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e);
@@ -327,6 +350,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
     handleMove(e) {
       var _context;
 
+      console.log('mouse-move', e);
       if (e.touches.length > 1) return;
       var x = e.touches[0].x;
       var y = e.touches[0].y;
@@ -335,8 +359,8 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
       var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context = this.elements).call(_context);
 
-      elements[this.activeIndex].left = this.startSelected.left - dx;
-      elements[this.activeIndex].top = this.startSelected.top - dy;
+      elements[this.activeIndex || 0].left = this.startSelected.left - dx;
+      elements[this.activeIndex || 0].top = this.startSelected.top - dy;
       _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setElements', elements);
     },
 
@@ -351,7 +375,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
       var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context2 = this.elements).call(_context2);
 
-      elements[this.activeIndex].scale = this.startSelected.scale * scale;
+      elements[this.activeIndex || 0].scale = this.startSelected.scale * scale;
       _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setElements', elements);
     },
 
