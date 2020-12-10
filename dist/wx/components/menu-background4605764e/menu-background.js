@@ -2,9 +2,9 @@
 var window = window || {};
 
 window["webpackJsonp"] = require("../../bundle.js");
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
 
-/***/ 437:
+/***/ 451:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21,33 +21,33 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_background_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(438);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_background_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(452);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(439)
+__webpack_require__(458)
 
 /* json */
-__webpack_require__(440)
+__webpack_require__(459)
 
 /* template */
-__webpack_require__(441)
+__webpack_require__(460)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 438:
+/***/ 452:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(254);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(471);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(453);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(433);
@@ -127,8 +127,6 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
                 data.top = (cHeight - data.height) / 2;
               }
 
-              console.log('new background', data);
-
               var index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(_context = _this.elements).call(_context, function (e) {
                 return e.type === 'background';
               });
@@ -155,48 +153,27 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
 
 /***/ }),
 
-/***/ 439:
+/***/ 453:
 /***/ (function(module, exports, __webpack_require__) {
 
-// removed by extractor
+module.exports = __webpack_require__(454);
 
 /***/ }),
 
-/***/ 440:
-/***/ (function(module, exports) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 441:
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
-// removed by extractor
-
-/***/ }),
-
-/***/ 471:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(472);
-
-/***/ }),
-
-/***/ 472:
-/***/ (function(module, exports, __webpack_require__) {
-
-var parent = __webpack_require__(473);
+var parent = __webpack_require__(455);
 
 module.exports = parent;
 
 
 /***/ }),
 
-/***/ 473:
+/***/ 455:
 /***/ (function(module, exports, __webpack_require__) {
 
-var findIndex = __webpack_require__(474);
+var findIndex = __webpack_require__(456);
 
 var ArrayPrototype = Array.prototype;
 
@@ -208,10 +185,10 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ 474:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(475);
+__webpack_require__(457);
 var entryVirtual = __webpack_require__(131);
 
 module.exports = entryVirtual('Array').findIndex;
@@ -219,7 +196,7 @@ module.exports = entryVirtual('Array').findIndex;
 
 /***/ }),
 
-/***/ 475:
+/***/ 457:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -249,7 +226,28 @@ $({ target: 'Array', proto: true, forced: SKIPS_HOLES || !USES_TO_LENGTH }, {
 addToUnscopables(FIND_INDEX);
 
 
+/***/ }),
+
+/***/ 458:
+/***/ (function(module, exports, __webpack_require__) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 459:
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 460:
+/***/ (function(module, exports, __webpack_require__) {
+
+// removed by extractor
+
 /***/ })
 
-},[[437,1]]]);
+},[[451,1]]]);
 //# sourceMappingURL=menu-background.js.map

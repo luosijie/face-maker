@@ -14983,8 +14983,8 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
     elements: [],
     activeIndex: null,
     // 当前编辑中的元素下标
-    mode: 'text',
-    // background, text, image
+    mode: 'background',
+    // background, text, sticker
     fontStyle: {
       opacity: 1,
       color: '#000000',
@@ -15035,6 +15035,11 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createStore"])({
         rotate: 0
       };
       state.elements.push(text);
+      state.activeIndex = state.elements.length - 1;
+    },
+
+    addSticker(state, data) {
+      state.elements.push(data);
       state.activeIndex = state.elements.length - 1;
     }
 

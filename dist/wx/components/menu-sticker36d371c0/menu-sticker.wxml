@@ -1,1 +1,1 @@
-<view class="menu-text" style="{{(mpxShow)||(mpxShow)===undefined?'':'display:none;'}}">贴图</view> 
+<view class="menu-sticker" style="{{(mpxShow)||(mpxShow)===undefined?'':'display:none;'}}"><view class="item" bindtap="__invoke" data-eventconfigs='{{ {tap:[["chooseSticker",item]]} }}' wx:for="{{ stickers }}" wx:key="item"><image src="{{ item }}" mode="aspectFit" class="img-sticker"/></view></view> 

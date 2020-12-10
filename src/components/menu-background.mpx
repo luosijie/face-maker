@@ -69,7 +69,6 @@ createComponent({
                 data.left = 0
                 data.top = (cHeight - data.height) / 2
               }
-              console.log('new background', data)
               const index = this.elements.findIndex(e => e.type === 'background')
               if (index > -1) {
                 this.elements.splice(index, 1, data)

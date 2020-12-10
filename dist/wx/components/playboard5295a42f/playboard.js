@@ -2,9 +2,9 @@
 var window = window || {};
 
 window["webpackJsonp"] = require("../../bundle.js");
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
-/***/ 442:
+/***/ 437:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21,26 +21,26 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_playboard_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(443);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_playboard_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(438);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(458)
+__webpack_require__(448)
 
 /* json */
-__webpack_require__(459)
+__webpack_require__(449)
 
 /* template */
-__webpack_require__(460)
+__webpack_require__(450)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 443:
+/***/ 438:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63,9 +63,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(273);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(444);
+/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(439);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(446);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(441);
 /* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(125);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__);
@@ -93,7 +93,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-var imageUrl = 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg';
 var ACTION_TYEP = {
   MOVE: 'MOVE',
   // 移动
@@ -162,13 +161,13 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
      */
     drawImage(ele) {
       this.ctx.save();
-      var left = ele.left - this.ctx.canvas.width / this.dpr / 2;
-      var top = ele.top - this.ctx.canvas.height / this.dpr / 2;
-      var width = ele.width * ele.scale;
-      var height = ele.height * ele.scale;
-      this.ctx.translate(ele.left + ele.width / 2, ele.top + ele.height / 2);
-      this.ctx.scale(ele.scale, ele.scale);
-      this.ctx.drawImage(ele.data, left, top, width, height);
+      var width = ele.width;
+      var height = ele.height;
+      var centerX = ele.left + ele.width / 2;
+      var centerY = ele.top + ele.height / 2;
+      this.ctx.translate(centerX, centerY);
+      this.ctx.rotate(ele.rotate);
+      this.ctx.drawImage(ele.data, ele.left - centerX, ele.top - centerY, width, height);
       this.ctx.restore();
     },
 
@@ -202,6 +201,10 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
         var ele = this.elements[i]; // 渲染背景
 
         if (ele.type === 'background') {
+          this.drawImage(ele);
+        }
+
+        if (ele.type === 'sticker') {
           this.drawImage(ele);
         } // 渲染文字
 
@@ -268,15 +271,13 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
       if (!this.elements.length) return;
       this.actionType = ACTION_TYEP.NULL;
       this.startTouches = e.touches;
-      var collidedEle = this.elements[0],
-          collided;
+      var collidedEle = this.elements[0];
+      var collided;
 
       for (var i = this.elements.length - 1; i > 0; i--) {
         var selected = this.elements[i];
-        console.log('controllerSize', selected);
-
-        var _controllerSize = this.convert2ControllerSize(selected); // 检测鼠标是否与canvas元素发生碰撞
-
+        console.log('controllerSize', selected); // const controllerSize = this.convert2ControllerSize(selected)
+        // 检测鼠标是否与canvas元素发生碰撞
 
         collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected);
 
@@ -368,14 +369,19 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
     handleScale(e) {
       var _context2;
 
-      if (e.touches.length !== 2) return;
+      if (e.touches.length !== 2 || this.mode !== 'background') return;
       var startLength = Math.sqrt(Math.pow(this.startTouches[0].x - this.startTouches[1].x, 2) + Math.pow(this.startTouches[0].y - this.startTouches[1].y, 2));
       var endLength = Math.sqrt(Math.pow(e.touches[0].x - e.touches[1].x, 2) + Math.pow(e.touches[0].y - e.touches[1].y, 2));
       var scale = endLength / startLength;
 
       var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context2 = this.elements).call(_context2);
 
-      elements[this.activeIndex || 0].scale = this.startSelected.scale * scale;
+      var selected = elements[this.activeIndex || 0];
+      selected.left = this.startSelected.centerX - this.startSelected.width * scale / 2;
+      selected.top = this.startSelected.centerY - this.startSelected.height * scale / 2;
+      selected.width = this.startSelected.width * scale;
+      selected.height = this.startSelected.height * scale; // elements[this.activeIndex || 0].scale = this.startSelected.scale * scale
+
       _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setElements', elements);
     },
 
@@ -395,14 +401,25 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
       var radian = this.convert2Radian(start, end, center);
       var scale = endLength / startLength;
 
-      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context3 = this.elements).call(_context3); // 旋转
+      var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default()(_context3 = this.elements).call(_context3);
 
+      var selected = elements[this.activeIndex]; // 旋转
 
-      elements[this.activeIndex].rotate = this.startSelected.rotate - radian; // 缩放
+      selected.rotate = this.startSelected.rotate - radian; // 缩放
 
-      elements[this.activeIndex].left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2;
-      elements[this.activeIndex].top = this.startSelected.centerY - this.startSelected.size * scale / 2;
-      elements[this.activeIndex].size = this.startSelected.size * scale;
+      if (selected.type === 'text') {
+        selected.left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2;
+        selected.top = this.startSelected.centerY - this.startSelected.size * scale / 2;
+        selected.size = this.startSelected.size * scale;
+      }
+
+      if (selected.type === 'sticker') {
+        selected.left = this.startSelected.centerX - this.startSelected.width * scale / 2;
+        selected.top = this.startSelected.centerY - this.startSelected.height * scale / 2;
+        selected.width = this.startSelected.width * scale;
+        selected.height = this.startSelected.height * scale;
+      }
+
       _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setElements', elements);
     },
 
@@ -426,13 +443,12 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
       var _this = this;
 
       return _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.mark(function _callee2() {
-        var query, elements;
+        var query;
         return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default.a.wrap(function _callee2$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 query = _this.createSelectorQuery();
-                elements = _store__WEBPACK_IMPORTED_MODULE_14__["default"].state.elements;
                 query.select('#canvas').fields({
                   node: true,
                   size: true
@@ -492,7 +508,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
                   };
                 }());
 
-              case 3:
+              case 2:
               case "end":
                 return _context5.stop();
             }
@@ -611,15 +627,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
 /***/ }),
 
-/***/ 444:
+/***/ 439:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(445);
+module.exports = __webpack_require__(440);
 
 
 /***/ }),
 
-/***/ 445:
+/***/ 440:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1374,10 +1390,10 @@ try {
 
 /***/ }),
 
-/***/ 446:
+/***/ 441:
 /***/ (function(module, exports, __webpack_require__) {
 
-var _Promise = __webpack_require__(447);
+var _Promise = __webpack_require__(442);
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1419,29 +1435,29 @@ module.exports = _asyncToGenerator;
 
 /***/ }),
 
-/***/ 447:
+/***/ 442:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(448);
+module.exports = __webpack_require__(443);
 
 /***/ }),
 
-/***/ 448:
+/***/ 443:
 /***/ (function(module, exports, __webpack_require__) {
 
 var parent = __webpack_require__(275);
-__webpack_require__(449);
+__webpack_require__(444);
 // TODO: Remove from `core-js@4`
-__webpack_require__(450);
-__webpack_require__(451);
-__webpack_require__(452);
+__webpack_require__(445);
+__webpack_require__(446);
+__webpack_require__(447);
 
 module.exports = parent;
 
 
 /***/ }),
 
-/***/ 449:
+/***/ 444:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -1450,7 +1466,7 @@ __webpack_require__(276);
 
 /***/ }),
 
-/***/ 450:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -1459,7 +1475,7 @@ __webpack_require__(291);
 
 /***/ }),
 
-/***/ 451:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1482,7 +1498,7 @@ $({ target: 'Promise', stat: true }, {
 
 /***/ }),
 
-/***/ 452:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -1491,26 +1507,26 @@ __webpack_require__(292);
 
 /***/ }),
 
-/***/ 458:
+/***/ 448:
 /***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ }),
 
-/***/ 459:
+/***/ 449:
 /***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ }),
 
-/***/ 460:
+/***/ 450:
 /***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ })
 
-},[[442,1]]]);
+},[[437,1]]]);
 //# sourceMappingURL=playboard.js.map

@@ -7,7 +7,7 @@ const store = createStore({
     background: null,
     elements: [],
     activeIndex: null, // 当前编辑中的元素下标
-    mode: 'text',   // background, text, image
+    mode: 'background',   // background, text, sticker
     fontStyle: {
       opacity: 1,
       color: '#000000',
@@ -49,6 +49,10 @@ const store = createStore({
         rotate: 0
       }
       state.elements.push(text)
+      state.activeIndex = state.elements.length - 1
+    },
+    addSticker (state, data) {
+      state.elements.push(data)
       state.activeIndex = state.elements.length - 1
     }
   }

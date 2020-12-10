@@ -89,12 +89,15 @@ createPage({
   .content 
     height calc(100% - 160rpx)
     padding 10rpx
+    position relative
+    overflow hidden
 
   .menu
     display flex
     justify-content space-around
     border-top 1rpx solid #eee
     line-height 100rpx
+    background white
 
     .menu-item 
       color #666

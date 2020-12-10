@@ -1,80 +1,74 @@
 <template>
-  <view class="menu-text">
-      贴图
+  <view class="menu-sticker">
+      <view class="item" wx:for="{{ stickers }}" wx:key="item" bindtap="chooseSticker(item)">
+        <image class="img-sticker" src="{{ item }}" mode="aspectFit"/>
+      </view>
   </view>
 </template>
 
 <script>
 import { createComponent } from '@mpxjs/core'
 import store from '../store'
+import stickers from '../config/stickers'
+console.log('sticker', stickers)
 
 createComponent({
-  data: {
-    colors: ['#000000', '#ffffff', '#0076B6', '#00A948', '#FFB500', '#FF2929']
-  },
+  data: {},
   computed: {
+    canvas() {
+      return store.state.canvas
+    },
+    stickers() {
+      return stickers
+    }
   },
   watch: {
   },
   methods: {
-    opacityChange(e) {
-      console.log(e)
+    chooseSticker(e) {
+      const image = this.canvas.createImage()
+      image.src = e
+      image.onload = res => {
+        const data = {
+          type: 'sticker',
+          data: image,
+          left: 10,
+          top: 10,
+          width: 100,
+          height: 100,
+          scale: 1,
+          rotate: 0
+        }
+        store.commit('addSticker', data)
+      }
     }
-  },
-  ready() {
-    // this.initCanvas()
   }
 })
 </script>
 
 <style lang="stylus">
-.menu-text
-  display flex
-  flex-direction column
-  justify-content center
+.menu-sticker
   height 100%
-  position relative
-  padding 20rpx
-  
-  input 
-    box-sizing border-box
-    text-align center
-    width 100%
-    font-size 40rpx
-    margin-bottom 20rpx
-    font-weight bold
-    color #ccc
-    border 1rpx dashed #ccc
-    border-radius 5rpx
-    padding 10rpx
-    height 90rpx
+  overflow auto
+  display flex
+  justify-content space-between
+  flex-wrap wrap
 
   .item
-    padding 10rpx 0
-    height 80rpx
-    display flex
-    align-items center
-    width 100%
+    box-sizing border-box
+    float left
+    width 100rpx
+    height 100rpx
+    border-radius 5rpx
+    background #eee
+    margin 10rpx
+    position relative
+    padding 5rpx
 
-    .label
-      color #1E3063
-      font-size 28rpx
-      font-weight bold
-      width 120rpx
-    
-    .content
-      width calc(100% - 120rpx)
-    
-    .colors
-      padding 0 10rpx
-      display flex
-      justify-content space-between
-      .color
-        box-sizing border-box
-        width 48rpx
-        height 48rpx
-        border-radius 50%
-        border 4rpx solid #eee
+    .img-sticker
+      width 100%
+      height 100%
+  
 </style>
 
 <script type="application/json">

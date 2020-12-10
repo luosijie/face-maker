@@ -14,13 +14,12 @@
 <script>
 import { createComponent } from '@mpxjs/core'
 import store from '../store'
-const imageUrl = 'https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg'
 const ACTION_TYEP = {
-  MOVE: 'MOVE', // 移动
-  SCALE: 'SCALE', // 缩放
+  MOVE: 'MOVE',     // 移动
+  SCALE: 'SCALE',   // 缩放
   ROTATE: 'ROTATE', // 旋转
   DELETE: 'DELETE', // 旋转
-  NULL: 'NULL' // 空闲
+  NULL: 'NULL'      // 空闲
 }
 
 createComponent({
@@ -71,16 +70,13 @@ createComponent({
      */
     drawImage(ele) {
       this.ctx.save()
-      const left = ele.left - this.ctx.canvas.width / this.dpr / 2
-      const top = ele.top - this.ctx.canvas.height / this.dpr / 2
-      const width = ele.width * ele.scale
-      const height = ele.height * ele.scale
-      this.ctx.translate(
-        ele.left + ele.width / 2,
-        ele.top + ele.height / 2
-      )
-      this.ctx.scale(ele.scale, ele.scale)
-      this.ctx.drawImage(ele.data, left, top, width, height)
+      const width = ele.width
+      const height = ele.height
+      const centerX = ele.left + ele.width / 2
+      const centerY = ele.top + ele.height / 2
+      this.ctx.translate(centerX, centerY)
+      this.ctx.rotate(ele.rotate)
+      this.ctx.drawImage(ele.data, ele.left - centerX, ele.top - centerY, width, height)
       this.ctx.restore()
     },
     /**
@@ -111,6 +107,9 @@ createComponent({
         const ele = this.elements[i]
         // 渲染背景
         if (ele.type === 'background') {
+          this.drawImage(ele)
+        }
+        if (ele.type === 'sticker') {
           this.drawImage(ele)
         }
         // 渲染文字
@@ -173,11 +172,12 @@ createComponent({
       if (!this.elements.length) return
       this.actionType = ACTION_TYEP.NULL
       this.startTouches = e.touches
-      let collidedEle = this.elements[0], collided
+      let collidedEle = this.elements[0]
+      let collided
       for (let i = this.elements.length - 1; i > 0; i--) {
         const selected = this.elements[i]
         console.log('controllerSize', selected)
-        const controllerSize = this.convert2ControllerSize(selected)
+        // const controllerSize = this.convert2ControllerSize(selected)
         // 检测鼠标是否与canvas元素发生碰撞
         collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected)
         if (collided) {
@@ -254,7 +254,7 @@ createComponent({
     },
     // 缩放事件绑定函数
     handleScale(e) {
-      if (e.touches.length !== 2) return
+      if (e.touches.length !== 2 || this.mode !== 'background') return
       const startLength = Math.sqrt(
         (this.startTouches[0].x - this.startTouches[1].x) ** 2 +
           (this.startTouches[0].y - this.startTouches[1].y) ** 2
@@ -264,7 +264,12 @@ createComponent({
       )
       const scale = endLength / startLength
       const elements = this.elements.slice()
-      elements[this.activeIndex || 0].scale = this.startSelected.scale * scale
+      const selected = elements[this.activeIndex || 0]
+      selected.left = this.startSelected.centerX - this.startSelected.width * scale / 2
+      selected.top = this.startSelected.centerY - this.startSelected.height * scale / 2
+      selected.width = this.startSelected.width * scale
+      selected.height = this.startSelected.height * scale
+      // elements[this.activeIndex || 0].scale = this.startSelected.scale * scale
       store.commit('setElements', elements)
     },
     // 旋转绑定函数
@@ -281,12 +286,21 @@ createComponent({
       const radian = this.convert2Radian(start, end, center)
       const scale = endLength / startLength
       const elements = this.elements.slice()
+      const selected = elements[this.activeIndex]
       // 旋转
-      elements[this.activeIndex].rotate = this.startSelected.rotate - radian
+      selected.rotate = this.startSelected.rotate - radian
       // 缩放
-      elements[this.activeIndex].left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2
-      elements[this.activeIndex].top = this.startSelected.centerY - this.startSelected.size * scale / 2
-      elements[this.activeIndex].size = this.startSelected.size * scale
+      if (selected.type === 'text') {
+        selected.left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2
+        selected.top = this.startSelected.centerY - this.startSelected.size * scale / 2
+        selected.size = this.startSelected.size * scale
+      }
+      if (selected.type === 'sticker') {
+        selected.left = this.startSelected.centerX - this.startSelected.width * scale / 2
+        selected.top = this.startSelected.centerY - this.startSelected.height * scale / 2
+        selected.width = this.startSelected.width * scale
+        selected.height = this.startSelected.height * scale
+      }
       store.commit('setElements', elements)
     },
     // 删除绑定函数
@@ -306,7 +320,6 @@ createComponent({
     },
     async initCanvas() {
       const query = this.createSelectorQuery()
-      const elements = store.state.elements
       query
         .select('#canvas')
         .fields({ node: true, size: true })
