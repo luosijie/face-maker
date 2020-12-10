@@ -276,8 +276,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
       for (var i = this.elements.length - 1; i > 0; i--) {
         var selected = this.elements[i];
-        console.log('controllerSize', selected); // const controllerSize = this.convert2ControllerSize(selected)
-        // 检测鼠标是否与canvas元素发生碰撞
+        console.log('touch-start', selected); // 检测鼠标是否与canvas元素发生碰撞
 
         collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected);
 
@@ -1508,7 +1507,7 @@ __webpack_require__(292);
 /***/ }),
 
 /***/ 448:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
@@ -1522,7 +1521,7 @@ __webpack_require__(292);
 /***/ }),
 
 /***/ 450:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 

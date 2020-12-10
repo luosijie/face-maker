@@ -49,28 +49,44 @@ __webpack_require__(466)
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(433);
-/* harmony import */ var _config_stickers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(463);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(469);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(433);
+/* harmony import */ var _config_stickers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(463);
 
 
 
-console.log('sticker', _config_stickers__WEBPACK_IMPORTED_MODULE_2__["default"]);
-Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createComponent"])({
+
+Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createComponent"])({
   data: {},
   computed: {
     canvas() {
-      return _store__WEBPACK_IMPORTED_MODULE_1__["default"].state.canvas;
+      return _store__WEBPACK_IMPORTED_MODULE_2__["default"].state.canvas;
     },
 
     stickers() {
-      return _config_stickers__WEBPACK_IMPORTED_MODULE_2__["default"];
+      return _config_stickers__WEBPACK_IMPORTED_MODULE_3__["default"];
     }
 
   },
   watch: {},
   methods: {
     chooseSticker(e) {
+      var _context;
+
+      var background = _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0___default()(_context = _store__WEBPACK_IMPORTED_MODULE_2__["default"].state.elements).call(_context, function (e) {
+        return e.type === 'background';
+      });
+
+      if (!background) {
+        wx.showToast({
+          title: '请先选择背景图',
+          icon: 'none'
+        });
+        return;
+      }
+
       var image = this.canvas.createImage();
       image.src = e;
 
@@ -85,7 +101,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createComponent"])({
           scale: 1,
           rotate: 0
         };
-        _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('addSticker', data);
+        _store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('addSticker', data);
       };
     }
 
@@ -104,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 464:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 
@@ -118,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 466:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 

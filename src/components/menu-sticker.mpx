@@ -10,7 +10,6 @@
 import { createComponent } from '@mpxjs/core'
 import store from '../store'
 import stickers from '../config/stickers'
-console.log('sticker', stickers)
 
 createComponent({
   data: {},
@@ -26,6 +25,14 @@ createComponent({
   },
   methods: {
     chooseSticker(e) {
+      const background = store.state.elements.find(e => e.type === 'background')
+      if (!background) {
+        wx.showToast({
+          title: '请先选择背景图',
+          icon: 'none'
+        })
+        return
+      }
       const image = this.canvas.createImage()
       image.src = e
       image.onload = res => {
