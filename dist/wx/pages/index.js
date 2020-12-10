@@ -18,6 +18,7 @@ global.currentSrcMode = "wx"
   moduleId: "m4343fc81",
   render: function () {
     this._c("mpxPageStatus", this.mpxPageStatus);
+    if (this._c("activeIndex", this.activeIndex)) {} else {}
     if (this._c("mode", this.mode) === 'text') {
       this._c("mpxPageStatus", this.mpxPageStatus);
     }
@@ -79,10 +80,33 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
   computed: {
     mode() {
       return _store__WEBPACK_IMPORTED_MODULE_1__["default"].state.mode;
+    },
+
+    activeIndex() {
+      return _store__WEBPACK_IMPORTED_MODULE_1__["default"].state.activeIndex;
     }
 
   },
   methods: {
+    confirm() {
+      _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setActiveIndex', null);
+    },
+
+    clear() {
+      if (!_store__WEBPACK_IMPORTED_MODULE_1__["default"].state.elements.length) return;
+      wx.showModal({
+        title: '提示',
+        content: '确定要清空画布吗',
+
+        success(res) {
+          if (res.confirm) {
+            _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('clear');
+          }
+        }
+
+      });
+    },
+
     switchMenu(e) {
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setActiveIndex', null);
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setMode', e);
@@ -99,7 +123,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
 /***/ }),
 
 /***/ 434:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 
@@ -113,7 +137,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
 /***/ }),
 
 /***/ 436:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 

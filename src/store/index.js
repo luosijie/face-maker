@@ -60,6 +60,10 @@ const store = createStore({
     },
     deleteActiveELement (state) {
       state.elements.splice(state.activeIndex, 1)
+    },
+    clear (state) {
+      state.elements = []
+      state.activeIndex = null
     }
   }
 })

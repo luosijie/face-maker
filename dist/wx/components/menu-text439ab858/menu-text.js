@@ -2,9 +2,9 @@
 var window = window || {};
 
 window["webpackJsonp"] = require("../../bundle.js");
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
-/***/ 467:
+/***/ 461:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35,31 +35,31 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_text_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(468);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_text_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(462);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(474)
+__webpack_require__(468)
 
 /* json */
-__webpack_require__(475)
+__webpack_require__(469)
 
 /* template */
-__webpack_require__(476)
+__webpack_require__(470)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1), __webpack_require__(431)))
 
 /***/ }),
 
-/***/ 468:
+/***/ 462:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(469);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(463);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(125);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1__);
@@ -100,7 +100,6 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
       var _context;
 
       var text = e.detail.value || '请输入文字';
-      console.log('text-change', e);
 
       var elements = _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1___default()(_context = _store__WEBPACK_IMPORTED_MODULE_3__["default"].state.elements).call(_context);
 
@@ -183,26 +182,26 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
 
 /***/ }),
 
-/***/ 474:
+/***/ 468:
+/***/ (function(module, exports, __webpack_require__) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 469:
 /***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ }),
 
-/***/ 475:
-/***/ (function(module, exports) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 476:
-/***/ (function(module, exports) {
+/***/ 470:
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
 /***/ })
 
-},[[467,1]]]);
+},[[461,1]]]);
 //# sourceMappingURL=menu-text.js.map

@@ -15053,6 +15053,11 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
       var _context;
 
       _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(_context = state.elements).call(_context, state.activeIndex, 1);
+    },
+
+    clear(state) {
+      state.elements = [];
+      state.activeIndex = null;
     }
 
   }
@@ -15089,31 +15094,25 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
 /* 460 */,
 /* 461 */,
 /* 462 */,
-/* 463 */,
-/* 464 */,
-/* 465 */,
-/* 466 */,
-/* 467 */,
-/* 468 */,
-/* 469 */
+/* 463 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(470);
+module.exports = __webpack_require__(464);
 
 /***/ }),
-/* 470 */
+/* 464 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parent = __webpack_require__(471);
+var parent = __webpack_require__(465);
 
 module.exports = parent;
 
 
 /***/ }),
-/* 471 */
+/* 465 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var find = __webpack_require__(472);
+var find = __webpack_require__(466);
 
 var ArrayPrototype = Array.prototype;
 
@@ -15124,17 +15123,17 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 472 */
+/* 466 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(473);
+__webpack_require__(467);
 var entryVirtual = __webpack_require__(131);
 
 module.exports = entryVirtual('Array').find;
 
 
 /***/ }),
-/* 473 */
+/* 467 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

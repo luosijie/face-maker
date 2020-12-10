@@ -151,6 +151,10 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
     mode() {
       this.renderCanvas();
+    },
+
+    activeIndex() {
+      this.renderCanvas();
     }
 
   },

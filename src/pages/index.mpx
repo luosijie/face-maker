@@ -3,11 +3,13 @@
     <playboard/>
     <view class="action">
       <view class="nav">
-        <view class="history">
-          <text class="iconfont icon-return"></text>
-          <text class="iconfont icon-forward"></text>
+        <view class="clear" bindtap="clear">
+          <text class="iconfont icon-clear"></text>
         </view>
-        <view class="export">  
+        <view class="export" wx:if="{{ activeIndex }}" bindtap="confirm">  
+          <text class="iconfont icon-confirm"></text>
+        </view>
+        <view class="export" wx:else>  
           <text class="iconfont icon-download"></text>
         </view>
       </view>
@@ -40,9 +42,27 @@ createPage({
   computed: {
     mode() {
       return store.state.mode
+    },
+    activeIndex() {
+      return store.state.activeIndex
     }
   },
   methods: {
+    confirm() {
+      store.commit('setActiveIndex', null)
+    },
+    clear() {
+      if (!store.state.elements.length) return
+      wx.showModal({
+        title: '提示',
+        content: '确定要清空画布吗',
+        success(res) {
+          if (res.confirm) {
+            store.commit('clear')
+          }
+        }
+      })
+    },
     switchMenu(e) {
       store.commit('setActiveIndex', null)
       store.commit('setMode', e)
@@ -75,7 +95,7 @@ createPage({
     display flex
     justify-content space-between
 
-    .history
+    .clear
       text
        font-size 28rpx
        padding 0 20rpx
@@ -84,7 +104,7 @@ createPage({
 
     .export
       font-size 28rpx
-      color #666
+      color #aaa
 
   .content 
     height calc(100% - 160rpx)

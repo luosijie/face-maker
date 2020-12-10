@@ -61,6 +61,9 @@ createComponent({
     },
     mode() {
       this.renderCanvas()
+    },
+    activeIndex() {
+      this.renderCanvas()
     }
   },
   methods: {

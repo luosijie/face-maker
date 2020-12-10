@@ -2,7 +2,7 @@
   <view class="menu-background">
     <view class="item replace" bindtap="chooseImage">
       <i class="iconfont icon-image"></i>
-      <text>替换图片</text>
+      <text>图片</text>
     </view>
   </view>
 </template>

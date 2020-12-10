@@ -81,8 +81,7 @@ createComponent({
   methods: {
     textChange(e) {
       const text = e.detail.value || '请输入文字'
-      console.log('text-change', e)
-      const elements =  store.state.elements.slice()
+      const elements = store.state.elements.slice()
       elements[store.state.activeIndex].data = text
       store.commit('setElements', elements)
     },
