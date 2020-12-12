@@ -14,15 +14,21 @@
     "checkInvalidKey": true,
     "checkSiteMap": false,
     "uploadWithSourceMap": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "bundle": false
   },
   "appid": "wxa3f81d284576329e",
   "projectname": "code",
