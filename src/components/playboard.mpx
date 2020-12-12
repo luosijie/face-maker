@@ -212,19 +212,21 @@ createComponent({
         this.renderCanvas()
         return
       }
-      if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top) ** 2) < 40) {
-        console.log('移动模式')
-        this.actionType = ACTION_TYEP.MOVE
-      } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top) ** 2) < 40) {
-        console.log('删除模式')
-        this.actionType = ACTION_TYEP.DELETE
-        this.handleDelete()
-      } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 40) {
+      // TODO：功能未完善
+      // if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
+      //   console.log('移动模式')
+      //   this.actionType = ACTION_TYEP.MOVE
+      // } else if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
+      //   console.log('缩放模式')
+      //   this.actionType = ACTION_TYEP.SCALE
+      // } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
+      //   console.log('删除模式')
+      //   this.actionType = ACTION_TYEP.DELETE
+      //   this.handleDelete()
+      // } else
+      if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
         console.log('旋转模式')
         this.actionType = ACTION_TYEP.ROTATE
-      } else if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 40) {
-        console.log('缩放模式')
-        this.actionType = ACTION_TYEP.SCALE
       } else if (e.touches.length === 1) {
         console.log('单指触发')
         this.actionType = ACTION_TYEP.MOVE
@@ -237,9 +239,9 @@ createComponent({
     touchmove(e) {
       console.log(this.actionType)
       if (this.activeIndex === null && this.mode !== 'background') return
+      if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e)
       if (this.actionType === ACTION_TYEP.MOVE) this.handleMove(e)
       if (this.actionType === ACTION_TYEP.SCALE) this.handleScale(e)
-      if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e)
     },
     touchend(e) {
       this.actionType = ACTION_TYEP.NULL
@@ -354,16 +356,17 @@ createComponent({
           store.commit('setCanvas', canvas)
           store.commit('setCtx', ctx)
 
-          await this.loadImage('/images/icon-move.png').then(res => {
-            console.log('this', this)
-            this.image.move = res
-          })
-          await this.loadImage('/images/icon-scale.png').then(res => {
-            this.image.scale = res
-          })
-          await this.loadImage('/images/icon-delete.png').then(res => {
-            this.image.delete = res
-          })
+          // TODO：功能未完善
+          // await this.loadImage('/images/icon-move.png').then(res => {
+          //   console.log('this', this)
+          //   this.image.move = res
+          // })
+          // await this.loadImage('/images/icon-scale.png').then(res => {
+          //   this.image.scale = res
+          // })
+          // await this.loadImage('/images/icon-delete.png').then(res => {
+          //   this.image.delete = res
+          // })
           await this.loadImage('/images/icon-rotate.png').then(res => {
             this.image.rotate = res
           })
@@ -417,32 +420,15 @@ createComponent({
       // this.ctx.scale(activeElement.scale, activeElement.scale)
       this.ctx.setLineDash([10, 5], 5)
       this.ctx.strokeRect(cs.left - cs.centerX, cs.top - cs.centerY, cs.width, cs.height)
-      // 绘制控制点-移动
-      this.ctx.drawImage(this.image.move, cs.left - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20)
-      // 绘制控制点-缩放
-      this.ctx.drawImage(
-        this.image.scale,
-        cs.left - 10 - cs.centerX,
-        cs.top + cs.height - 10 - cs.centerY,
-        20,
-        20
-      )
-      // 绘制控制点-删除
-      this.ctx.drawImage(
-        this.image.delete,
-        cs.left + cs.width - 10 - cs.centerX,
-        cs.top - 10 - cs.centerY,
-        20,
-        20
-      )
       // 绘制控制点-旋转
-      this.ctx.drawImage(
-        this.image.rotate,
-        cs.left + cs.width - 10 - cs.centerX,
-        cs.top + cs.height - 10 - cs.centerY,
-        20,
-        20
-      )
+      this.ctx.drawImage(this.image.rotate, cs.left + cs.width - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20)
+      // TODO：功能未完善
+      // // 绘制控制点-移动
+      // this.ctx.drawImage(this.image.move, cs.left - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20)
+      // // 绘制控制点-缩放
+      // this.ctx.drawImage(this.image.scale, cs.left - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20)
+      // // 绘制控制点-删除
+      // this.ctx.drawImage(this.image.delete, cs.left + cs.width - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20)
       this.ctx.restore()
     },
     // 绘制网格做地图

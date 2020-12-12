@@ -315,21 +315,23 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
         _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setActiveIndex', null);
         this.renderCanvas();
         return;
-      }
+      } // TODO：功能未完善
+      // if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
+      //   console.log('移动模式')
+      //   this.actionType = ACTION_TYEP.MOVE
+      // } else if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
+      //   console.log('缩放模式')
+      //   this.actionType = ACTION_TYEP.SCALE
+      // } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
+      //   console.log('删除模式')
+      //   this.actionType = ACTION_TYEP.DELETE
+      //   this.handleDelete()
+      // } else
 
-      if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 40) {
-        console.log('移动模式');
-        this.actionType = ACTION_TYEP.MOVE;
-      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top, 2)) < 40) {
-        console.log('删除模式');
-        this.actionType = ACTION_TYEP.DELETE;
-        this.handleDelete();
-      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 40) {
+
+      if (Math.sqrt(Math.pow(collided.left - controllerSize.left - controllerSize.width, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 20) {
         console.log('旋转模式');
         this.actionType = ACTION_TYEP.ROTATE;
-      } else if (Math.sqrt(Math.pow(collided.left - controllerSize.left, 2) + Math.pow(collided.top - controllerSize.top - controllerSize.height, 2)) < 40) {
-        console.log('缩放模式');
-        this.actionType = ACTION_TYEP.SCALE;
       } else if (e.touches.length === 1) {
         console.log('单指触发');
         this.actionType = ACTION_TYEP.MOVE;
@@ -344,9 +346,9 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
     touchmove(e) {
       console.log(this.actionType);
       if (this.activeIndex === null && this.mode !== 'background') return;
+      if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e);
       if (this.actionType === ACTION_TYEP.MOVE) this.handleMove(e);
       if (this.actionType === ACTION_TYEP.SCALE) this.handleScale(e);
-      if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e);
     },
 
     touchend(e) {
@@ -491,32 +493,24 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
                             canvas = res[0].node;
                             ctx = canvas.getContext('2d');
                             _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCanvas', canvas);
-                            _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCtx', ctx);
+                            _store__WEBPACK_IMPORTED_MODULE_14__["default"].commit('setCtx', ctx); // TODO：功能未完善
+                            // await this.loadImage('/images/icon-move.png').then(res => {
+                            //   console.log('this', this)
+                            //   this.image.move = res
+                            // })
+                            // await this.loadImage('/images/icon-scale.png').then(res => {
+                            //   this.image.scale = res
+                            // })
+                            // await this.loadImage('/images/icon-delete.png').then(res => {
+                            //   this.image.delete = res
+                            // })
+
                             _context4.next = 6;
-                            return _this.loadImage('/images/icon-move.png').then(function (res) {
-                              console.log('this', _this);
-                              _this.image.move = res;
-                            });
-
-                          case 6:
-                            _context4.next = 8;
-                            return _this.loadImage('/images/icon-scale.png').then(function (res) {
-                              _this.image.scale = res;
-                            });
-
-                          case 8:
-                            _context4.next = 10;
-                            return _this.loadImage('/images/icon-delete.png').then(function (res) {
-                              _this.image.delete = res;
-                            });
-
-                          case 10:
-                            _context4.next = 12;
                             return _this.loadImage('/images/icon-rotate.png').then(function (res) {
                               _this.image.rotate = res;
                             });
 
-                          case 12:
+                          case 6:
                             _this.canvas.width = res[0].width * _this.dpr;
                             _this.canvas.height = res[0].height * _this.dpr;
 
@@ -524,7 +518,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
                             _this.drawGrid();
 
-                          case 16:
+                          case 10:
                           case "end":
                             return _context4.stop();
                         }
@@ -590,15 +584,16 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
       this.ctx.rotate(cs.rotate); // this.ctx.scale(activeElement.scale, activeElement.scale)
 
       this.ctx.setLineDash([10, 5], 5);
-      this.ctx.strokeRect(cs.left - cs.centerX, cs.top - cs.centerY, cs.width, cs.height); // 绘制控制点-移动
+      this.ctx.strokeRect(cs.left - cs.centerX, cs.top - cs.centerY, cs.width, cs.height); // 绘制控制点-旋转
 
-      this.ctx.drawImage(this.image.move, cs.left - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20); // 绘制控制点-缩放
+      this.ctx.drawImage(this.image.rotate, cs.left + cs.width - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20); // TODO：功能未完善
+      // // 绘制控制点-移动
+      // this.ctx.drawImage(this.image.move, cs.left - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20)
+      // // 绘制控制点-缩放
+      // this.ctx.drawImage(this.image.scale, cs.left - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20)
+      // // 绘制控制点-删除
+      // this.ctx.drawImage(this.image.delete, cs.left + cs.width - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20)
 
-      this.ctx.drawImage(this.image.scale, cs.left - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20); // 绘制控制点-删除
-
-      this.ctx.drawImage(this.image.delete, cs.left + cs.width - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20); // 绘制控制点-旋转
-
-      this.ctx.drawImage(this.image.rotate, cs.left + cs.width - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20);
       this.ctx.restore();
     },
 

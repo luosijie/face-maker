@@ -18,6 +18,7 @@ global.currentSrcMode = "wx"
   moduleId: "m4343fc81",
   render: function () {
     this._c("mpxPageStatus", this.mpxPageStatus);
+    if (this._c("activeIndex", this.activeIndex)) {}
     if (this._c("activeIndex", this.activeIndex)) {} else {}
     if (this._c("mode", this.mode) === 'text') {
       this._c("mpxPageStatus", this.mpxPageStatus);
@@ -88,6 +89,20 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
 
   },
   methods: {
+    delete() {
+      wx.showModal({
+        title: '提示',
+        content: '确认删除元素吗',
+
+        success(res) {
+          if (res.confirm) {
+            _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('deleteActiveELement');
+          }
+        }
+
+      });
+    },
+
     confirm() {
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setActiveIndex', null);
     },
@@ -110,20 +125,69 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
     switchMenu(e) {
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setActiveIndex', null);
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('setMode', e);
+    },
+
+    export() {
+      if (!_store__WEBPACK_IMPORTED_MODULE_1__["default"].state.elements.length) {
+        wx.showToast({
+          title: '加点东西再导出吧',
+          icon: 'none'
+        });
+        return;
+      }
+
+      wx.showModal({
+        title: '提示',
+        content: '图片将保存到手机相册',
+
+        success(res) {
+          if (res.confirm) {
+            console.log('export-canvas', _store__WEBPACK_IMPORTED_MODULE_1__["default"].state.ctx);
+            var canvas = _store__WEBPACK_IMPORTED_MODULE_1__["default"].state.canvas;
+            wx.canvasToTempFilePath({
+              x: 0,
+              y: 0,
+              width: canvas.width,
+              height: canvas.height,
+              canvas,
+
+              complete(res) {
+                if (res.errMsg === 'canvasToTempFilePath:ok') {
+                  wx.saveImageToPhotosAlbum({
+                    filePath: res.tempFilePath,
+
+                    success(res) {
+                      wx.showToast({
+                        title: '图片保存成功',
+                        icon: 'none'
+                      });
+                    }
+
+                  });
+                }
+              }
+
+            });
+          }
+        }
+
+      });
     }
 
   },
 
   onLoad() {
     console.log('app is ready');
-  }
+  },
+
+  onShareAppMessage() {}
 
 });
 
 /***/ }),
 
 /***/ 434:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
@@ -137,7 +201,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
 /***/ }),
 
 /***/ 436:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 

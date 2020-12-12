@@ -14981,14 +14981,17 @@ __webpack_require__.r(__webpack_exports__);
 var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
   state: {
     cavas: null,
+    // cnavas实例
     ctx: null,
-    background: null,
+    // canvas上下文实例
     elements: [],
+    // canvas元素
     activeIndex: null,
-    // 当前编辑中的元素下标
+    // 当前编辑中的元素索引
     mode: 'background',
-    // background, text, sticker
+    // 当前编辑模式：background, text, sticker
     fontStyle: {
+      // 文字默认样式
       opacity: 1,
       fillStyle: '#000000',
       strokeStyle: '#000000'
@@ -15001,10 +15004,6 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
 
     setCtx(state, data) {
       state.ctx = data;
-    },
-
-    setBackground(state, data) {
-      state.background = data;
     },
 
     setElements(state, data) {
@@ -15025,6 +15024,7 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
       state.fontStyle[key] = data;
     },
 
+    // 添加文字
     addText(state) {
       var size = 50;
       var string = '请输入文字';
@@ -15044,17 +15044,22 @@ var store = Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createStore"])({
       state.activeIndex = state.elements.length - 1;
     },
 
+    // 添加贴图
     addSticker(state, data) {
       state.elements.push(data);
       state.activeIndex = state.elements.length - 1;
     },
 
+    // 删除当前选中
     deleteActiveELement(state) {
       var _context;
 
       _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default()(_context = state.elements).call(_context, state.activeIndex, 1);
+
+      state.activeIndex = null;
     },
 
+    // 清空画布
     clear(state) {
       state.elements = [];
       state.activeIndex = null;
