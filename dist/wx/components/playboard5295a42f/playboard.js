@@ -2,9 +2,9 @@
 var window = window || {};
 
 window["webpackJsonp"] = require("../../bundle.js");
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ 437:
+/***/ 463:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21,26 +21,26 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_playboard_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(438);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_playboard_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(464);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(448)
+__webpack_require__(474)
 
 /* json */
-__webpack_require__(449)
+__webpack_require__(475)
 
 /* template */
-__webpack_require__(450)
+__webpack_require__(476)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 438:
+/***/ 464:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63,9 +63,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_object_keys__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(273);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(439);
+/* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(465);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(441);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(467);
 /* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(125);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_11__);
@@ -651,15 +651,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_13__["createComponent"])({
 
 /***/ }),
 
-/***/ 439:
+/***/ 465:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(440);
+module.exports = __webpack_require__(466);
 
 
 /***/ }),
 
-/***/ 440:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1414,10 +1414,10 @@ try {
 
 /***/ }),
 
-/***/ 441:
+/***/ 467:
 /***/ (function(module, exports, __webpack_require__) {
 
-var _Promise = __webpack_require__(442);
+var _Promise = __webpack_require__(468);
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1459,29 +1459,29 @@ module.exports = _asyncToGenerator;
 
 /***/ }),
 
-/***/ 442:
+/***/ 468:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(443);
+module.exports = __webpack_require__(469);
 
 /***/ }),
 
-/***/ 443:
+/***/ 469:
 /***/ (function(module, exports, __webpack_require__) {
 
 var parent = __webpack_require__(275);
-__webpack_require__(444);
+__webpack_require__(470);
 // TODO: Remove from `core-js@4`
-__webpack_require__(445);
-__webpack_require__(446);
-__webpack_require__(447);
+__webpack_require__(471);
+__webpack_require__(472);
+__webpack_require__(473);
 
 module.exports = parent;
 
 
 /***/ }),
 
-/***/ 444:
+/***/ 470:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -1490,7 +1490,7 @@ __webpack_require__(276);
 
 /***/ }),
 
-/***/ 445:
+/***/ 471:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -1499,7 +1499,7 @@ __webpack_require__(291);
 
 /***/ }),
 
-/***/ 446:
+/***/ 472:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1522,7 +1522,7 @@ $({ target: 'Promise', stat: true }, {
 
 /***/ }),
 
-/***/ 447:
+/***/ 473:
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -1531,26 +1531,26 @@ __webpack_require__(292);
 
 /***/ }),
 
-/***/ 448:
+/***/ 474:
 /***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
 /***/ }),
 
-/***/ 449:
+/***/ 475:
 /***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ }),
 
-/***/ 450:
+/***/ 476:
 /***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
 /***/ })
 
-},[[437,1]]]);
+},[[463,1]]]);
 //# sourceMappingURL=playboard.js.map

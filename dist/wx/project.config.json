@@ -1,39 +1,16 @@
 {
   "compileType": "miniprogram",
   "setting": {
+    "newFeature": true,
     "urlCheck": true,
     "es6": false,
     "postcss": true,
-    "preloadBackgroundData": false,
     "minified": false,
-    "newFeature": true,
-    "coverView": true,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": false,
-    "checkInvalidKey": true,
     "checkSiteMap": false,
-    "uploadWithSourceMap": true,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
-    "babelSetting": {
-      "ignore": [],
-      "disablePlugins": [],
-      "outputPath": ""
-    },
-    "useIsolateContext": true,
-    "useCompilerModule": true,
-    "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "bundle": false
+    "autoAudits": false
   },
-  "appid": "wxa3f81d284576329e",
+  "appid": "touristappid",
   "projectname": "code",
   "description": "face maker",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
   "condition": {}
 }

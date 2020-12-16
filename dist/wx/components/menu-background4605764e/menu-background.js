@@ -2,9 +2,9 @@
 var window = window || {};
 
 window["webpackJsonp"] = require("../../bundle.js");
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
-/***/ 451:
+/***/ 453:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21,33 +21,33 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_background_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(452);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_background_mpx_packageName_main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(454);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(458)
+__webpack_require__(460)
 
 /* json */
-__webpack_require__(459)
+__webpack_require__(461)
 
 /* template */
-__webpack_require__(460)
+__webpack_require__(462)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 452:
+/***/ 454:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(254);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(453);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(455);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(433);
@@ -153,27 +153,27 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
 
 /***/ }),
 
-/***/ 453:
+/***/ 455:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(454);
+module.exports = __webpack_require__(456);
 
 /***/ }),
 
-/***/ 454:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
-var parent = __webpack_require__(455);
+var parent = __webpack_require__(457);
 
 module.exports = parent;
 
 
 /***/ }),
 
-/***/ 455:
+/***/ 457:
 /***/ (function(module, exports, __webpack_require__) {
 
-var findIndex = __webpack_require__(456);
+var findIndex = __webpack_require__(458);
 
 var ArrayPrototype = Array.prototype;
 
@@ -185,10 +185,10 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ 456:
+/***/ 458:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(457);
+__webpack_require__(459);
 var entryVirtual = __webpack_require__(131);
 
 module.exports = entryVirtual('Array').findIndex;
@@ -196,7 +196,7 @@ module.exports = entryVirtual('Array').findIndex;
 
 /***/ }),
 
-/***/ 457:
+/***/ 459:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -228,26 +228,26 @@ addToUnscopables(FIND_INDEX);
 
 /***/ }),
 
-/***/ 458:
-/***/ (function(module, exports, __webpack_require__) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 459:
+/***/ 460:
 /***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ }),
 
-/***/ 460:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 461:
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 462:
+/***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ })
 
-},[[451,1]]]);
+},[[453,1]]]);
 //# sourceMappingURL=menu-background.js.map

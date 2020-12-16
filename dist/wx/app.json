@@ -1,6 +1,5 @@
 {
   "pages": [
     "pages/index"
-  ],
-  "sitemapLocation": "sitemap.json"
+  ]
 }

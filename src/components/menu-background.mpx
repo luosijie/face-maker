@@ -2,7 +2,8 @@
   <view class="menu-background">
     <view class="item replace" bindtap="chooseImage">
       <i class="iconfont icon-image"></i>
-      <text>图片</text>
+      <text class="title">图片</text>
+      <text class="sub-title">图片仅供本地使用</text>
     </view>
   </view>
 </template>
@@ -106,9 +107,16 @@ createComponent({
     flex-direction column
     align-items center
     color #999
+
     i
       font-size 80rpx
-    text
+    
+    text.title
+      font-size  24rpx
+      font-weight bold
+
+    text.sub-title
+      margin-top 20rpx
       font-size 20rpx
 </style>
 
