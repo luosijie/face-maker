@@ -42,5 +42,6 @@
   "description": "A mpx project",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {}
 }

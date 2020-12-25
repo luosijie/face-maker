@@ -50,29 +50,41 @@ createComponent({
         success: async res => {
           if (res.errMsg === 'chooseImage:ok') {
             const path = res.tempFilePaths[0]
-            // const type = path.match(/[^.]*$/)[0]
-            // wx.cloud.uploadFile({
-            //   cloudPath: `${new Date().getTime()}.${type}`,
-            //   filePath: path,
+            console.log('image from chooseImage', res)
+            const image = await loadImage(path, this.canvas)
+            const filePath = await compress.call(this, image, 'canvas_compress')
+            console.log('filesssss', filePath)
+            // wx.cloud.callFunction({
+            //   name: 'checkImage',
+            //   data: {
+            //     media: {
+            //       contentType: 'image/png',
+            //       value: file.data
+            //     }
+            //   },
             //   success(res) {
-            //     wx.cloud.callFunction({
-            //       name: 'checkImage',
-            //       data: {
-            //         contentType: `image/${type}`,
-            //         fileID: res.fileID
-            //       },
-            //       success(res) {
-            //         console.log('res from cloud', res)
-            //       },
-            //       fail: console.error
-            //     })
+            //     console.log('res from cloud', res)
             //   },
             //   fail: console.error
             // })
-            console.log('image from chooseImage', res)
-            const image = await loadImage(path, this.canvas)
-            // const queryCompress = this.createSelectorQuery()
-            compress.call(this, image, 'canvas_compress')
+            // const type = path.match(/[^.]*$/)[0]
+            wx.cloud.uploadFile({
+              cloudPath: `${new Date().getTime()}.png`,
+              filePath: filePath,
+              success(res) {
+                wx.cloud.callFunction({
+                  name: 'checkImage',
+                  data: {
+                    fileID: res.fileID
+                  },
+                  success(res) {
+                    console.log('res from cloud', res)
+                  },
+                  fail: console.error
+                })
+              },
+              fail: console.error
+            })
             const cWidth = this.canvas.width / this.dpr
             const cHeight = this.canvas.height / this.dpr
             const data = {
