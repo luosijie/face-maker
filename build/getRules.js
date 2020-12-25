@@ -61,8 +61,11 @@ module.exports = function getRules (options) {
     })
   }
 
+  let currentMpxLoaderConf
   if (typeof mpxLoaderConf === 'function') {
-    mpxLoaderConf = mpxLoaderConf(options)
+    currentMpxLoaderConf = mpxLoaderConf(options)
+  } else {
+    currentMpxLoaderConf = mpxLoaderConf
   }
 
   if (mode === 'web') {
@@ -80,13 +83,14 @@ module.exports = function getRules (options) {
               }
             }
           },
-          MpxWebpackPlugin.loader(mpxLoaderConf)
+          MpxWebpackPlugin.loader(currentMpxLoaderConf)
         ]
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
+      // 如输出web时需要支持其他预编译语言，可以在此添加rule配置
       {
         test: /\.styl(us)?$/,
         use: [
@@ -94,13 +98,20 @@ module.exports = function getRules (options) {
           'css-loader',
           'stylus-loader'
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
       }
     ])
   } else {
     rules = rules.concat([
       {
         test: /\.mpx$/,
-        use: MpxWebpackPlugin.loader(mpxLoaderConf)
+        use: MpxWebpackPlugin.loader(currentMpxLoaderConf)
       }
     ])
   }

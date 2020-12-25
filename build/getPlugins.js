@@ -15,11 +15,14 @@ module.exports = function getRules (options) {
     return `**/${item}/**`
   })
 
+  let currentMpxPluginConf
   if (typeof mpxPluginConf === 'function') {
-    mpxPluginConf = mpxPluginConf(options)
+    currentMpxPluginConf = mpxPluginConf(options)
+  } else {
+    currentMpxPluginConf = mpxPluginConf
   }
 
-  plugins.push(new MpxWebpackPlugin(Object.assign({}, mpxPluginConf, {
+  plugins.push(new MpxWebpackPlugin(Object.assign({}, currentMpxPluginConf, {
     mode,
     srcMode
   })))
@@ -44,6 +47,17 @@ module.exports = function getRules (options) {
       context: resolve(`src/functions`),
       from: '**/*',
       to: '../functions/'
+    })
+    // 自定义代码
+    copyList.push({
+      context: resolve(`src/miniprogram/assets/images`),
+      from: '**/*',
+      to: '../miniprogram/images/'
+    })
+    copyList.push({
+      context: resolve(`src/miniprogram/assets/stickers`),
+      from: '**/*',
+      to: '../miniprogram/stickers/'
     })
   }
 
@@ -86,6 +100,7 @@ module.exports = function getRules (options) {
   if (report) {
     plugins.push(new BundleAnalyzerPlugin())
   }
+  console.log('plugins', plugins)
 
   return plugins
 }

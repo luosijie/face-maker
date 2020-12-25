@@ -1,1 +1,0 @@
-<view class="menu-background" style="{{(mpxShow)||(mpxShow)===undefined?'':'display:none;'}}"><view bindtap="chooseImage" class="item replace"><i class="iconfont icon-image"></i> <text class="title">图片</text> <text class="sub-title">图片仅供本地使用</text></view></view> 

@@ -11,7 +11,7 @@ module.exports = {
   srcMode: formatOption('wx'),
   cross: formatOption('false'),
   transWeb: formatOption('true'),
-  cloudFunc: formatOption('false'),
+  cloudFunc: formatOption('true'),
   isPlugin: formatOption('false'),
   tsSupport: formatOption('false'),
   babel7Support: formatOption('true'),

@@ -1,8 +1,6 @@
-# face-maker
+# face-workshop
 
-预览地址
-
-微信小程序搜索：表情工坊
+> A mpx project
 
 ## Dev
 

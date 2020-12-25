@@ -1,0 +1,149 @@
+<template>
+  <view class="menu-background">
+    <view class="item replace" bindtap="chooseImage">
+      <i class="iconfont icon-image"></i>
+      <text class="title">图片</text>
+      <text class="sub-title">图片仅供本地使用</text>
+    </view>
+    <canvas type="2d" id="canvas_compress" class="canvas-compress" />
+  </view>
+</template>
+
+<script>
+import { createComponent } from '@mpxjs/core'
+import store from '../store'
+import loadImage from '../utils/loadImage'
+import compress from '../utils/compress'
+
+createComponent({
+  data: {},
+  computed: {
+    canvas() {
+      return store.state.canvas
+    },
+    ctx() {
+      return store.state.ctx
+    },
+    elements() {
+      return store.state.elements
+    },
+    dpr() {
+      return wx.getSystemInfoSync().pixelRatio
+    }
+  },
+  methods: {
+    chooseImage() {
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: async res => {
+          if (res.errMsg === 'chooseImage:ok') {
+            const path = res.tempFilePaths[0]
+            // const type = path.match(/[^.]*$/)[0]
+            // wx.cloud.uploadFile({
+            //   cloudPath: `${new Date().getTime()}.${type}`,
+            //   filePath: path,
+            //   success(res) {
+            //     wx.cloud.callFunction({
+            //       name: 'checkImage',
+            //       data: {
+            //         contentType: `image/${type}`,
+            //         fileID: res.fileID
+            //       },
+            //       success(res) {
+            //         console.log('res from cloud', res)
+            //       },
+            //       fail: console.error
+            //     })
+            //   },
+            //   fail: console.error
+            // })
+            console.log('image from chooseImage', res)
+            const image = await loadImage(path, this.canvas)
+            // const queryCompress = this.createSelectorQuery()
+            compress.call(this, image, 'canvas_compress')
+            const cWidth = this.canvas.width / this.dpr
+            const cHeight = this.canvas.height / this.dpr
+            const data = {
+              type: 'background',
+              data: image,
+              left: 0,
+              top: 0,
+              width: 0,
+              height: 0,
+              scale: 1,
+              rotate: 0
+            }
+            if (image.height > image.width) {
+              // 图片高大于宽
+              const rate = image.height / cHeight
+              data.width = image.width / rate
+              data.height = cHeight
+              data.left = (cWidth - data.width) / 2
+              data.top = 0
+            } else {
+              // 图片宽大于高
+              const rate = image.width / cWidth
+              data.height = image.height / rate
+              data.width = cWidth
+              data.left = 0
+              data.top = (cHeight - data.height) / 2
+            }
+            const index = this.elements.findIndex(e => e.type === 'background')
+            if (index > -1) {
+              this.elements.splice(index, 1, data)
+            } else {
+              this.elements.unshift(data)
+            }
+          }
+        }
+      })
+    }
+  },
+  ready() {
+    // this.initCanvas()
+  }
+})
+</script>
+
+<style lang="stylus">
+@import url('../assets/iconfont/iconfont.css')
+
+.menu-background
+  display flex
+  justify-content center
+  align-items center
+  height 100%
+  position relative
+  padding 20rpx
+  .item
+    color #666
+    font-size 28rpx
+    margin 10rpx
+  .replace
+    display flex
+    flex-direction column
+    align-items center
+    color #999
+    i
+      font-size 80rpx
+    text.title
+      font-size 24rpx
+      font-weight bold
+    text.sub-title
+      margin-top 20rpx
+      font-size 20rpx
+  .canvas-compress
+    position fixed
+    background red
+    left 0
+    top 0
+    z-index 0
+</style>
+
+<script type="application/json">
+  {
+    "component": true
+  }
+</script>

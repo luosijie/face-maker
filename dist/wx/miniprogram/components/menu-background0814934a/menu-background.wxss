@@ -1,0 +1,39 @@
+@import "../../styles/iconfontdd1d0aae.wxss";
+
+.menu-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  padding: 20rpx;
+}
+.menu-background .item {
+  color: #666;
+  font-size: 28rpx;
+  margin: 10rpx;
+}
+.menu-background .replace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+}
+.menu-background .replace i {
+  font-size: 80rpx;
+}
+.menu-background .replace text.title {
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.menu-background .replace text.sub-title {
+  margin-top: 20rpx;
+  font-size: 20rpx;
+}
+.menu-background .canvas-compress {
+  position: fixed;
+  background: #f00;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}

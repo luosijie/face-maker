@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "Face",
+  "usingComponents": {
+    "playboard": "/components/playboard6b19df31/playboard",
+    "menu-background": "/components/menu-background0814934a/menu-background",
+    "menu-text": "/components/menu-text5c1ef35a/menu-text",
+    "menu-sticker": "/components/menu-sticker2f35d644/menu-sticker"
+  },
+  "disableScroll": true
+}

@@ -1,0 +1,471 @@
+<template>
+  <view class="playboard">
+    <canvas
+      type="2d"
+      id="canvas"
+      class="canvas"
+      bindtouchstart="touchstart"
+      bindtouchmove="touchmove"
+      bindtouchend="touchend"
+    />
+  </view>
+</template>
+
+<script>
+import { createComponent } from '@mpxjs/core'
+import store from '../store'
+import loadImage from '../utils/loadImage'
+const ACTION_TYEP = {
+  MOVE: 'MOVE',     // 移动
+  SCALE: 'SCALE',   // 缩放
+  ROTATE: 'ROTATE', // 旋转
+  DELETE: 'DELETE', // 旋转
+  NULL: 'NULL'      // 空闲
+}
+
+createComponent({
+  data: {
+    startTouches: [],
+    startSelected: null,
+    actionType: '',
+    image: {
+      move: null,
+      scale: null,
+      delete: null,
+      rotate: null
+    }
+  },
+  computed: {
+    mode() {
+      return store.state.mode
+    },
+    canvas() {
+      return store.state.canvas
+    },
+    ctx() {
+      return store.state.ctx
+    },
+    elements() {
+      return store.state.elements
+    },
+    activeIndex() {
+      return store.state.activeIndex
+    },
+    dpr() {
+      return wx.getSystemInfoSync().pixelRatio
+    }
+  },
+  watch: {
+    elements() {
+      console.log('canvas elements change', this.elements)
+      this.renderCanvas()
+    },
+    mode() {
+      this.renderCanvas()
+    },
+    activeIndex() {
+      this.renderCanvas()
+    }
+  },
+  methods: {
+    /**
+     * 绘制图片
+     * @param { Object } ele canvas元素
+     */
+    drawImage(ele) {
+      this.ctx.save()
+      const width = ele.width
+      const height = ele.height
+      const centerX = ele.left + ele.width / 2
+      const centerY = ele.top + ele.height / 2
+      this.ctx.translate(centerX, centerY)
+      this.ctx.rotate(ele.rotate)
+      this.ctx.drawImage(ele.data, ele.left - centerX, ele.top - centerY, width, height)
+      this.ctx.restore()
+    },
+    /**
+     * 绘制文字
+     * @param { Object } ele canvas元素
+     */
+    drawText(ele) {
+      this.ctx.save()
+      const width = ele.size * ele.data.length
+      const height = ele.size
+      const centerX = ele.left + width / 2
+      const centerY = ele.top + height / 2
+      this.ctx.translate(centerX, centerY)
+      this.ctx.rotate(ele.rotate)
+      this.ctx.font = `${ele.size}px bold sans-serif`
+      this.ctx.globalAlpha = ele.opacity
+      this.ctx.fillStyle = ele.fillStyle
+      this.ctx.strokeStyle = ele.strokeStyle
+      // this.ctx.lineWidth = 2
+      this.ctx.textBaseline = 'top'
+      console.log('draw-text', ele)
+      this.ctx.fillText(ele.data, ele.left - centerX, ele.top - centerY)
+      this.ctx.strokeText(ele.data, ele.left - centerX, ele.top - centerY)
+      this.ctx.restore()
+    },
+    // 画布渲染函数
+    renderCanvas() {
+      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+      this.drawGrid()
+      console.log('draw-background', this.background)
+      if (this.background) this.drawImage(this.background)
+      for (let i = 0; i < this.elements.length; i++) {
+        const ele = this.elements[i]
+        // 渲染背景
+        if (ele.type === 'background') {
+          this.drawImage(ele)
+        }
+        if (ele.type === 'sticker') {
+          this.drawImage(ele)
+        }
+        // 渲染文字
+        if (ele.type === 'text') {
+          this.drawText(ele)
+        }
+        // 选中元素添加控制元件
+        if (this.activeIndex === i) {
+          this.initController(ele)
+        }
+      }
+    },
+    /**
+     * 检测鼠标是否与物体发生碰撞
+     * @param { Number } x 鼠标坐标X
+     * @param { Number } y 鼠标坐标Y
+     * @param { Object } y canvas元素
+     * @return { Boolean } 是否发生碰撞
+     */
+    isCollided(x, y, ele) {
+      const controllerSize = this.convert2ControllerSize(ele)
+      const unrotatedSize = this.convert2unrotatedSize(
+        x,
+        y,
+        controllerSize.centerX,
+        controllerSize.centerY,
+        ele.rotate
+      )
+      return unrotatedSize.left > controllerSize.left &&
+        unrotatedSize.top > controllerSize.top &&
+        unrotatedSize.left < controllerSize.left + controllerSize.width &&
+        unrotatedSize.top < controllerSize.top + controllerSize.height
+        ? unrotatedSize
+        : null
+    },
+    /**
+     * 将canvas尺寸转为控制点的尺寸
+     * @param { Object } ele canvas元素
+     * @return { Object } 坐标集合
+     */
+    convert2ControllerSize(ele) {
+      let left, top, width, height, centerX, centerY, rotate
+      if (ele.type === 'text') {
+        left = ele.left - 5
+        top = ele.top - 5
+        width = ele.size * ele.data.length + 10
+        height = ele.size + 10
+      } else {
+        left = ele.left
+        top = ele.top
+        width = ele.width
+        height = ele.height
+      }
+      rotate = ele.rotate
+      centerX = left + width / 2
+      centerY = top + height / 2
+      return { left, top, width, height, rotate, centerX, centerY }
+    },
+    touchstart(e) {
+      if (!this.elements.length) return
+      this.actionType = ACTION_TYEP.NULL
+      this.startTouches = e.touches
+      let collidedEle = this.elements[0]
+      let collided
+      for (let i = this.elements.length - 1; i > 0; i--) {
+        const selected = this.elements[i]
+        // 检测鼠标是否与canvas元素发生碰撞
+        collided = this.isCollided(e.touches[0].x, e.touches[0].y, selected)
+        if (collided) {
+          console.log('碰撞成功', collidedEle)
+          collidedEle = selected
+          store.commit('setActiveIndex', i)
+          store.commit('setMode', collidedEle.type)
+          break
+        }
+      }
+      const controllerSize = this.convert2ControllerSize(collidedEle)
+      this.startSelected = {
+        ...collidedEle,
+        centerX: controllerSize.centerX,
+        centerY: controllerSize.centerY
+      }
+      if (!collided) {
+        if (e.touches.length === 1) {
+          console.log('单指触发')
+          this.actionType = ACTION_TYEP.MOVE
+        } else if (e.touches.length === 2) {
+          console.log('双指触发')
+          this.actionType = ACTION_TYEP.SCALE
+        }
+        store.commit('setActiveIndex', null)
+        this.renderCanvas()
+        return
+      }
+      // TODO：功能未完善
+      // if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
+      //   console.log('移动模式')
+      //   this.actionType = ACTION_TYEP.MOVE
+      // } else if (Math.sqrt((collided.left - controllerSize.left) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
+      //   console.log('缩放模式')
+      //   this.actionType = ACTION_TYEP.SCALE
+      // } else if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top) ** 2) < 20) {
+      //   console.log('删除模式')
+      //   this.actionType = ACTION_TYEP.DELETE
+      //   this.handleDelete()
+      // } else
+      if (Math.sqrt((collided.left - controllerSize.left - controllerSize.width) ** 2 + (collided.top - controllerSize.top - controllerSize.height) ** 2) < 20) {
+        console.log('旋转模式')
+        this.actionType = ACTION_TYEP.ROTATE
+      } else if (e.touches.length === 1) {
+        console.log('单指触发')
+        this.actionType = ACTION_TYEP.MOVE
+      } else if (e.touches.length === 2) {
+        console.log('双指触发')
+        this.actionType = ACTION_TYEP.SCALE
+      }
+      this.renderCanvas()
+    },
+    touchmove(e) {
+      console.log(this.actionType)
+      if (this.activeIndex === null && this.mode !== 'background') return
+      if (this.actionType === ACTION_TYEP.ROTATE) this.handleRotate(e)
+      if (this.actionType === ACTION_TYEP.MOVE) this.handleMove(e)
+      if (this.actionType === ACTION_TYEP.SCALE) this.handleScale(e)
+    },
+    touchend(e) {
+      this.actionType = ACTION_TYEP.NULL
+      console.log('touch-end', e)
+    },
+    // 移动事件绑定函数
+    handleMove(e) {
+      console.log('mouse-move', e)
+      if (e.touches.length > 1) return
+      const x = e.touches[0].x
+      const y = e.touches[0].y
+      const dx = this.startTouches[0].x - x
+      const dy = this.startTouches[0].y - y
+      const elements = this.elements.slice()
+      elements[this.activeIndex || 0].left = this.startSelected.left - dx
+      elements[this.activeIndex || 0].top = this.startSelected.top - dy
+      store.commit('setElements', elements)
+    },
+    // 缩放事件绑定函数
+    handleScale(e) {
+      if (e.touches.length !== 2 || this.mode !== 'background') return
+      const startLength = Math.sqrt(
+        (this.startTouches[0].x - this.startTouches[1].x) ** 2 +
+          (this.startTouches[0].y - this.startTouches[1].y) ** 2
+      )
+      const endLength = Math.sqrt(
+        (e.touches[0].x - e.touches[1].x) ** 2 + (e.touches[0].y - e.touches[1].y) ** 2
+      )
+      const scale = endLength / startLength
+      const elements = this.elements.slice()
+      const selected = elements[this.activeIndex || 0]
+      selected.left = this.startSelected.centerX - this.startSelected.width * scale / 2
+      selected.top = this.startSelected.centerY - this.startSelected.height * scale / 2
+      selected.width = this.startSelected.width * scale
+      selected.height = this.startSelected.height * scale
+      // elements[this.activeIndex || 0].scale = this.startSelected.scale * scale
+      store.commit('setElements', elements)
+    },
+    // 旋转绑定函数
+    handleRotate(e) {
+      console.log('handleRotate')
+      const start = this.startTouches[0]
+      const end = e.touches[0]
+      const center = {
+        x: this.startSelected.centerX,
+        y: this.startSelected.centerY
+      }
+      const startLength = Math.sqrt((center.x - start.x) ** 2 + (center.y - start.y) ** 2)
+      const endLength = Math.sqrt((center.x - end.x) ** 2 + (center.y - end.y) ** 2)
+      const radian = this.convert2Radian(start, end, center)
+      const scale = endLength / startLength
+      const elements = this.elements.slice()
+      const selected = elements[this.activeIndex]
+      // 旋转
+      selected.rotate = this.startSelected.rotate - radian
+      // 缩放
+      if (selected.type === 'text') {
+        selected.left = this.startSelected.centerX - this.startSelected.size * this.startSelected.data.length * scale / 2
+        selected.top = this.startSelected.centerY - this.startSelected.size * scale / 2
+        selected.size = this.startSelected.size * scale
+      }
+      if (selected.type === 'sticker') {
+        selected.left = this.startSelected.centerX - this.startSelected.width * scale / 2
+        selected.top = this.startSelected.centerY - this.startSelected.height * scale / 2
+        selected.width = this.startSelected.width * scale
+        selected.height = this.startSelected.height * scale
+      }
+      store.commit('setElements', elements)
+    },
+    // 删除绑定函数
+    handleDelete() {
+      wx.showModal({
+        title: '提示',
+        content: '确认删除元素吗',
+        success(res) {
+          if (res.confirm) {
+            store.commit('deleteActiveELement')
+          }
+        }
+      })
+    },
+    initSelectStatus() {
+      //
+    },
+    /**
+     * 将坐标转化为旋转前的坐标
+     * 用于碰撞检测
+     * @param { Number } x
+     * @param { Number } y
+     * @param { Number } ox 原点坐标x
+     * @param { Number } oy 原点坐标y
+     * @param { Number } r 旋转弧度
+     * @return { Object } {left, top} 旋转前的坐标
+     */
+    convert2unrotatedSize(x, y, ox, oy, r) {
+      x = x - ox
+      y = y - oy
+      return {
+        left: x * Math.cos(-r) - y * Math.sin(-r) + ox,
+        top: x * Math.sin(-r) + y * Math.cos(-r) + oy
+      }
+    },
+    // 初始化画布
+    async initCanvas() {
+      const query = this.createSelectorQuery()
+      query
+        .select('#canvas')
+        .fields({ node: true, size: true })
+        .exec(async res => {
+          const canvas = res[0].node
+          const ctx = canvas.getContext('2d')
+          store.commit('setCanvas', canvas)
+          store.commit('setCtx', ctx)
+
+          // TODO：功能未完善
+          // await loadImage('/images/icon-move.png', this.canvas).then(res => {
+          //   console.log('this', this)
+          //   this.image.move = res
+          // })
+          // await loadImage('/images/icon-scale.png', this.canvas).then(res => {
+          //   this.image.scale = res
+          // })
+          // await loadImage('/images/icon-delete.png', this.canvas).then(res => {
+          //   this.image.delete = res
+          // })
+          const imageRotate = await loadImage('/images/icon-rotate.png', this.canvas)
+          this.image.rotate = imageRotate
+
+          this.canvas.width = res[0].width * this.dpr
+          this.canvas.height = res[0].height * this.dpr
+          this.ctx.scale(this.dpr, this.dpr)
+          this.drawGrid()
+        })
+    },
+    /**
+     * 已知2点坐标，求旋转弧度
+     * @param { Object } s 开始坐标
+     * @param { Object } e 结束坐标
+     * @param { Object } c 原点坐标
+     * @return { Number } 旋转弧度
+     */
+    convert2Radian(s, e, c) {
+      const sx = s.x - c.x
+      const sy = s.y - c.y
+      const ex = e.x - c.x
+      const ey = e.y - c.y
+      const rs = Math.atan2(sy, sx)
+      const re = Math.atan2(ey, ex)
+      return rs - re
+    },
+    initController(ele) {
+      const cs = this.convert2ControllerSize(ele)
+      this.ctx.save()
+      this.ctx.strokeStyle = '#eee'
+      this.ctx.translate(cs.centerX, cs.centerY)
+      this.ctx.rotate(cs.rotate)
+      // this.ctx.scale(activeElement.scale, activeElement.scale)
+      this.ctx.setLineDash([10, 5], 5)
+      this.ctx.strokeRect(cs.left - cs.centerX, cs.top - cs.centerY, cs.width, cs.height)
+      // 绘制控制点-旋转
+      this.ctx.drawImage(this.image.rotate, cs.left + cs.width - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20)
+      // TODO：功能未完善
+      // // 绘制控制点-移动
+      // this.ctx.drawImage(this.image.move, cs.left - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20)
+      // // 绘制控制点-缩放
+      // this.ctx.drawImage(this.image.scale, cs.left - 10 - cs.centerX, cs.top + cs.height - 10 - cs.centerY, 20, 20)
+      // // 绘制控制点-删除
+      // this.ctx.drawImage(this.image.delete, cs.left + cs.width - 10 - cs.centerX, cs.top - 10 - cs.centerY, 20, 20)
+      this.ctx.restore()
+    },
+    // 绘制网格做地图
+    drawGrid() {
+      this.ctx.save()
+      const lineNums = 3
+      const cWidth = this.ctx.canvas.width / this.dpr
+      // const cHeight = this.ctx.canvas.height
+      const lineGap = cWidth / lineNums
+      this.ctx.strokeStyle = '#ccc'
+      this.ctx.setLineDash([5, 5])
+      // 绘制x轴
+      for (let i = 0; i <= lineNums; i++) {
+        this.ctx.beginPath()
+        this.ctx.moveTo(0, lineGap * i)
+        this.ctx.lineTo(cWidth, lineGap * i)
+        this.ctx.stroke()
+      }
+      // 绘制y轴
+      for (let i = 0; i <= lineNums; i++) {
+        this.ctx.beginPath()
+        this.ctx.moveTo(lineGap * i, 0)
+        this.ctx.lineTo(lineGap * i, cWidth)
+        this.ctx.stroke()
+      }
+      this.ctx.restore()
+    }
+  },
+  async ready() {
+    await this.initCanvas()
+  }
+})
+</script>
+
+<style lang="stylus">
+.playboard
+  position relative
+  width 100vw
+  height 100vw
+  background #f8f8f8
+.canvas
+  width 100vw
+  height 100vw
+.icon-add
+  position absolute
+  width 160rpx
+  height 160rpx
+  left 50%
+  top 50%
+  margin-top -80rpx
+  margin-left -80rpx
+</style>
+
+<script type="application/json">
+  {
+    "component": true
+  }
+</script>

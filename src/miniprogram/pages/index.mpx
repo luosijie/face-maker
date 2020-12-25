@@ -1,0 +1,203 @@
+<template>
+  <view class="main">
+    <playboard />
+    <view class="action">
+      <view class="nav">
+        <!-- 清除画布 -->
+        <view class="clear" bindtap="clear">
+          <text class="iconfont icon-clear"></text>
+        </view>
+
+        <!-- 删除选中元素 -->
+        <view class="clear" bindtap="delete" wx:if="{{ activeIndex }}">
+          <text class="iconfont icon-delete"></text>
+        </view>
+
+        <view class="export" wx:if="{{ activeIndex }}" bindtap="confirm">
+          <text class="iconfont icon-confirm"></text>
+        </view>
+        <!-- 导出 -->
+        <view class="export" wx:else bindtap="export">
+          <text class="iconfont icon-download"></text>
+        </view>
+      </view>
+      <view class="content">
+        <menu-text wx:if="{{ mode === 'text' }}" />
+        <menu-background wx:if="{{ mode === 'background' }}" />
+        <menu-sticker wx:if="{{ mode === 'sticker' }}" />
+      </view>
+      <view class="menu">
+        <view
+          bindtap="switchMenu(item.code)"
+          class="menu-item"
+          wx:class="{{ { active: item.code === mode } }}"
+          wx:for="{{menuData}}"
+          wx:key="code"
+        >{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import { createPage } from '@mpxjs/core'
+import store from '../store'
+
+createPage({
+  data: {
+    menuData: [
+      { name: '背景', code: 'background' },
+      { name: '文字', code: 'text' },
+      { name: '贴图', code: 'sticker' }
+    ]
+  },
+  computed: {
+    mode() {
+      return store.state.mode
+    },
+    activeIndex() {
+      return store.state.activeIndex
+    }
+  },
+  methods: {
+    delete() {
+      wx.showModal({
+        title: '提示',
+        content: '确认删除元素吗',
+        success(res) {
+          if (res.confirm) {
+            store.commit('deleteActiveELement')
+          }
+        }
+      })
+    },
+    confirm() {
+      store.commit('setActiveIndex', null)
+    },
+    clear() {
+      if (!store.state.elements.length) return
+      wx.showModal({
+        title: '提示',
+        content: '确定要清空画布吗',
+        success(res) {
+          if (res.confirm) {
+            store.commit('clear')
+          }
+        }
+      })
+    },
+    switchMenu(e) {
+      store.commit('setActiveIndex', null)
+      store.commit('setMode', e)
+    },
+    export() {
+      if (!store.state.elements.length) {
+        wx.showToast({
+          title: '加点东西再导出吧',
+          icon: 'none'
+        })
+        return
+      }
+      wx.showModal({
+        title: '提示',
+        content: '图片将保存到手机相册',
+        success(res) {
+          if (res.confirm) {
+            console.log('export-canvas', store.state.ctx)
+            const canvas = store.state.canvas
+            wx.canvasToTempFilePath({
+              x: 0,
+              y: 0,
+              width: canvas.width,
+              height: canvas.height,
+              canvas,
+              complete(res) {
+                if (res.errMsg === 'canvasToTempFilePath:ok') {
+                  wx.saveImageToPhotosAlbum({
+                    filePath: res.tempFilePath,
+                    success(res) {
+                      wx.showToast({
+                        title: '图片保存成功',
+                        icon: 'none'
+                      })
+                    }
+                  })
+                }
+              }
+            })
+          }
+        }
+      })
+    }
+  },
+  onLoad() {
+    console.log('app is ready')
+    wx.cloud.init()
+  },
+  onShareAppMessage() {}
+})
+</script>
+
+<style lang="stylus">
+.main
+  height 100vh
+  width 100vw
+  position fixed
+  top 0
+  left 0
+
+.playboard
+  width 100vw
+  height 100vw
+  background #f8f8f8
+.action
+  width 100vw
+  height calc(100% - 100vw)
+  background white
+  position relative
+.nav
+  box-sizing border-box
+  padding 10rpx 10rpx 0 10rpx
+  display flex
+  justify-content space-between
+  .clear
+    text
+      font-size 28rpx
+      padding 0 20rpx
+      color #aaa
+      font-weight bold
+  .export
+    font-size 28rpx
+    color #aaa
+.content
+  height calc(100% - 160rpx)
+  padding 10rpx
+  position relative
+  overflow hidden
+.menu
+  display flex
+  justify-content space-around
+  border-top 1rpx solid #eee
+  line-height 100rpx
+  background white
+  .menu-item
+    color #666
+  .active
+    color #333
+    font-weight bold
+</style>
+
+<script type="application/json">
+  {
+    "navigationBarTitleText": "Face",
+    "usingComponents": {
+      "playboard": "../components/playboard",
+      "menu-background": "../components/menu-background",
+      "menu-text": "../components/menu-text",
+      "menu-sticker": "../components/menu-sticker"
+    },
+    "disableScroll" : true
+  }
+</script>
+
+
