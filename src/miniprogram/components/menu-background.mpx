@@ -19,12 +19,13 @@ import { createComponent } from '@mpxjs/core'
 import store from '../store'
 import loadImage from '../utils/loadImage'
 import compress from '../utils/compress'
+import checkImage from '../utils/checkImage'
 
 createComponent({
   data: {
     canvasCompress: {
       width: 0,
-      height: 0,
+      height: 0
     }
   },
   computed: {
@@ -49,42 +50,15 @@ createComponent({
         sourceType: ['album', 'camera'],
         success: async res => {
           if (res.errMsg === 'chooseImage:ok') {
+            wx.showLoading({ title: '图片加载中' })
             const path = res.tempFilePaths[0]
-            console.log('image from chooseImage', res)
             const image = await loadImage(path, this.canvas)
             const filePath = await compress.call(this, image, 'canvas_compress')
-            console.log('filesssss', filePath)
-            // wx.cloud.callFunction({
-            //   name: 'checkImage',
-            //   data: {
-            //     media: {
-            //       contentType: 'image/png',
-            //       value: file.data
-            //     }
-            //   },
-            //   success(res) {
-            //     console.log('res from cloud', res)
-            //   },
-            //   fail: console.error
-            // })
-            // const type = path.match(/[^.]*$/)[0]
-            wx.cloud.uploadFile({
-              cloudPath: `${new Date().getTime()}.png`,
-              filePath: filePath,
-              success(res) {
-                wx.cloud.callFunction({
-                  name: 'checkImage',
-                  data: {
-                    fileID: res.fileID
-                  },
-                  success(res) {
-                    console.log('res from cloud', res)
-                  },
-                  fail: console.error
-                })
-              },
-              fail: console.error
-            })
+            const imgValid = await checkImage(filePath)
+            wx.hideLoading()
+            if (!imgValid) return
+            // 图片安全检测通过
+            // 执行下步操作
             const cWidth = this.canvas.width / this.dpr
             const cHeight = this.canvas.height / this.dpr
             const data = {
@@ -113,11 +87,11 @@ createComponent({
               data.top = (cHeight - data.height) / 2
             }
             const index = this.elements.findIndex(e => e.type === 'background')
-            // if (index > -1) {
-            //   this.elements.splice(index, 1, data)
-            // } else {
-            //   this.elements.unshift(data)
-            // }
+            if (index > -1) {
+              this.elements.splice(index, 1, data)
+            } else {
+              this.elements.unshift(data)
+            }
           }
         }
       })
@@ -157,11 +131,10 @@ createComponent({
       margin-top 20rpx
       font-size 20rpx
   .canvas-compress
-    position fixed
-    background red
+    position absolute
     left 0
-    top 0
-    z-index 0
+    top 1000px
+    z-index -999
 </style>
 
 <script type="application/json">

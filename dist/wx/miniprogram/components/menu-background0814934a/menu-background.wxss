@@ -31,9 +31,8 @@
   font-size: 20rpx;
 }
 .menu-background .canvas-compress {
-  position: fixed;
-  background: #f00;
+  position: absolute;
   left: 0;
-  top: 0;
-  z-index: 0;
+  top: 1000px;
+  z-index: -999;
 }

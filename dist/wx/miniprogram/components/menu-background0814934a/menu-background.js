@@ -48,14 +48,17 @@ __webpack_require__(474)
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(451);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(466);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(453);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(445);
-/* harmony import */ var _utils_loadImage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(460);
-/* harmony import */ var _utils_compress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(471);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(251);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(466);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(453);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(445);
+/* harmony import */ var _utils_loadImage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(460);
+/* harmony import */ var _utils_compress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(471);
+/* harmony import */ var _utils_checkImage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(491);
 
 
 
@@ -63,7 +66,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_3__["createComponent"])({
+
+
+Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
   data: {
     canvasCompress: {
       width: 0,
@@ -72,15 +77,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_3__["createComponent"])({
   },
   computed: {
     canvas() {
-      return _store__WEBPACK_IMPORTED_MODULE_4__["default"].state.canvas;
+      return _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.canvas;
     },
 
     ctx() {
-      return _store__WEBPACK_IMPORTED_MODULE_4__["default"].state.ctx;
+      return _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.ctx;
     },
 
     elements() {
-      return _store__WEBPACK_IMPORTED_MODULE_4__["default"].state.elements;
+      return _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
     },
 
     dpr() {
@@ -97,66 +102,49 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_3__["createComponent"])({
         sizeType: ['original', 'compressed'],
         sourceType: ['album', 'camera'],
         success: function () {
-          var _success = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
-            var _context, path, image, filePath, cWidth, cHeight, data, rate, _rate, index;
+          var _success = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
+            var _context, path, image, filePath, imgValid, cWidth, cHeight, data, rate, _rate, index, _context2;
 
-            return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context2) {
+            return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context3) {
               while (1) {
-                switch (_context2.prev = _context2.next) {
+                switch (_context3.prev = _context3.next) {
                   case 0:
                     if (!(res.errMsg === 'chooseImage:ok')) {
-                      _context2.next = 16;
+                      _context3.next = 21;
                       break;
                     }
 
+                    wx.showLoading({
+                      title: '图片加载中'
+                    });
                     path = res.tempFilePaths[0];
-                    console.log('image from chooseImage', res);
-                    _context2.next = 5;
-                    return Object(_utils_loadImage__WEBPACK_IMPORTED_MODULE_5__["default"])(path, _this.canvas);
+                    _context3.next = 5;
+                    return Object(_utils_loadImage__WEBPACK_IMPORTED_MODULE_6__["default"])(path, _this.canvas);
 
                   case 5:
-                    image = _context2.sent;
-                    _context2.next = 8;
-                    return _utils_compress__WEBPACK_IMPORTED_MODULE_6__["default"].call(_this, image, 'canvas_compress');
+                    image = _context3.sent;
+                    _context3.next = 8;
+                    return _utils_compress__WEBPACK_IMPORTED_MODULE_7__["default"].call(_this, image, 'canvas_compress');
 
                   case 8:
-                    filePath = _context2.sent;
-                    console.log('filesssss', filePath); // wx.cloud.callFunction({
-                    //   name: 'checkImage',
-                    //   data: {
-                    //     media: {
-                    //       contentType: 'image/png',
-                    //       value: file.data
-                    //     }
-                    //   },
-                    //   success(res) {
-                    //     console.log('res from cloud', res)
-                    //   },
-                    //   fail: console.error
-                    // })
-                    // const type = path.match(/[^.]*$/)[0]
+                    filePath = _context3.sent;
+                    _context3.next = 11;
+                    return Object(_utils_checkImage__WEBPACK_IMPORTED_MODULE_8__["default"])(filePath);
 
-                    wx.cloud.uploadFile({
-                      cloudPath: "".concat(new Date().getTime(), ".png"),
-                      filePath: filePath,
+                  case 11:
+                    imgValid = _context3.sent;
+                    wx.hideLoading();
 
-                      success(res) {
-                        wx.cloud.callFunction({
-                          name: 'checkImage',
-                          data: {
-                            fileID: res.fileID
-                          },
+                    if (imgValid) {
+                      _context3.next = 15;
+                      break;
+                    }
 
-                          success(res) {
-                            console.log('res from cloud', res);
-                          },
+                    return _context3.abrupt("return");
 
-                          fail: console.error
-                        });
-                      },
-
-                      fail: console.error
-                    });
+                  case 15:
+                    // 图片安全检测通过
+                    // 执行下步操作
                     cWidth = _this.canvas.width / _this.dpr;
                     cHeight = _this.canvas.height / _this.dpr;
                     data = {
@@ -186,17 +174,19 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_3__["createComponent"])({
                       data.top = (cHeight - data.height) / 2;
                     }
 
-                    index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(_context = _this.elements).call(_context, function (e) {
+                    index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2___default()(_context = _this.elements).call(_context, function (e) {
                       return e.type === 'background';
-                    }); // if (index > -1) {
-                    //   this.elements.splice(index, 1, data)
-                    // } else {
-                    //   this.elements.unshift(data)
-                    // }
+                    });
 
-                  case 16:
+                    if (index > -1) {
+                      _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1___default()(_context2 = _this.elements).call(_context2, index, 1, data);
+                    } else {
+                      _this.elements.unshift(data);
+                    }
+
+                  case 21:
                   case "end":
-                    return _context2.stop();
+                    return _context3.stop();
                 }
               }
             }, _callee);
@@ -404,7 +394,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 472:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 
@@ -418,9 +408,58 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 474:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
+
+/***/ }),
+
+/***/ 491:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(274);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (function (filePath) {
+  return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (resolve, reject) {
+    wx.cloud.uploadFile({
+      cloudPath: "".concat(new Date().getTime(), ".png"),
+      filePath,
+
+      success(res) {
+        wx.cloud.callFunction({
+          name: 'checkImage',
+          data: {
+            fileID: res.fileID
+          },
+
+          success(res) {
+            resolve(res.result);
+
+            if (!res.result) {
+              wx.showToast({
+                title: '图片可能含有敏感信息, 请重新选择',
+                icon: 'none'
+              });
+            }
+          },
+
+          fail(err) {
+            reject(err);
+          }
+
+        });
+      },
+
+      fail(err) {
+        reject(err);
+      }
+
+    });
+  });
+});
 
 /***/ })
 
