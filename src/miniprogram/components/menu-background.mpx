@@ -5,7 +5,12 @@
       <text class="title">图片</text>
       <text class="sub-title">图片仅供本地使用</text>
     </view>
-    <canvas type="2d" id="canvas_compress" class="canvas-compress" />
+    <canvas
+      type="2d"
+      id="canvas_compress"
+      class="canvas-compress"
+      style="width: {{canvasCompress.width}}px; height: {{canvasCompress.height}}px"
+    />
   </view>
 </template>
 
@@ -16,7 +21,12 @@ import loadImage from '../utils/loadImage'
 import compress from '../utils/compress'
 
 createComponent({
-  data: {},
+  data: {
+    canvasCompress: {
+      width: 0,
+      height: 0,
+    }
+  },
   computed: {
     canvas() {
       return store.state.canvas
@@ -91,11 +101,11 @@ createComponent({
               data.top = (cHeight - data.height) / 2
             }
             const index = this.elements.findIndex(e => e.type === 'background')
-            if (index > -1) {
-              this.elements.splice(index, 1, data)
-            } else {
-              this.elements.unshift(data)
-            }
+            // if (index > -1) {
+            //   this.elements.splice(index, 1, data)
+            // } else {
+            //   this.elements.unshift(data)
+            // }
           }
         }
       })

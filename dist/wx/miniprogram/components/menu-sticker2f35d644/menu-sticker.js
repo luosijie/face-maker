@@ -120,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 488:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
@@ -134,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 490:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 

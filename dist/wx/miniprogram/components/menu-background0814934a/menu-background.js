@@ -18,6 +18,7 @@ global.currentSrcMode = "wx"
   moduleId: "m6182d117",
   render: function () {
     this._c("mpxShow", this.mpxShow) || this._c("mpxShow", this.mpxShow) === undefined ? '' : 'display:none;';
+    "width: " + this._c("canvasCompress.width", this.canvasCompress.width) + "px; height: " + this._c("canvasCompress.height", this.canvasCompress.height) + "px";
     this._r();
   }
 };
@@ -47,16 +48,14 @@ __webpack_require__(474)
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(451);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(251);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(466);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(453);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(445);
-/* harmony import */ var _utils_loadImage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(460);
-/* harmony import */ var _utils_compress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(471);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(466);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(453);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(445);
+/* harmony import */ var _utils_loadImage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(460);
+/* harmony import */ var _utils_compress__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(471);
 
 
 
@@ -64,20 +63,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
-  data: {},
+Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_3__["createComponent"])({
+  data: {
+    canvasCompress: {
+      width: 0,
+      height: 0
+    }
+  },
   computed: {
     canvas() {
-      return _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.canvas;
+      return _store__WEBPACK_IMPORTED_MODULE_4__["default"].state.canvas;
     },
 
     ctx() {
-      return _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.ctx;
+      return _store__WEBPACK_IMPORTED_MODULE_4__["default"].state.ctx;
     },
 
     elements() {
-      return _store__WEBPACK_IMPORTED_MODULE_5__["default"].state.elements;
+      return _store__WEBPACK_IMPORTED_MODULE_4__["default"].state.elements;
     },
 
     dpr() {
@@ -94,15 +97,15 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
         sizeType: ['original', 'compressed'],
         sourceType: ['album', 'camera'],
         success: function () {
-          var _success = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
-            var _context, path, image, cWidth, cHeight, data, rate, _rate, index, _context2;
+          var _success = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
+            var _context, path, image, cWidth, cHeight, data, rate, _rate, index;
 
-            return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context3) {
+            return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context2) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context2.prev = _context2.next) {
                   case 0:
                     if (!(res.errMsg === 'chooseImage:ok')) {
-                      _context3.next = 13;
+                      _context2.next = 12;
                       break;
                     }
 
@@ -127,13 +130,13 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
                     // })
 
                     console.log('image from chooseImage', res);
-                    _context3.next = 5;
-                    return Object(_utils_loadImage__WEBPACK_IMPORTED_MODULE_6__["default"])(path, _this.canvas);
+                    _context2.next = 5;
+                    return Object(_utils_loadImage__WEBPACK_IMPORTED_MODULE_5__["default"])(path, _this.canvas);
 
                   case 5:
-                    image = _context3.sent;
+                    image = _context2.sent;
                     // const queryCompress = this.createSelectorQuery()
-                    _utils_compress__WEBPACK_IMPORTED_MODULE_7__["default"].call(_this, image, 'canvas_compress');
+                    _utils_compress__WEBPACK_IMPORTED_MODULE_6__["default"].call(_this, image, 'canvas_compress');
                     cWidth = _this.canvas.width / _this.dpr;
                     cHeight = _this.canvas.height / _this.dpr;
                     data = {
@@ -163,19 +166,17 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
                       data.top = (cHeight - data.height) / 2;
                     }
 
-                    index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2___default()(_context = _this.elements).call(_context, function (e) {
+                    index = _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_1___default()(_context = _this.elements).call(_context, function (e) {
                       return e.type === 'background';
-                    });
+                    }); // if (index > -1) {
+                    //   this.elements.splice(index, 1, data)
+                    // } else {
+                    //   this.elements.unshift(data)
+                    // }
 
-                    if (index > -1) {
-                      _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1___default()(_context2 = _this.elements).call(_context2, index, 1, data);
-                    } else {
-                      _this.elements.unshift(data);
-                    }
-
-                  case 13:
+                  case 12:
                   case "end":
-                    return _context3.stop();
+                    return _context2.stop();
                 }
               }
             }, _callee);
@@ -292,7 +293,6 @@ __webpack_require__.r(__webpack_exports__);
   };
   var width = image.width;
   var height = image.height;
-  console.log('image in compressed', image, width, height);
 
   if (width > config.maxWidth) {
     var ratio = width / config.maxWidth;
@@ -307,6 +307,10 @@ __webpack_require__.r(__webpack_exports__);
     width = width / _ratio;
   }
 
+  console.log('image in compressed', image, width, height);
+  var dpr = wx.getSystemInfoSync().pixelRatio;
+  this.canvasCompress.width = width;
+  this.canvasCompress.height = height;
   var query = this.createSelectorQuery();
   query.select("#".concat(canvasId)).fields({
     node: true,
@@ -319,8 +323,12 @@ __webpack_require__.r(__webpack_exports__);
           switch (_context.prev = _context.next) {
             case 0:
               canvas = res[0].node;
-              ctx = canvas.getContext('2d');
-              ctx.drawImage(image, 0, 0, width, height);
+              ctx = canvas.getContext('2d'); // canvas.width = res[0].width * dpr
+              // canvas.height = res[0].height * dpr
+              // ctx.scale(dpr, dpr)
+              // console.log('canvas-width-height', res[0].width, res[0].height)
+
+              ctx.drawImage(image, 0, 0, width - 100, height - 100);
 
             case 3:
             case "end":
@@ -339,7 +347,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 472:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
@@ -353,7 +361,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 474:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
