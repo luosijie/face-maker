@@ -143,8 +143,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
                     return _context3.abrupt("return");
 
                   case 15:
-                    // 图片安全检测通过
-                    // 执行下步操作
+                    // 图片安全检测通过，执行图片插入操作
                     cWidth = _this.canvas.width / _this.dpr;
                     cHeight = _this.canvas.height / _this.dpr;
                     data = {
@@ -299,6 +298,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/**
+ * 压缩图片
+ * 将尺寸超过规范的图片最小限度压缩
+ * @param {Image} image 需要压缩的图片实例
+ * @param {String} canvasId 用来处理压缩图片的canvas对应的canvasId
+ * @param {Object} config 压缩的图片规范 -> { maxWidth 最大宽度, maxHeight 最小宽度 }
+ * @return {Promise} promise返回 压缩后的 图片路径
+ */
 /* harmony default export */ __webpack_exports__["default"] = (function (image, canvasId) {
   var _this2 = this;
 
@@ -307,26 +315,29 @@ __webpack_require__.r(__webpack_exports__);
     maxHeight: 1334
   };
 
+  // 引用的组件传入的this作用域
   var _this = this;
 
   return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_2___default.a(function (resolve, reject) {
+    // 获取图片原始宽高
     var width = image.width;
-    var height = image.height;
+    var height = image.height; // 宽度 > 最大限宽 -> 重置尺寸
 
     if (width > config.maxWidth) {
       var ratio = width / config.maxWidth;
       width = config.maxWidth;
       height = height / ratio;
-    }
+    } // 高度 > 最大限高度 -> 重置尺寸
+
 
     if (height > config.maxHeight) {
       var _ratio = height / config.maxHeight;
 
       height = config.maxHeight;
       width = width / _ratio;
-    }
+    } // 设置canvas的css宽高
 
-    var dpr = wx.getSystemInfoSync().pixelRatio;
+
     _this.canvasCompress.width = width;
     _this.canvasCompress.height = height;
 
@@ -337,18 +348,23 @@ __webpack_require__.r(__webpack_exports__);
       size: true
     }).exec( /*#__PURE__*/function () {
       var _ref = _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(res) {
-        var canvas, ctx;
+        var canvas, ctx, dpr;
         return _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                canvas = res[0].node;
-                ctx = canvas.getContext('2d');
+                // 获取 canvas 实例
+                canvas = res[0].node; // 获取 canvas 绘图上下文
+
+                ctx = canvas.getContext('2d'); // 根据设备dpr处理尺寸
+
+                dpr = wx.getSystemInfoSync().pixelRatio;
                 canvas.width = width * dpr;
                 canvas.height = height * dpr;
-                ctx.scale(dpr, dpr); // console.log('canvas-width-height', res[0].width, res[0].height)
+                ctx.scale(dpr, dpr); // 将图片绘制到 canvas
 
-                ctx.drawImage(image, 0, 0, width, height);
+                ctx.drawImage(image, 0, 0, width, height); // 将canvas图片上传到微信临时文件
+
                 wx.canvasToTempFilePath({
                   canvas,
                   x: 0,
@@ -358,15 +374,8 @@ __webpack_require__.r(__webpack_exports__);
 
                   complete(res) {
                     if (res.errMsg === 'canvasToTempFilePath:ok') {
-                      resolve(res.tempFilePath); // wx.getFileSystemManager().readFile({
-                      //   filePath: res.tempFilePath,
-                      //   success (file) {
-                      //     resolve(file)
-                      //   },
-                      //   fail (err) {
-                      //     reject(err)
-                      //   }
-                      // })
+                      // 返回临时文件路径
+                      resolve(res.tempFilePath);
                     }
                   },
 
@@ -376,7 +385,7 @@ __webpack_require__.r(__webpack_exports__);
 
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -394,7 +403,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 472:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
@@ -408,7 +417,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 474:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
@@ -422,13 +431,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(274);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0__);
 
+
+/**
+ * 校验图片是否存在敏感信息
+ * @param { String } filePath
+ * @return { Promise } promise返回校验结果
+ */
 /* harmony default export */ __webpack_exports__["default"] = (function (filePath) {
   return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (resolve, reject) {
+    // 先将图片上传到云开发存储
     wx.cloud.uploadFile({
       cloudPath: "".concat(new Date().getTime(), ".png"),
       filePath,
 
       success(res) {
+        // 调用云函数-checkImage
         wx.cloud.callFunction({
           name: 'checkImage',
           data: {
@@ -436,6 +453,7 @@ __webpack_require__.r(__webpack_exports__);
           },
 
           success(res) {
+            // res.result -> 0:存在敏感信息；1:校验通过
             resolve(res.result);
 
             if (!res.result) {

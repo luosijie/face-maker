@@ -16063,9 +16063,10 @@ __webpack_require__.r(__webpack_exports__);
  * 图片要放在 image 里才可以被 canvas 渲染
  * @param { String } src 本地文件路径
  * @param { Object } canvas canvas实例
- * @return { Promise } 返回 image 元素
+ * @return { Promise } promise返回 image 实例
  */
 /* harmony default export */ __webpack_exports__["default"] = (function (src, canvas) {
+  // 新建一个图片实例
   var image = canvas.createImage();
   image.src = src;
   return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (resolve, reject) {

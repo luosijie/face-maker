@@ -57,8 +57,7 @@ createComponent({
             const imgValid = await checkImage(filePath)
             wx.hideLoading()
             if (!imgValid) return
-            // 图片安全检测通过
-            // 执行下步操作
+            // 图片安全检测通过，执行图片插入操作
             const cWidth = this.canvas.width / this.dpr
             const cHeight = this.canvas.height / this.dpr
             const data = {
