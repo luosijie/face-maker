@@ -1,6 +1,6 @@
-# face-workshop
+# 小程序：表情工坊
 
-> A mpx project
+> 一个简单的小程序图片应用
 
 ## Dev
 
