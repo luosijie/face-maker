@@ -1,6 +1,9 @@
-# face-workshop
+# face-maker
 
-> A mpx project
+> 一个简单的小程序图片应用
+
+### 小程序名称
+表情工坊
 
 ## Dev
 
