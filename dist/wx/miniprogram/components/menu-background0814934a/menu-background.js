@@ -28,13 +28,13 @@ global.currentSrcMode = "wx"
 
 
 /* styles */
-__webpack_require__(472)
-
-/* json */
 __webpack_require__(473)
 
-/* template */
+/* json */
 __webpack_require__(474)
+
+/* template */
+__webpack_require__(475)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(445);
 /* harmony import */ var _utils_loadImage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(460);
 /* harmony import */ var _utils_compress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(471);
-/* harmony import */ var _utils_checkImage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(491);
+/* harmony import */ var _utils_checkImage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(472);
 
 
 
@@ -403,27 +403,6 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 472:
-/***/ (function(module, exports, __webpack_require__) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 473:
-/***/ (function(module, exports) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 474:
-/***/ (function(module, exports, __webpack_require__) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 491:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -478,6 +457,27 @@ __webpack_require__.r(__webpack_exports__);
     });
   });
 });
+
+/***/ }),
+
+/***/ 473:
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 474:
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 475:
+/***/ (function(module, exports) {
+
+// removed by extractor
 
 /***/ })
 

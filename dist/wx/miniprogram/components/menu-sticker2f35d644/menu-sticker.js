@@ -4,7 +4,7 @@ var window = window || {};
 window["webpackJsonp"] = require("../../bundle.js");
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ 485:
+/***/ 486:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25,35 +25,35 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_sticker_mpx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(486);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_sticker_mpx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(487);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(488)
-
-/* json */
 __webpack_require__(489)
 
-/* template */
+/* json */
 __webpack_require__(490)
+
+/* template */
+__webpack_require__(491)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 486:
+/***/ 487:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(477);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(478);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(445);
-/* harmony import */ var _config_stickers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(487);
+/* harmony import */ var _config_stickers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(488);
 
 
 
@@ -110,19 +110,12 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_1__["createComponent"])({
 
 /***/ }),
 
-/***/ 487:
+/***/ 488:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (['/stickers/01.png', '/stickers/02.png', '/stickers/03.png', '/stickers/04.png', '/stickers/05.png', '/stickers/06.png', '/stickers/07.png', '/stickers/08.png', '/stickers/09.png', '/stickers/10.png', '/stickers/11.png', '/stickers/12.png', '/stickers/13.png', '/stickers/14.png', '/stickers/15.png', '/stickers/16.png', '/stickers/17.png', '/stickers/18.png']);
-
-/***/ }),
-
-/***/ 488:
-/***/ (function(module, exports, __webpack_require__) {
-
-// removed by extractor
 
 /***/ }),
 
@@ -134,11 +127,18 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 490:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 491:
+/***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ })
 
-},[[485,1]]]);
+},[[486,1]]]);
 //# sourceMappingURL=menu-sticker.js.map

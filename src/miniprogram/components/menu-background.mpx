@@ -133,7 +133,6 @@ createComponent({
     position absolute
     left 0
     top 1000px
-    z-index -999
 </style>
 
 <script type="application/json">

@@ -38,10 +38,9 @@
     "minifyWXSS": true
   },
   "appid": "wxa3f81d284576329e",
-  "projectname": "face-maker",
+  "projectname": "face-workshop",
   "description": "A mpx project",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {}
 }

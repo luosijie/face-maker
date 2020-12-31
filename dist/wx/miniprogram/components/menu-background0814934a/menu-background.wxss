@@ -34,5 +34,4 @@
   position: absolute;
   left: 0;
   top: 1000px;
-  z-index: -999;
 }

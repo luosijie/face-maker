@@ -4,7 +4,7 @@ var window = window || {};
 window["webpackJsonp"] = require("../../bundle.js");
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
-/***/ 475:
+/***/ 476:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35,31 +35,31 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_text_mpx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(476);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_text_mpx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(477);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(482)
-
-/* json */
 __webpack_require__(483)
 
-/* template */
+/* json */
 __webpack_require__(484)
+
+/* template */
+__webpack_require__(485)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1), __webpack_require__(443)))
 
 /***/ }),
 
-/***/ 476:
+/***/ 477:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(477);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(478);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(179);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_slice__WEBPACK_IMPORTED_MODULE_1__);
@@ -182,13 +182,6 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
 
 /***/ }),
 
-/***/ 482:
-/***/ (function(module, exports, __webpack_require__) {
-
-// removed by extractor
-
-/***/ }),
-
 /***/ 483:
 /***/ (function(module, exports) {
 
@@ -197,11 +190,18 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_2__["createComponent"])({
 /***/ }),
 
 /***/ 484:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 485:
+/***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ })
 
-},[[475,1]]]);
+},[[476,1]]]);
 //# sourceMappingURL=menu-text.js.map
