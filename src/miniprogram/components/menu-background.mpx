@@ -52,8 +52,11 @@ createComponent({
             wx.showLoading({ title: '图片加载中' })
             const path = res.tempFilePaths[0]
             const image = await loadImage(path, this.canvas)
+            console.log('load-image', image)
             const filePath = await compress.call(this, image, 'canvas_compress')
+            console.log('compress')
             const imgValid = await checkImage(filePath)
+            console.log('check-image')
             wx.hideLoading()
             if (!imgValid) return
             // 图片安全检测通过，执行图片插入操作

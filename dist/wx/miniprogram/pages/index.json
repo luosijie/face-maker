@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "Face",
+  "navigationBarTitleText": "表情工坊",
   "usingComponents": {
     "playboard": "/components/playboard6b19df31/playboard",
     "menu-background": "/components/menu-background0814934a/menu-background",

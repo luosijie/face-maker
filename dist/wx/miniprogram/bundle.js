@@ -15940,10 +15940,15 @@ try {
 
 
 /***/ }),
-/* 453 */
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _Promise = __webpack_require__(454);
+var _Promise = __webpack_require__(459);
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -15984,27 +15989,27 @@ function _asyncToGenerator(fn) {
 module.exports = _asyncToGenerator;
 
 /***/ }),
-/* 454 */
+/* 459 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(455);
+module.exports = __webpack_require__(460);
 
 /***/ }),
-/* 455 */
+/* 460 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var parent = __webpack_require__(276);
-__webpack_require__(456);
+__webpack_require__(461);
 // TODO: Remove from `core-js@4`
-__webpack_require__(457);
-__webpack_require__(458);
-__webpack_require__(459);
+__webpack_require__(462);
+__webpack_require__(463);
+__webpack_require__(464);
 
 module.exports = parent;
 
 
 /***/ }),
-/* 456 */
+/* 461 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -16012,7 +16017,7 @@ __webpack_require__(277);
 
 
 /***/ }),
-/* 457 */
+/* 462 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -16020,7 +16025,7 @@ __webpack_require__(292);
 
 
 /***/ }),
-/* 458 */
+/* 463 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16042,7 +16047,7 @@ $({ target: 'Promise', stat: true }, {
 
 
 /***/ }),
-/* 459 */
+/* 464 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // TODO: Remove from `core-js@4`
@@ -16050,7 +16055,7 @@ __webpack_require__(293);
 
 
 /***/ }),
-/* 460 */
+/* 465 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16069,6 +16074,7 @@ __webpack_require__.r(__webpack_exports__);
   // 新建一个图片实例
   var image = canvas.createImage();
   image.src = src;
+  console.log('image', image, canvas.createImage());
   return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (resolve, reject) {
     try {
       image.onload = function (e) {
@@ -16082,11 +16088,6 @@ __webpack_require__.r(__webpack_exports__);
 });
 
 /***/ }),
-/* 461 */,
-/* 462 */,
-/* 463 */,
-/* 464 */,
-/* 465 */,
 /* 466 */,
 /* 467 */,
 /* 468 */,

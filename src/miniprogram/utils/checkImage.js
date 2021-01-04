@@ -7,7 +7,7 @@ export default function (filePath) {
   return new Promise((resolve, reject) => {
     // 先将图片上传到云开发存储
     wx.cloud.uploadFile({
-      cloudPath: `${new Date().getTime()}.png`,
+      cloudPath: `dev/${new Date().getTime()}.png`,
       filePath,
       success (res) {
         // 调用云函数-checkImage

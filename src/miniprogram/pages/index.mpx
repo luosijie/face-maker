@@ -132,7 +132,9 @@ createPage({
   },
   onLoad() {
     console.log('app is ready')
-    wx.cloud.init()
+    wx.cloud.init({
+      env: 'pro-5gnn5h7bc2c058b5'
+    })
   },
   onShareAppMessage() {}
 })
@@ -189,7 +191,7 @@ createPage({
 
 <script type="application/json">
   {
-    "navigationBarTitleText": "Face",
+    "navigationBarTitleText": "表情工坊",
     "usingComponents": {
       "playboard": "../components/playboard",
       "menu-background": "../components/menu-background",

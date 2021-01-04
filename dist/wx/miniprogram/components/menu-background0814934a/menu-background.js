@@ -2,9 +2,9 @@
 var window = window || {};
 
 window["webpackJsonp"] = require("../../bundle.js");
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
-/***/ 464:
+/***/ 449:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22,26 +22,26 @@ global.currentSrcMode = "wx"
     this._r();
   }
 };
-/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_background_mpx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(465);
+/* harmony import */ var _babel_loader_node_modules_mpxjs_webpack_plugin_lib_selector_type_script_index_0_menu_background_mpx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(450);
 /* empty/unused harmony star reexport */global.currentModuleId
 /* script */
 
 
 /* styles */
-__webpack_require__(473)
+__webpack_require__(468)
 
 /* json */
-__webpack_require__(474)
+__webpack_require__(469)
 
 /* template */
-__webpack_require__(475)
+__webpack_require__(470)
 
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(1)))
 
 /***/ }),
 
-/***/ 465:
+/***/ 450:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50,15 +50,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(251);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_splice__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(466);
+/* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(453);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_instance_find_index__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(453);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(458);
 /* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _mpxjs_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(445);
-/* harmony import */ var _utils_loadImage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(460);
-/* harmony import */ var _utils_compress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(471);
-/* harmony import */ var _utils_checkImage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(472);
+/* harmony import */ var _utils_loadImage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(465);
+/* harmony import */ var _utils_compress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(466);
+/* harmony import */ var _utils_checkImage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(467);
 
 
 
@@ -110,7 +110,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
                 switch (_context3.prev = _context3.next) {
                   case 0:
                     if (!(res.errMsg === 'chooseImage:ok')) {
-                      _context3.next = 21;
+                      _context3.next = 24;
                       break;
                     }
 
@@ -123,26 +123,29 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
 
                   case 5:
                     image = _context3.sent;
-                    _context3.next = 8;
+                    console.log('load-image', image);
+                    _context3.next = 9;
                     return _utils_compress__WEBPACK_IMPORTED_MODULE_7__["default"].call(_this, image, 'canvas_compress');
 
-                  case 8:
+                  case 9:
                     filePath = _context3.sent;
-                    _context3.next = 11;
+                    console.log('compress');
+                    _context3.next = 13;
                     return Object(_utils_checkImage__WEBPACK_IMPORTED_MODULE_8__["default"])(filePath);
 
-                  case 11:
+                  case 13:
                     imgValid = _context3.sent;
+                    console.log('check-image');
                     wx.hideLoading();
 
                     if (imgValid) {
-                      _context3.next = 15;
+                      _context3.next = 18;
                       break;
                     }
 
                     return _context3.abrupt("return");
 
-                  case 15:
+                  case 18:
                     // 图片安全检测通过，执行图片插入操作
                     cWidth = _this.canvas.width / _this.dpr;
                     cHeight = _this.canvas.height / _this.dpr;
@@ -183,7 +186,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
                       _this.elements.unshift(data);
                     }
 
-                  case 21:
+                  case 24:
                   case "end":
                     return _context3.stop();
                 }
@@ -209,27 +212,27 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_4__["createComponent"])({
 
 /***/ }),
 
-/***/ 466:
+/***/ 453:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(467);
+module.exports = __webpack_require__(454);
 
 /***/ }),
 
-/***/ 467:
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
-var parent = __webpack_require__(468);
+var parent = __webpack_require__(455);
 
 module.exports = parent;
 
 
 /***/ }),
 
-/***/ 468:
+/***/ 455:
 /***/ (function(module, exports, __webpack_require__) {
 
-var findIndex = __webpack_require__(469);
+var findIndex = __webpack_require__(456);
 
 var ArrayPrototype = Array.prototype;
 
@@ -241,10 +244,10 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ 469:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(470);
+__webpack_require__(457);
 var entryVirtual = __webpack_require__(84);
 
 module.exports = entryVirtual('Array').findIndex;
@@ -252,7 +255,7 @@ module.exports = entryVirtual('Array').findIndex;
 
 /***/ }),
 
-/***/ 470:
+/***/ 457:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -284,14 +287,14 @@ addToUnscopables(FIND_INDEX);
 
 /***/ }),
 
-/***/ 471:
+/***/ 466:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(451);
 /* harmony import */ var _babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(453);
+/* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(458);
 /* harmony import */ var _babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(274);
 /* harmony import */ var _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_2__);
@@ -402,7 +405,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 472:
+/***/ 467:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -420,7 +423,7 @@ __webpack_require__.r(__webpack_exports__);
   return new _babel_runtime_corejs3_core_js_stable_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (resolve, reject) {
     // 先将图片上传到云开发存储
     wx.cloud.uploadFile({
-      cloudPath: "".concat(new Date().getTime(), ".png"),
+      cloudPath: "dev/".concat(new Date().getTime(), ".png"),
       filePath,
 
       success(res) {
@@ -460,26 +463,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 473:
+/***/ 468:
+/***/ (function(module, exports, __webpack_require__) {
+
+// removed by extractor
+
+/***/ }),
+
+/***/ 469:
 /***/ (function(module, exports) {
 
 // removed by extractor
 
 /***/ }),
 
-/***/ 474:
-/***/ (function(module, exports) {
-
-// removed by extractor
-
-/***/ }),
-
-/***/ 475:
-/***/ (function(module, exports) {
+/***/ 470:
+/***/ (function(module, exports, __webpack_require__) {
 
 // removed by extractor
 
 /***/ })
 
-},[[464,1]]]);
+},[[449,1]]]);
 //# sourceMappingURL=menu-background.js.map

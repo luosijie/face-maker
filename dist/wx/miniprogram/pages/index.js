@@ -178,7 +178,9 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
 
   onLoad() {
     console.log('app is ready');
-    wx.cloud.init();
+    wx.cloud.init({
+      env: 'pro-5gnn5h7bc2c058b5'
+    });
   },
 
   onShareAppMessage() {}

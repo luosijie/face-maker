@@ -9,6 +9,7 @@ export default (src, canvas) => {
   // 新建一个图片实例
   const image = canvas.createImage()
   image.src = src
+  console.log('image', image, canvas.createImage())
   return new Promise((resolve, reject) => {
     try {
       image.onload = e => {
