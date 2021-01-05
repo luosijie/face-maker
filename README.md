@@ -2,6 +2,9 @@
 
 > 一个简单的小程序图片应用
 
+### 小程序界面展示
+![](https://github.com/luosijie/face-maker/blob/master/images/process.png)
+
 ## Dev
 
 ```bash
