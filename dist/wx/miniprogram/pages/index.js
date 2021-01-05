@@ -190,7 +190,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
 /***/ }),
 
 /***/ 446:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 
@@ -204,7 +204,7 @@ Object(_mpxjs_core__WEBPACK_IMPORTED_MODULE_0__["createPage"])({
 /***/ }),
 
 /***/ 448:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 // removed by extractor
 
